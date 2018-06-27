@@ -31,18 +31,35 @@ body {
 .search {
 	display: inline-block;
 	float: left;
-	margin: 15px 0px 0px 15px;
+	margin: 18px 0px 0px 15px;
+	padding: 0;
+	width: 300px;
+	height: 40px;
+}
+
+.search > input {
+	height: 21px;
+	width: 200px;
+	margin: 0;
+	display: block;
+	float:left
+}
+
+.search button {
+	padding: 0;
+	margin: 0;
+	height :32px;
+	width : 33px;
+	float: left;
+	background-color: #333;
+	border: none;
 }
 
 .searchBtn {
-	height :20px;
-	width : 20px;
-	border: 1px solid red;
-}
-
-.search input {
-	height: 25px;
-	width: 200px;
+	margin: 0;
+	height :33px;
+	width : 33px;
+	display: block;
 }
 
 .header div ul {
@@ -73,23 +90,85 @@ body {
     background-color: #111;
 }
 
+.subject {
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.challengeName {
+	margin: 0 0 0 5px;
+}
+
+.challengeSub {
+	width: 657px;
+	padding: 0px;
+	font-weight: bold;
+}
+.challengeSub p:nth-child(1) {
+	display: inline-block;
+	margin: 25px 0 0 5px;
+	color: #e74c3c;
+}
+
+.challengeSub p:nth-child(2) {
+	display: inline-block;
+	margin: 25px 0 0 0;
+}
+
+.challengeSub p:nth-child(3) {
+	display: inline-block;
+	float: right;
+	margin: 25px 5px 0 0;
+}
+
 .column {
 	width: 661px;
-	height: 1800px;
+	height: 2100px;
 	margin-right: 82px;
 	display: inline-block;
 	float: left;
 }
-.middle {
+
+.middle { /*공통사항*/
 	width: 660px;
-	height: 300px;
+	height: 300px; /*임시 높이임 나중에 삭제*/
 	margin-right: 50px;
 	float: left;
 }
 
+.one{
+	height: 600px;
+	margin-bottom: 30px;
+	border: 1px solid #e6e6e6;
+}
+
+.oneImg {
+	height: 496px;
+}
+
+.oneName {
+	padding: 0 20px;
+	height: 100px;
+}
+
+.oneName p:nth-child(2) {
+	float: left;
+	display: inline-block;
+	margin: 0;
+}
+
+.oneName p:last-child {
+	font-size: 20px;
+	float: right;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+
 .aside {
 	width: 456px;
-	height: 1800px;
+	height: 2100px;
 	float: left;
 }
 
