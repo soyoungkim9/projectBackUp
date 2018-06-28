@@ -1,0 +1,39 @@
+{
+  "ecmaVersion": 5,
+  "libs": [
+    "browser",
+    "jquery"
+  ],
+  "plugins": {
+    "chrome-apps": {
+      
+    },
+    "chrome-extension": {
+      
+    },
+    "node": {
+      
+    },
+    "jshint": {
+      
+    },
+    "jscs": {
+      
+    },
+    "browser-extension": {
+      
+    },
+    "angular1": {
+      
+    },
+    "node-extension": {
+      
+    },
+    "bootstrap": {
+      
+    },
+    "jquery-extension": {
+      
+    }
+  }
+}
