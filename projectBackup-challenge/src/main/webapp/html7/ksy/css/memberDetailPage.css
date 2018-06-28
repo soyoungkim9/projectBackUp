@@ -131,7 +131,7 @@ body {
 
 .middle { /*공통사항*/
 	width: 660px;
-	height: 300px; /*임시 높이임 나중에 삭제*/
+	height: 50px; /*임시 높이임 나중에 삭제*/
 	margin-right: 50px;
 	float: left;
 }
@@ -141,6 +141,7 @@ body {
 	margin-bottom: 30px;
 	border: 1px solid #e6e6e6;
 }
+
 
 .oneImg {
 	height: 496px;
@@ -165,13 +166,243 @@ body {
 	padding: 0;
 }
 
+.two {
+	height: 57px;
+	margin-bottom: 15px;
+}
+
+.alineCenter {
+	width: 350px;
+	height: 42px;
+	margin: 0 auto;
+}
+.two img {
+	float: left;
+	
+}
+.evalNum {
+	display: inline-block;
+	margin-top: 8px;
+	margin-left: 10px;
+}
+
+.evalEnp {
+	display: inline-block;
+	margin-top: 8px;
+}
+
+
 
 .aside {
 	width: 456px;
-	height: 2100px;
+	height: 2100px; /* 수정할예쩡 */
+	float: right;
+}
+
+.asideProfile {
+	border: 1px solid #e6e6e6;
+	height: 1000px;
+	padding-top: 25px;
+}
+
+.asideProfile > div {
+	/*border: 1px solid red;*/
+	width: 400px;
+	/*margin: 0 auto;*/
+	padding: 3px;
+}
+
+.ProfileDiv {
+	margin: 0 auto;
+}
+
+.proImg {
+	height: 100px;
+	
+}
+
+.imgCircle {
+	width: 100px;
+	height: 100px;
+	background: #e6e6e6;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	margin: auto;
+	margin-top: 15px;
+}
+.proName {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+.proName h2 {
+	width: 380px;
+	margin: auto;
+	text-align: center;
+}
+
+.proName div {
+	width: 40px;
+	height: 2px;
+	margin: auto;
+	margin-top: 10px;
+	background-color: #ffd400;
+}
+
+.proTime {
+	margin-bottom: 20px;
+}
+
+.proTime h5 {
+	text-align: center;
+	margin: 0;
+}
+.proCommuni {
+	margin-bottom: 15px;
+}
+.CommuniDiv {
+	margin: 0 auto;
+	overflow:hidden;
+	padding: 0 31%;
+	height: 70px;
+
+}
+
+.CommuniDiv .box{
+	width: 50%;
+	height: 50px;
+	float:left;
+}
+
+.box a {
+	display: block;
+}
+
+.proInfo {
+	overflow: hidden;
+}
+
+.left {
+	float: left;
+	width: 32%;
+}
+
+.left:nth-child(1), .left:nth-child(2) {
+	border-right: 1px solid #e6e6e6;
+}
+
+.left h5, .left h6 {
+	margin: 0;
+	text-align: center;
+	padding: 2px 25px;
+}
+
+.left h6 {
+	color: 1px solid #e6e6e6;
+}
+
+.prolect {
+	border-top: 1px dashed #e6e6e6;
+	margin-top: 20px;
+}
+
+.prolect h3 {
+	margin: 20px 0 10px 0;
+	text-align: center;
+}
+
+.lectList {
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+	height: 150px;
+	padding-left: 4.5%;
+	padding-top: 4%;
+	height: 83px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+
+.subjectBox {
+	overflow: hidden;
+	padding-left: 12px;
+	
+}
+
+.subjectBox h5 {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 6px;
 	float: left;
 }
 
+.imgBox {
+	width: 70px;
+	height: 70px;
+	background: #e6e6e6;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	float: left;
+}
+
+.evalBox {
+	float: left;
+	padding-left: 11px;
+	width: 250px;
+}
+
+.evalBox div{
+	float: left;
+}
+
+.evalBox p {
+	float: left;
+	margin: 0;
+	font-size: 13px;
+	padding-left: 5px;
+}
+
+.priceBox {
+	float: left;
+	padding-left: 13px;
+	
+}
+
+.priceBox p {
+	margin: 0;
+	font-size: 14px;
+}
+
+.asideCost {
+	border: 1px solid #e6e6e6;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+.asideCost h2 {
+	margin: 0;
+	padding: 5px 0px 5px 20px;
+}
+
+
+
+
+
+
+
+
+
+.asidePosition {
+	height: 100px;
+}
+
+.asideDate {
+	height: 100px;
+}
+
+.asideMap {
+	height: 100px;
+}
 .footer {
 	background-color:#eee;
 	width: 1200px;
