@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원 상세페이지</title>
-
-<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../ksy/css/memberDetailPage.css">
+<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
 </head>
 <body>
 <div class="header">
@@ -39,7 +38,7 @@
   <div class="oneName">
   	<h3>[2기] 아웃바디 피트니스센터 - 3개월 안에 식스팩을 만들어 드립니다.</h3>
   	<p><img src="../ksy/img/good.png" style="width:25px;"></p>
-  	<p>99,000</p>
+  	<p>￦ <span>99,000</span></p>
   </div>
   </div>
   <div class="middle two">
@@ -53,12 +52,23 @@
     <p class="evalEnp">(<span>11</span>개의 평가)</p>
   </div>
   </div>
-  <div class="middle three" style="background-color:#bbb;">Coldumn</div>
-  <div class="middle four" style="background-color:#bbb;">Column</div>
-  <div class="middle five" style="background-color:#bbb;">Column</div>
-  <div class="middle six" style="background-color:#bbb;">Column</div>
+
+  <!-- 본문 따라다니는 navbar -> name id(#) 잘 활용하기 -->
+  <div id="navbar" class="middle">
+   <a id="defaultNav" href="javascript:void(0)" onclick="openNav(event)" class="navLink">프로그램설명</a>
+   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">가격정보</a>
+   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">기수정보</a>
+   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">프로그램평가</a>
+  </div>
+
+  <div class="middle three" style="background-color:#bbb;">프로그램 설명</div>
+  <div class="middle four" style="background-color:#bbb;">가격정보</div>
+  <div class="middle five" style="background-color:#bbb;">기수정보</div>
+  <div class="middle six" style="background-color:#bbb;">프로그램 평가</div>
 </div>
+
 <div class="aside">
+<!-- 강사 정보 -->
  <div class="asideProfile">
   <div class="ProfileDiv">
     <div class="proImg">
@@ -91,6 +101,7 @@
        <h6>평균 응답시간</h6>
      </div>
     </div>
+    </div>
     <div class="prolect">
      <h3><span>ksy106</span>님의 다른 추천 강좌</h3>
      <div class="lectBox">
@@ -114,7 +125,7 @@
 	    <p><span>33,000</span>원</p>
 	   </div>
 	  </div>
-	  
+
 	  <div class="lectList">
 	   <!-- 이미지 태그 넣을 때 공백 있으면 안됨 -->
 	   <div class="imgBox"></div>
@@ -135,7 +146,7 @@
 	    <p><span>33,000</span>원</p>
 	   </div>
 	  </div>
-	  
+
 	  <div class="lectList">
 	   <!-- 이미지 태그 넣을 때 공백 있으면 안됨 -->
 	   <div class="imgBox"></div>
@@ -159,25 +170,87 @@
      </div>
     </div>
   </div>
-  
+ <!-- 결제하기 -->
  <div class="asideCost">
- <h2 style="font-weight:normal;">￦<span>99,000</span></h2>
+ <h2 style="font-weight:normal;">
+ <span style="font-size:22px">결제하기 </span><span style="font-size:25px">(
+ </span><span>99,000</span><span style="font-size:22px">원</span><span style="font-size:25px">
+ )</span>
+ </h2>
  </div>
- <div class="asidePosition">
- </div>
- <div class="asideDate">
- </div>
- <div class="asideMap">
- </div>
-</div> 
+ <!-- 강의 장소 -->
+<div class="asidePosition">
+  <h4><img src="../ksy/img/position.png" style="width: 7px;"> 장소</h4>
+  <div class="tab">
+    <button class="tablinks1" onclick="openCity(event, 'cityName1')" id="defaultOpen1">강남</button>
+    <button class="tablinks1" onclick="openCity(event, 'cityName2')">제주</button>
+  </div>
 
- 
+  <div id="cityName1" class="tabcontent1">
+    <h6 class="tapMargin">상세주소</h6>
+    <h5 class="tapMargin">서울 강남 테헤란로 62-1길 비트빌딩</h5>
+  </div>
+
+  <div id="cityName2" class="tabcontent1">
+    <h6 class="tapMargin">상세주소</h6>
+    <h5 class="tapMargin">제주 서귀포시 연무장 9길</h5>
+  </div>
 </div>
+<!-- 강의 일정 -->
+ <div class="asideDate">
+   <h4><img src="../ksy/img/schedule.png" style="width: 14px;"> 일정</h4>
+   <div id="date" class="tab">
+     <button class="tablinks2" onclick="openDay(event, 'day1')" id="defaultOpen2">월</button>
+     <button class="tablinks2" onclick="openDay(event, 'day2')">화</button>
+     <button class="tablinks2" onclick="openDay(event, 'day3')">수</button>
+     <button class="tablinks2" onclick="openDay(event, 'day4')">목</button>
+     <button class="tablinks2" onclick="openDay(event, 'day5')">금</button>
+     <button class="tablinks2" onclick="openDay(event, 'day6')">토</button>
+     <button class="tablinks2" onclick="openDay(event, 'day7')">일</button>
 
+   </div>
 
+   <div id="day1" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">15:00 ~ 19:00,  22:00 ~ 22:30</h5>
+   </div>
+
+   <div id="day2" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">22:00 ~ 22:30</h5>
+   </div>
+
+   <div id="day3" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">15:00 ~ 19:00,  22:00 ~ 22:30</h5>
+   </div>
+
+   <div id="day4" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">22:00 ~ 22:30</h5>
+   </div>
+
+   <div id="day5" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">x</h5>
+   </div>
+
+   <div id="day6" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">15:00 ~ 19:00,  22:00 ~ 22:30</h5>
+   </div>
+
+   <div id="day7" class="tabcontent2">
+     <h6 class="tapMargin">가능 시간</h6>
+     <h5 class="tapMargin">22:00 ~ 22:30</h5>
+   </div>
+ </div>
+</div>
+<!-- Footer -->
 <div class="footer">
   Footer
 </div>
 </div>
+<script src="../ksy/js/memberDetailPage.js"></script>
 </body>
 </html>

@@ -123,10 +123,14 @@ body {
 
 .column {
 	width: 661px;
-	height: 2100px;
+	height: 2100px; /* 높이 삭제할 예정 */
 	margin-right: 82px;
 	display: inline-block;
 	float: left;
+
+  /* 삭제할 예정 */
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .middle { /*공통사항*/
@@ -178,7 +182,7 @@ body {
 }
 .two img {
 	float: left;
-	
+
 }
 .evalNum {
 	display: inline-block;
@@ -191,34 +195,100 @@ body {
 	margin-top: 8px;
 }
 
+/* 본문 따라다니는 navbar */
+#navbar {
+  overflow: hidden;
+  border-top: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  width: 650px;
+  background: #fafafa;
+
+}
+
+#navbar .navLink {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 43px;
+  text-decoration: none;
+  font-size: 15px;
+  border-left: 1px solid #e6e6e6;
+  height: 19px;
+}
+
+#navbar .navLink.active {
+  font-weight: bold;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: none;
+
+}
+
+#navbar .navLink:not(.active) {
+  border-bottom: 1px solid black;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .aside {
-	width: 456px;
-	height: 2100px; /* 수정할예쩡 */
+	width: 455px;
 	float: right;
+	border: 1px solid #e6e6e6;
+  padding-bottom: 50px;
 }
 
 .asideProfile {
-	border: 1px solid #e6e6e6;
-	height: 1000px;
+	height: 748px;
 	padding-top: 25px;
 }
 
+/* aside 부분 div 전체에 영향미치므로 항상 고려해 두기*/
 .asideProfile > div {
 	/*border: 1px solid red;*/
-	width: 400px;
+	/*width: 400px;*/
 	/*margin: 0 auto;*/
 	padding: 3px;
 }
 
 .ProfileDiv {
 	margin: 0 auto;
+	width: 400px;
 }
 
 .proImg {
 	height: 100px;
-	
+
 }
 
 .imgCircle {
@@ -311,6 +381,10 @@ body {
 	text-align: center;
 }
 
+.lectBox {
+  padding: 0 6%;
+}
+
 .lectList {
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
@@ -325,7 +399,7 @@ body {
 .subjectBox {
 	overflow: hidden;
 	padding-left: 12px;
-	
+
 }
 
 .subjectBox h5 {
@@ -365,7 +439,7 @@ body {
 .priceBox {
 	float: left;
 	padding-left: 13px;
-	
+
 }
 
 .priceBox p {
@@ -374,41 +448,87 @@ body {
 }
 
 .asideCost {
-	border: 1px solid #e6e6e6;
 	margin: 0 auto;
-	margin-top: 15px;
+	margin-top: 20px;
+	width: 350px;
+	border-radius: 4px;
+	background-color: #e4bf51;
 }
 
 .asideCost h2 {
 	margin: 0;
-	padding: 5px 0px 5px 20px;
+	padding: 8px 0px 8px 0px;
+	text-align: center;
+	color: white;
 }
 
-
-
-
-
-
-
-
-
-.asidePosition {
-	height: 100px;
+/* 장소 */
+.asidePosition, .asideDate {
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 26px;
+}
+.asidePosition h4, .asideDate h4 {
+  margin: 0;
+  margin-bottom: 8px;
 }
 
+.tab {
+    overflow: hidden;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 7px 24px;
+    transition: 0.3s;
+    font-size: 15px;
+    border-top: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #fafafa;
+}
+
+[class^="tabcontent"] {
+    display: none;
+    padding: 10px 12px;
+    border: 1px solid #e6e6e6;
+    background-color: #fafafa;
+}
+
+.tapMargin {
+  margin: 6px;
+}
+
+/*강의 일정*/
 .asideDate {
-	height: 100px;
+
 }
 
-.asideMap {
-	height: 100px;
+[id="date"] button {
+  padding: 7px 20px;
 }
+
+
+
+
 .footer {
 	background-color:#eee;
 	width: 1200px;
 	height: 100px;
 	float: left;
-} 
+}
 
 
 
@@ -418,11 +538,11 @@ body {
 }
 .column {
     padding: 10px;
-    height: 300px; 
+    height: 300px;
 }
 
 .column.middle {
-	
+
     width: 650px;
     float: left;
 }
