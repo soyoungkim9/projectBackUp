@@ -135,7 +135,6 @@ body {
 
 .middle { /*공통사항*/
 	width: 660px;
-	height: 50px; /*임시 높이임 나중에 삭제*/
 	margin-right: 50px;
 	float: left;
 }
@@ -203,13 +202,14 @@ body {
   box-sizing: border-box;
   width: 650px;
   background: #fafafa;
-
+  margin-bottom: 50px;
 }
 
 #navbar .navLink {
   float: left;
   display: block;
-  color: black;
+  color: #999;
+  font-weight: bold;
   text-align: center;
   padding: 14px 43px;
   text-decoration: none;
@@ -219,11 +219,11 @@ body {
 }
 
 #navbar .navLink.active {
-  font-weight: bold;
   border-left: 1px solid black;
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-bottom: none;
+  color: black;
 
 }
 
@@ -245,6 +245,21 @@ body {
   padding-top: 60px;
 }
 
+/* 프로그램 설명 */
+.three {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+#navExam {
+  border: 1px solid blue;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+#navExam b {
+ border: 1px solid red;
+}
 
 
 
@@ -261,6 +276,8 @@ body {
 
 
 
+
+/* aside 부분 */
 .aside {
 	width: 455px;
 	float: right;

@@ -55,16 +55,45 @@
 
   <!-- 본문 따라다니는 navbar -> name id(#) 잘 활용하기 -->
   <div id="navbar" class="middle">
-   <a id="defaultNav" href="javascript:void(0)" onclick="openNav(event)" class="navLink">프로그램설명</a>
-   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">가격정보</a>
-   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">기수정보</a>
-   <a href="javascript:void(0)" onclick="openNav(event)" class="navLink">프로그램평가</a>
+   <a id="defaultNav" href="#navExam" onclick="openNav(event)" class="navLink">프로그램설명</a>
+   <a href="#navPrice" onclick="openNav(event)" class="navLink">가격정보</a>
+   <a href="#navNum" onclick="openNav(event)" class="navLink">기수정보</a>
+   <a href="#navEval" onclick="openNav(event)" class="navLink">프로그램평가</a>
   </div>
+  <!-- 프로그램 설명-->
+  <div class="middle three">
+    <div id ="navExam">
+     <b>프로그램 설명</b>
+    </div>
+    <div id ="examContent"> <!--설명, 수업대상, 종목 수준 -->
+     <div class="pExam">
 
-  <div class="middle three" style="background-color:#bbb;">프로그램 설명</div>
-  <div class="middle four" style="background-color:#bbb;">가격정보</div>
-  <div class="middle five" style="background-color:#bbb;">기수정보</div>
-  <div class="middle six" style="background-color:#bbb;">프로그램 평가</div>
+     </div>
+     <div class="pTarget">
+      <h5>수업대상</h5>
+      <div>
+
+      </div>
+     </div>
+     <div class="pType">
+      <h5>종목</h5>
+      <div>
+       내용
+      </div>
+     </div>
+     <div class="pLevel">
+      <h5>수준</h5>
+      <div>
+       내용
+      </div>
+     </div>
+
+    </div>
+
+  </div>
+  <div id ="navPrice" class="middle four">가격정보</div>
+  <div id ="navNum" class="middle five">기수정보</div>
+  <div id ="navEval" class="middle six">프로그램 평가</div>
 </div>
 
 <div class="aside">
