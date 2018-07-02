@@ -57,7 +57,7 @@ function openNav(evt) {
 document.getElementById("defaultNav").click();
 
 
-
+/* 이미지 슬라이드 이벤트 */
 var slideIndex = 1;
 showSlides(slideIndex);
 

@@ -2,6 +2,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 #container {
 	width : 1200px;
@@ -135,7 +136,7 @@ ul {
 
 .column {
 	width: 661px;
-	height: 2100px; /* 높이 삭제할 예정 */
+	height: 3200px; /* 높이 삭제할 예정 */
 	margin-right: 82px;
 	display: inline-block;
 	float: left;
@@ -290,18 +291,18 @@ ul {
   margin: 0;
 }
 
-
-
+.ExamImage {
+  margin-bottom: 0px;
+  width: 649px;
+}
 
 .mySlides {display: none}
 # slideshow-container img {vertical-align: middle;}
 
-/* Slideshow container */
 .slideshow-container {
   position: relative;
 }
 
-/* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -317,18 +318,15 @@ ul {
   box-sizing: border-box;
 }
 
-/* Position the "next button" to the right */
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
-/* Number text (1/3 etc) */
 .numbertext {
   color: #f2f2f2;
   font-size: 12px;
@@ -337,7 +335,6 @@ ul {
   top: 0;
 }
 
-/* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -363,10 +360,226 @@ ul {
   to {opacity: 1}
 }
 
-/* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
   .prev, .next {font-size: 11px}
 }
+
+/* 가격 정보 */
+.four {
+
+width: 649px;
+}
+
+.navPriceSub {
+  margin-bottom: 17px;
+}
+
+.PriceContent ul {
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  box-sizing: border-box;
+  color: #666;
+}
+
+.PriceContent ul li {
+  box-sizing: border-box;
+  padding: 16px;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 14.5px;
+  overflow: hidden; /* 공통 사항*/
+
+}
+
+.PriceContent ul li:last-child {
+  border-bottom: none;
+}
+
+.PriceContent ul li:first-child {
+  background-color: #fafafa;
+}
+
+.priceLeft {
+  float: left;
+}
+
+.priceRight {
+  float: right;
+  width: 180px;
+  margin-top: 5px;
+}
+
+.PriceContentSize {
+  width: 430px;
+  margin-top: 5px;
+}
+
+.priceSubLeft {
+  float: left;
+}
+
+.priceSubRight {
+  float: right;
+}
+
+.numMinus, .numPlus {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #e4e1e1;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.priceSubLeft span {
+  background-color: white;
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.PriceContentSub2 {
+  margin-top: 15px;
+  float: right;
+}
+
+.PriceContentSub2 h4 {
+  margin:0;
+  border-radius: 4px;
+  background-color: #DD1F26;
+  color: #FFFFFF;
+  padding: 8px 20px;
+  text-align: center;
+}
+
+/* 기수 정보 */
+.five {
+  margin-top: 20px;
+}
+
+.navNumSub {
+  margin-bottom: 15px;
+}
+
+thead {
+  background-color: #fafafa;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
+.five table, tr, td, th {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 39.8px;
+  text-align: center;
+}
+
+/* 프로그램 평가 */
+.six {
+  margin-top: 25px;
+  width: 649px;
+}
+
+.navEvalSub {
+  margin-bottom: 15px;
+}
+
+.EvalContent1 {
+  background-color: #f5f5f5;
+  padding: 2% 30%;
+  padding-top: 3%;
+}
+
+.EvalContent1-star {
+  padding: 0 11%;
+}
+
+.EvalContent1-score {
+  padding: 0 32%;
+}
+
+.EvalContent1-score .evalEnp {
+  font-size: 14px;
+}
+
+.EvalContent2 {
+  box-sizing: border-box;
+  border: 1px solid red;
+  margin-top: 15px;
+  overflow: hidden;
+  padding-bottom: 14px;
+}
+
+.EvalContent2 div[class^="comment"] {
+    float: left;
+}
+
+.commentImg {
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  background-color: #e6e6e6;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  width: 75px;
+  height: 75px;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.commentDate {
+  padding-left: 20px;
+}
+
+.commentEval {
+  padding: 0;
+}
+.commentContent {
+  width: 550px;
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.commentName {
+  padding-left: 20px;
+}
+
+.EvalContent2 ul {
+  margin: 0;
+}
+.EvalContent2 li {
+  border-bottom: 1px solid #eee;
+  height: 99px;
+  padding-top: 15px;
+}
+
+.commentPlus {
+  width: 648px;
+  text-align: right;
+  margin-top: 25px;
+}
+
+.commentPlus a {
+  border-top: 1px solid #e6e6e6;
+  padding-top: 8px;
+  font-size: 15px;
+  color: #5e5e5e;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -574,14 +787,14 @@ ul {
 	margin-top: 20px;
 	width: 350px;
 	border-radius: 4px;
-	background-color: #e4bf51;
+	background-color: #DD1F26;
+  color: #FFFFFF;
 }
 
 .asideCost h2 {
 	margin: 0;
 	padding: 8px 0px 8px 0px;
 	text-align: center;
-	color: white;
 }
 
 /* 장소 */
