@@ -75,3 +75,15 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";
 }
+
+/* 더보기 임시 */
+function moreFunction() {
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("moreBtn");
+
+  if (moreText.style.display === "none") {
+    moreText.style.display = "none";
+  } else {
+    moreText.style.display = "inline";
+  }
+}
