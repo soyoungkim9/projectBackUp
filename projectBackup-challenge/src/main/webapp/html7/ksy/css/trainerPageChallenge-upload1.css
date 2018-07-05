@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+.sm-mypage-body {
+  box-sizing: border-box;
+  /*border: 1px solid black;*/
+}
+
+/* 프로젝트 등록 서브 메뉴 */
+.uploadSubMenu a {
+  color: black;
+  text-decoration: none;
+  padding-bottom: 5px;
+}
+
+.uploadSubMenu a:visited {
+ border-bottom: 1px solid black;
+ border-width: 3px;
+}
+
+.uploadSubMenu a:hover {
+  color: #1B3453;
+}
+
+
+.uploadSubMenu ul {
+  box-sizing: border-box;
+  border-bottom: 1px solid #666666;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  height: 35px;
+}
+
+.uploadSubMenu ul li {
+  float: left;
+  margin: 0 25px;
+}
+
+#uploadSubMenu-fist {
+  margin-left: 0;
+}
+
+/* 프로젝트 등록 본문 */
+.uploadContent {
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+  margin-top: 25px;
+}
+
+.uploadContent ul {
+  height: 2000px;
+  margin: 25px;
+  padding: 0;
+}
+
+.uploadContent li {
+  clear: both;
+  display: inline-block;
+  box-sizing: border-box;
+  border-bottom: 1px solid #d7d7d7;
+  padding: 15px 0 20px 0;
+}
+
+#notPadding {
+  padding-top: 0;
+}
+
+.contentName {
+  width: 170px;
+  font-size: 17px;
+  font-weight: bold;
+  float: left;
+}
+
+.ucContet {
+  float: left;
+  width: 658px;
+}
+
+.challengeSelect {
+
+}
+
+/* 챌린지 주제, 종목 */
+#selectTab1 {
+    border:1px solid #d7d7d7;
+    padding: 10px;
+    border-radius:2px;
+    width: 200px;
+}
+
+#selectTab1:hover{
+    background:#cde4f7;
+    border:1px solid #41c9ff;
+}
+
+#selectTab1 option {
+  background:#fff;
+}
+
+/* 챌린지 날짜 */
+
+.challengeDate input {
+  border:1px solid #d7d7d7;
+  padding: 8px;
+  border-radius:2px;
+  width: 180px;
+}
+
+.fontStyle1 {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+/* 챌린지 프로그램 */
+.challengeProgram input {
+    border:1px solid #d7d7d7;
+    width: 350px;
+    padding: 10px;
+}
+
+/* 챌린지 인원 */
+.minNum, .maxNum {
+  float: left;
+  width: 150px;
+}
+
+.ucNum h5 {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.ucNum input {
+  border:1px solid #d7d7d7;
+  width: 90px;
+  height: 10px;
+  padding: 10px;
+}
+
+/* 챌린지 메인 이미지 등록 */
+
+.ucmainImage .mainImg {
+  border:1px solid #fafafa;
+  width: 500px;
+  height: 400px;
+  background: #fafafa
+}
+
+.mainImg .far {
+  font-size: 100px;
+  color: #bbbbbb;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

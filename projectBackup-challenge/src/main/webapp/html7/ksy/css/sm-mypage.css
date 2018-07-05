@@ -14,6 +14,10 @@ body {
   margin-left: 0px;
 }
 
+#sh_top_layout {
+  border-bottom: none!important;
+}
+
 #sm-btn-1 { /* 남색 버튼 */
   width:100px;
     background-color: #1B3453;
@@ -76,7 +80,7 @@ border:1px solid gray;
   position:fixed;
   display: inline-block;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
-  z-index: 1;
+  z-index: 999;
 }
 
 .sm-menubar{
@@ -199,6 +203,36 @@ border:1px solid gray;
   height: 41px;
 }
 
+.sm-tabcontent {
+  padding:10px;
+  text-align: left;
+}
+.sm-profile {
+  padding-bottom: 0px;
+}
+
+.sm-menu {
+  width: 49.28%; height: 100px; border:1px solid gray; padding:0px;
+  display: inline-block;
+  float: left;
+  font-size:small;
+  border-right: white;
+  border-bottom: white;
+}
+.sm-menu:hover {
+  background-color: #EEEEEE;
+}
+
+.sm-menu i {
+  margin: 10px;
+  font-size:50px;
+}
+
+
+
+
+
+
 /* 소영 운동일지 */
 
 .sm-mypage-bar{
@@ -207,12 +241,11 @@ border:1px solid gray;
     margin-top:15px;
     margin-left:5%;
     margin-bottom: 15px;
-    border:1px solid gray;
     box-sizing: border-box;
 }
 
 ul {list-style:none;}
-.sm-mypage-bar ul{margin:0;padding:0; padding-left: 35px;}
+.sm-mypage-bar ul{margin:0;padding:0;}
 .sm-mypage-bar ul li{ display: inline-block; text-align: center;}
 .sm-mypage-bar ul li b{display:block;}
 
@@ -233,6 +266,7 @@ a {
   overflow: hidden;
   float: left;
   list-style-type: none;
+  padding-left: 35px;
 }
 .tabbed ul * {
   margin: 0px;
@@ -310,25 +344,34 @@ a {
 /* 도전 날자 */
 .topBox {
   overflow: hidden;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
-.challengeBox {
-  float: left;
-}
-
-.challengeBox h3, .challengeBox h4{
+.challengeBox1 h3, .challengeBox1 h4, .challengeBox2 h4 {
   margin: 0;
 }
 
-.challengeBox h4 {
+.challengeBox1 h4 {
   margin-top: 8px;
+  font-weight: bold;
 }
 
-/* 운동일지 하단 탭 */
+.challengeBox2 {
+  float: left;
+  margin: 30px 0 5px 13px;
+}
+
+.challengeBox2 h4{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* 운동일지 하단 메뉴 */
 .bottomMenu {
   float: right;
-  margin-top: 8px;
+  margin-top: 12px;
+  margin-right: 18px;
+  margin-bottom: 30px;
 }
 
 .bottomMenu ul {
@@ -354,6 +397,63 @@ a {
 
 /* 운동일지 */
 .dayList {
+  display: inline-block;
+}
+.dayList li {
+  box-sizing: border-box;
+  box-shadow: 0 1px 7px 0 gray;
+  width: 260px;
+  float: left;
+  height: 200px;
+  margin: 10px 15px;
+}
+.dayContent {
+  height: 152px;
+  margin: 0 14px;
+}
+.editIcon {
+  float: right;
+  margin-right: 10px;
+}
+
+.dayContent p {
+  text-align: left;
+  font-size: 15px;
+}
+
+.time {
+  font-weight: bold;
+  color: #1B3453;
+  font-size: 19px;
+}
+
+/* 강사일지 or 내 일지 선택 */
+#selectTab {
+    margin-right:20px;
+    border:1px solid #d7d7d7;
+    padding:5px;
+    border-radius:2px;
+    float: right;
+    margin-top: 20px;
+}
+
+#selectTab:hover{
+    background:#cde4f7;
+    border:1px solid #41c9ff;
+}
+
+#selectTab:before{
+    content: "▼";
+}
+#selectTab option {
+  background:#fff;
+}
+
+
+
+
+/* 운동일지 */
+/* .dayList {
   padding: 50px 0;
   padding-top: 25px;
   margin: 0;
@@ -429,7 +529,7 @@ a {
 
 .timeline .dayList li div p {
   margin: 9px;
-}
+} */
 
 /* 운동일지 페이지 넘기는 탭 */
 .pagination {
