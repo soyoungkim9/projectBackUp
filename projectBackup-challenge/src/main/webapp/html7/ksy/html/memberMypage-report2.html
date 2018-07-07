@@ -366,26 +366,6 @@
 
 
 </div><!-- back -->
-
-
-
-
-
-<script> // 탭 메뉴
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-</script>
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../header/header_white_login.js"></script>
 <script src="../../footer/footer.js"></script>

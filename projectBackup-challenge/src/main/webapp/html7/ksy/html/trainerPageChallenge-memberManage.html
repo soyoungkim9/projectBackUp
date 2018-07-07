@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<title>회원페이지</title>
+<title>트레이너페이지</title>
 <link rel="stylesheet" href="../css/template/sm-trainerPage.css">
-<link rel="stylesheet" href="../css/trainerPageChallenge-upload3.css">
+<link rel="stylesheet" href="../css/trainerPageChallenge-memberManage.css">
 <link rel="stylesheet" href="../../css/common.css">
 <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 <!-- 서버에 연결할 때 지울 부분 -->
@@ -141,7 +141,7 @@
 
 <div id="sm-back">
 <div class="sm-container">
-  <h2>서비스 관리</h2>
+  <h2>회원 관리</h2>
 
 <div class="sm-mypage">
   <div class="sm-profile">
@@ -152,58 +152,147 @@
 			사용자이름<br>
       <button id="sm-btn-2" type="button" style="margin-top:10px; margin-bottom:20px;">프로필관리</button>
 		</div>
-    <!-- ************* 이부분만 템플릿에서 다르니까 이것만 짤라서 쓰면된다!!!! ********************************************* -->
-    <div class="sm-menu" style="border-left:none;"><i class="fas fa-chalkboard"></i><br>챌린지 관리</div>
-    <div class="sm-menu" style="border-bottom:1px solid gray;"><i class="fas fa-angle-double-up"></i><br>챌린지 등록</div>
-    <div class="sm-menu" style="border-left:none; border-right:1px solid gray;"><i class="fas fa-dumbbell"></i><br>챌린지 운동일지</div>
 	</div><!-- .profile -->
 
 
     <div class="sm-mypage-body">
-      <!-- 프로젝트 등록 서브 메뉴 -->
-      <div class="uploadSubMenu">
-        <ul>
-          <li id="uploadSubMenu-fist"><a href="trainerPageChallenge-upload1.html">① 기본사항</a></li>
-          <li id="uploadSubMenu-second"><a href="trainerPageChallenge-upload2.html">② 가격설정</a></li>
-          <li id="uploadSubMenu-third"><a href="trainerPageChallenge-upload3.html">③ 서비스 설명</a></li>
-        </ul>
+      <!-- 통계 서브 메뉴 -->
+      <div class="mangeSubMenu">
+        <div class="tabbed">
+          <ul>
+            <li>본격! 식스팩 만들기</li>
+            <li>기초 근력 기르기</li>
+            <li>3주 하비탈출</li>
+            <li class="active">전체</li>
+          </ul>
+        </div>
+        <div class="arrow">
+          <div class="arrowLeft"><i class="fas fa-chevron-circle-left"></i></div>
+          <div class="arrowRight"><i class="fas fa-chevron-circle-right"></i></div>
+        </div>
       </div>
-      <!-- 프로젝트 등록 본문-->
-      <div class="uploadContent">
-      <ul>
-        <li class="ucpexplain">
-          <div class="contentName">설명</div>
-          <div class="ucContet">
-            <textarea name="name" rows="15" cols="80"></textarea>
-          </div>
-        </li>
-
-        <li class="ucpImgs" id="bottomNone">
-          <div class="contentName">상세 이미지</div>
-          <div class="ucContet">
-            <div class="ImgsBox">
-              <div id="subImgMain">
-                <div class="imgIcon"><i class="far fa-image"></i></div>
-              </div>
-              <div id="more" class="subImg">
-                <div class="plusImg"><a onclick="lessFunction()" id="lessBtn"><i class="fas fa-times-circle"></i></a></div>
-                <div class="imgIcon"><i class="far fa-image"></i></div>
-              </div>
-            </div>
-            <div class="mediaPlus">
-              <a onclick="moreFunction()" id="moreBtn">+ 마다어 추가</a>
-            </div>
-          </div>
-        </li>
-
-      </ul>
+      <!-- 회원 관리 -->
+      <div class="manageContent">
+        <div class="memberName">
+          <div class="rightBox">
+          <input type="text" placeholder="회원명을 입력해 주세요.">
+          <button type="button" name="button">검색</button>
+        </div>
+        </div>
+        <div class="memberTable">
+          <div class="programDate">2018.07.10 ~ 2018.12.10</div>
+          <table class="demo-table">
+            <thead>
+              <tr>
+                <th>아이디</th>
+                <th>회원이름</th>
+                <th>성별</th>
+                <th>프로젝트명</th>
+                <th>출석률</th>
+                <th>선택</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>abc123</td>
+                <td>홍길동</td>
+                <td>남</td>
+                <td>3주 완성! 근력 강화 프로젝트</td>
+                <td>22%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>bbb123</td>
+                <td>김미진</td>
+                <td>여</td>
+                <td>비키니를 위한 다이어트 뽀개기</td>
+                <td>11%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>aoa777</td>
+                <td>권혁수</td>
+                <td>남</td>
+                <td>본격! 3개월 근육 키우기</td>
+                <td>50%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>ksy106</td>
+                <td>이지수</td>
+                <td>여</td>
+                <td>요가로 유연성 기르기</td>
+                <td>90%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>ksy106</td>
+                <td>권혁수</td>
+                <td>남</td>
+                <td>본격! 3개월 근육 키우기</td>
+                <td>50%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>melong</td>
+                <td>이지수</td>
+                <td>여</td>
+                <td>요가로 유연성 기르기</td>
+                <td>90%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>star1004</td>
+                <td>권혁수</td>
+                <td>남</td>
+                <td>본격! 3개월 근육 키우기</td>
+                <td>50%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>abdddc133</td>
+                <td>이지수</td>
+                <td>여</td>
+                <td>요가로 유연성 기르기</td>
+                <td>90%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>love999</td>
+                <td>권혁수</td>
+                <td>남</td>
+                <td>본격! 3개월 근육 키우기</td>
+                <td>50%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>appleff</td>
+                <td>이지수</td>
+                <td>여</td>
+                <td>요가로 유연성 기르기</td>
+                <td>90%</td>
+                <td><input type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="memberButtons">
+          <ul>
+            <li><a>메시지</a></li>
+            <li class="MenuShare"><a onclick="showMemberInfo();">정보보기</a></li>
+          </ul>
+        </div>
+        <div class="pagination">
+          <a>«</a>
+          <a class="pageActive" href="#">1</a>
+          <a>2</a>
+          <a>3</a>
+          <a>4</a>
+          <a>5</a>
+          <a>6</a>
+          <a>»</a>
+        </div>
       </div>
-      <!-- 다음 단계 버튼 -->
-      <div class="backBox">
-        <button type="button">뒤로</button>
-      </div>
-      <div class="nextBox">
-        <button type="button">저장 및 다음단계</button>
       </div>
     </div><!-- mypage-body -->
 
@@ -238,7 +327,7 @@
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../header/header_white_login.js"></script>
 <script src="../../footer/footer.js"></script>
-<script src="../../ksy/js/trainerPageChallenge-upload.js"></script>
+<script src="../../ksy/js/trainerPageChallenge-stats.js"></script>
 <!-- 서버에 올릴 때 지울 부분 -->
 <script src="../../header/header_event.js"></script>
 </body>

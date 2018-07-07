@@ -63,7 +63,7 @@
   clear: both;
   display: inline-block;
   box-sizing: border-box;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px dashed #d7d7d7;
   padding: 15px 0 20px 0;
 }
 
@@ -83,51 +83,56 @@
   width: 658px;
 }
 
-/* 서비스 설명*/
-.explainBox textarea {
-  border:1px solid #d7d7d7;
+/* 프로젝트 설명 */
+.ucContet textarea {
   overflow: scroll;
-
 }
 
-/* 챌린지 메인 이미지 등록 */
+/* 상세 이미지 등록 */
+#bottomNone {
+  border-bottom: none;
+}
 
-.Imgs {
+#subImgMain, .subImg {
   border:1px solid #eae8e8;
   width: 250px;
-  height: 150px;
+  height: 200px;
   background: #fafafa;
   text-align: center;
+  margin-bottom: 10px;
 }
 
-.xIcon {
-  display: inline-block;
-  float: right;
-  padding: 6px 5px;
-}
-
-.xIcon a {
-  display: inline-block;
-}
-
-.imgIcon1 .fas, .imgIcon2 .fas {
-  font-size: 40px;
+#subImgMain .far, .subImg .far {
+  font-size: 60px;
   color: #bbbbbb;
-  margin-top: 52px;
 }
 
-.imgIcon2 .fas {
-  margin-left: 25px;
+#subImgMain .imgIcon {
+  margin-top: 68px;
 }
 
-.imgsPlus {
-  border: 1px solid #eae8e8;
+.subImg .plusImg {
+  float: right;
+  margin: 8px 7px;
+}
+
+.subImg .imgIcon {
+  margin-top: 65px;
+}
+
+.subImg {
+  display: none;
+}
+
+.mediaPlus {
+  text-align: center;
   width: 250px;
-  margin-top: 15px;
+  border:1px solid #d7d7d7;
+  margin-top: 10px;
   height: 42px;
 }
 
-.imgsPlus a {
+.mediaPlus a {
   display: inherit;
   text-align: center;
   padding-top: 13px;
@@ -139,14 +144,13 @@
   cursor: pointer;
 }
 
-#more {
-  display: none;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
 #lessBtn {
   display: inline-block;
+  margin-left: 370px;
+}
+
+#lastBottom {
+  border-bottom: none;
 }
 
 /* 이전단계, 다음단계 버튼 */
