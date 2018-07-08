@@ -225,6 +225,154 @@
 
 .pagination a:hover:not(.pageActive) {background-color: #ddd;}
 
+/* 모달창 퍼옴 */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    float: right;
+    font-size: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 10px;
+    height: 15px;
+}
+
+.modal-body {
+  padding: 2px 60px;
+  display: inline-block;
+  clear: both;
+}
+
+
+/* 모달창 본문 내용 */
+.memberInfo1 {
+  float: left;
+}
+.memberInfo2 {
+  float: left;
+  width: 458px;
+}
+
+.originalImg {
+  border: 1px solid #dddddd;
+  background: #dddddd;
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  margin: 0 auto;
+}
+
+.memberId {
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+  margin-top: 12px;
+}
+
+.memberInfoList {
+  margin: 0;
+  margin-top: 8px;
+}
+
+.memberInfoList li {
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.contentName {
+  font-weight: bold;
+  float: left;
+  margin-right: 15px;
+}
+
+#topContentBox {
+  display: inline-block;
+}
+
+.styleBox {
+  width: 458px;
+  margin-bottom: 10px;
+}
+
+.cssBox {
+  float: left;
+  width: 430px;
+  height: 44px;
+}
+
+.skillBox{
+    width: 100%;
+    background-color: #ddd;
+}
+
+.skills {
+    text-align: right;
+    padding-right: 20px;
+    line-height: 25px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.attend {
+  width: 80%;
+  background-color: #2196F3;
+  font-size: 15px;
+}
+
+.target {
+  width: 65%;
+  background-color: #f44336;
+  font-size: 15px;
+}
+
 
 
 
