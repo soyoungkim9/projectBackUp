@@ -102,25 +102,26 @@
   clear: both;
 }
 
-/* 회원명 검색 */
+/* 날짜별 검색 */
 .memberName {
-  /* float: right; */
   height: 40px;
 }
 
-.rightBox {
-  float: right;
+.dateInput {
+  margin-bottom: 15px;
+  text-align: center;
 }
-.memberName input {
+.dateInput input {
   border:1px solid #d7d7d7;
-  width: 160px;
-  padding: 10px;
+  width: 220px;
+  padding: 5px;
+  color: gray;
   border-radius: 5px;
 }
 
-.memberName button {
-  height: 34px;
-  width: 50px;
+.dateInput button {
+  height: 30px;
+  width: 60px;
   background: #2d5586;
   border: none;
   border-radius: 5px;
@@ -129,10 +130,6 @@
 }
 
 /* 회원관리 테이블 */
-.programDate {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
 .demo-table {
   border-collapse: collapse;
   font-size: 14px;
@@ -141,7 +138,6 @@
 .demo-table th,
 .demo-table td {
   border: 1px solid #e1edff;
-  padding: 7px 17px;
 }
 .demo-table .title {
   caption-side: bottom;
@@ -171,36 +167,7 @@
 }
 
 .demo-table td, .demo-table th {
-  padding: 13px 40px;
-}
-
-/* 회원관리 버튼 들 */
-.memberButtons {
-  float: right;
-  margin-top: 12px;
-  margin-right: 3px;
-  margin-bottom: 30px;
-}
-
-.memberButtons ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.memberButtons li {
-  float:left;
-  padding: 6px 25px;
-  font-weight: bold;
-  border: 1px solid #DD1F26;
-  border-radius: 5px;
-  background-color: #DD1F26;
-  color: white;
-  font-size: 15px;
-}
-
-.MenuShare {
-  margin-left: 10px;
+  padding: 13px 45px;
 }
 
 /* 회원관리 넘기는 탭 */
@@ -208,7 +175,7 @@
   height: 35px;
   padding: 0 30%;
   margin-bottom: 30px;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 .pagination a {
     color: black;
