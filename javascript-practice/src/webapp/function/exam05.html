@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>리턴값</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function returnFunction() {
+        alert('함수A');
+        return;
+        alert('함수B');
+      }
+
+      // returnFunction(); 함수 A실행!
+      var output = returnFunction(); // 함수 A 실행
+      // 아무 값도 리턴하지 않았기 때문에 결과는 undefined : undefined
+      alert(typeof (output) + ' : ' + output);
+    </script>
+  </body>
+</html>

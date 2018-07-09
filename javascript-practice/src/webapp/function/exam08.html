@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>클로저</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 클로저
+      // => 지역변수를 남겨두는 현상
+      // => 자바스크립트에서는 지역변수가 이후에도 활용될 가능성이 있으므로
+      //    변수를 제거하지 않고 남겨둔다.
+      // => 반드시 리턴된 클로저 함수를 사용해야 지역변수를 사용할 수 있다.
+      function test(name) {
+        var output = 'Hello' + name + '...!';
+        return function() {
+          alert(output);
+        }
+      }
+
+      test('javascript')();
+      var test_1 = test('Web');
+      var test_2 = test('Script');
+      test_1();
+      test_2();
+
+
+    </script>
+  </body>
+</html>

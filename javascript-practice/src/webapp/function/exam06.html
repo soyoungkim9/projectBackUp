@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>내부함수</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 내부함수는 내부함수가 포함되는 함수에서만 사용할 수 있다.
+      // 다른 외부함수와의 충돌을 막는다.
+      function pythagoras(width, height) {
+        function square(x) {
+          return x * x;
+        }
+
+        return Math.sqrt(square(width) + square(height))
+      }
+
+      alert(pythagoras(4, 4));
+    </script>
+  </body>
+</html>

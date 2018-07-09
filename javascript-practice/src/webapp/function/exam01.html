@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>익명함수</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    // 익명함수
+    // var 함수 = function() {}
+
+    var 함수 = function() {
+      var output = prompt('숫자를 입력해주세요.', '숫자');
+      alert(output);
+    };
+
+    alert(함수);
+    
+    // 함수 호출
+    함수();
+
+    // 내장 함수 출력
+    // 내장하고 있는 함수의 소스코드는 볼 수 없다.
+    // 다음 함수는 이름이 있는 선언적 함수이다.
+    alert(alert);
+    alert(prompt);
+    </script>
+  </body>
+</html>
