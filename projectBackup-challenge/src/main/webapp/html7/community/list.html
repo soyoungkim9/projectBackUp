@@ -112,7 +112,7 @@
 					<thead class="chall-thead">
 						<tr>
 							<th width="10%">번호</th>
-							<th width="10%">게시판</th>
+							<th width="10%">말머리</th>
 							<th width="40%">제목</th>
 							<th width="15%">작성자</th>
 							<th width="10%">조회수</th>
@@ -158,11 +158,33 @@
 </main>
 <div id="footer"></div>
 
-<script src="../js/common.js"></script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../header/js/header_white_login.js"></script>
-<script src="../footer/js/footer.js"></script>
 <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../js/common.js"></script>
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+    <td>{{no}}</td>
+    <td>{{type}}</td>
+    <td><a href='form.html?no={{no}}'>{{title}}</a></td>
+    <td>{{user}}</td>
+    <td>{{cnt}}</td>
+    <td>{{createdDate}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script id="tr-template2" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+    <td><a href='form.html?no={{no}}'>{{title}}</a></td>
+</tr>
+{{/each}}
+</script>
+
+	<script src="../header/js/header_white_login.js"></script>
+	<script src="../footer/js/footer.js"></script>
+	<script src="list.js"></script>
 </body>
 
 </html>

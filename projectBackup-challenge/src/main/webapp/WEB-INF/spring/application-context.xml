@@ -14,17 +14,17 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
     
-    <context:component-scan base-package="bitcamp.java106.pms">
-        <context:exclude-filter type="regex" expression="bitcamp.java106.pms.web.*"/>
+    <context:component-scan base-package="challenge">
+        <context:exclude-filter type="regex" expression="challenge.web.*"/>
     </context:component-scan>
     
     <bean id="sqlSessionFactory"
           class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
       <property name="mapperLocations" 
-                value="classpath*:bitcamp/java106/pms/sql/*Mapper.xml" />  
+                value="classpath*:challenge/sql/*Mapper.xml" />  
       <property name="typeAliasesPackage" 
-                value="bitcamp.java106.pms.domain"/>   
+                value="challenge.domain"/>   
     </bean>
     
     <bean id="dataSource" 
@@ -41,7 +41,7 @@
         		  classpath:aws.properties"/> 
         
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="bitcamp.java106.pms.dao" />
+        <property name="basePackage" value="challenge.dao" />
     </bean>
     
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -56,7 +56,7 @@
     </tx:advice>
     <aop:config>
         <aop:advisor advice-ref="txAdvice" 
-                     pointcut="execution(* bitcamp.java106.pms.service.impl.*.*(..))"/>
+                     pointcut="execution(* challenge.service.impl.*.*(..))"/>
     </aop:config>     
 </beans>
 
