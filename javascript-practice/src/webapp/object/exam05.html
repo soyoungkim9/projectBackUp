@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>객체와 배열을 이용한 데이터 관리</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 학생 배열 정보를 만든다.
+      var students = [];
+      students.push({ 이름: '윤인성', 국어: 87, 수학: 98, 영어: 88, 과학: 95 });
+      students.push({ 이름: '연하진', 국어: 92, 수학: 98, 영어: 96, 과학: 98 });
+      students.push({ 이름: '구지연', 국어: 76, 수학: 96, 영어: 94, 과학: 90 });
+
+      // 모든 students 배열 내의 객체에 메서드를 추가한다.
+      for(var i in students) {
+        // 총점을 구하는 메서드
+        students[i].getSum = function () {
+          return this.국어 + this.수학 + this.영어 + this.과학;
+        };
+        // 평균을 구하는 메서드
+        students[i].getAverage = function () {
+          return this.getSum() / 4;
+        };
+      }
+
+      // 출력
+      var output = '이름\t총점\t평균\n';
+      for(var i in students) {
+        with(students[i]) {
+          output += 이름 + '\t' + getSum() + '\t' + getAverage() + '\n';
+        }
+      }
+      alert(output);
+    </script>
+  </body>
+</html>
