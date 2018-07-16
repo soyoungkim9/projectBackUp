@@ -4,7 +4,7 @@
 <meta charset='UTF-8'>
 <title>트레이너페이지</title>
 <link rel="stylesheet" href="../../css/trainer/template/sm-trainerPage.css">
-<link rel="stylesheet" href="../../css/trainer/trainerPage-memberManage.css">
+<link rel="stylesheet" href="../../css/trainer/trainerPage-memberModal.css">
 <link rel="stylesheet" href="../../css/common.css">
 <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="../../css/pagination.css">
@@ -83,6 +83,73 @@
 	      <a class="sm-pagination-button sm-pagination-button-end" href="#">5</a>
 	      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-right"></i></a>
 	    </div>
+        <!-- 모달창 -->
+        <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close"><i class="far fa-times-circle"></i></span>
+            </div>
+            <div class="modal-body">
+            <div id="topContentBox">
+              <div class="memberInfo1">
+                <div class="originalImg"></div>
+                <div class="memberId">abc123님</div>
+              </div>
+              <div class="memberInfo2">
+              <ul class="memberInfoList">
+                <li class="modalName">
+                  <div class="contentName">이름</div>
+                  <div class="modalContent">
+                    홍길동
+                  </div>
+                </li>
+                <li class="modalSex">
+                  <div class="contentName">성별</div>
+                  <div class="modalContent">
+                    남
+                  </div>
+                </li>
+                <li class="modaPhone">
+                  <div class="contentName">연락처</div>
+                  <div class="modalContent">
+                    010-2012-2018
+                  </div>
+                </li>
+                <li class="modalProgram">
+                  <div class="contentName">참여 프로그램</div>
+                  <div class="modalContent">
+                    3주 완성! 근력 강화 프로젝트
+                  </div>
+                </li>
+                <li class="modalTarget">
+                  <div class="contentName">목표</div>
+                  <div class="modalContent">
+                    몸무게 -10kg
+                  </div>
+                </li>
+                <li class="attendanceRate">
+                  <div class="contentName styleBox">출석률</div>
+                  <div class="modalContent cssBox">
+                  <div class="skillBox">
+                    <div class="skills attend">80%</div>
+                  </div>
+                  </div>
+                </li>
+                <li class="targetRate">
+                  <div class="contentName styleBox">목표 달성률</div>
+                  <div class="modalContent cssBox">
+                    <div class="skillBox">
+                      <div class="skills target">65%</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div><!-- mypage-body -->
 </div><!-- mypage -->
@@ -93,6 +160,7 @@
 <script src="../../js/common.js"></script>
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../js/footer/footer.js"></script>
+<script src="../../js/trainer/trainerPage-memberModal.js"></script>
 <script src="../../js/trainer/trainer-template.js"></script>
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
