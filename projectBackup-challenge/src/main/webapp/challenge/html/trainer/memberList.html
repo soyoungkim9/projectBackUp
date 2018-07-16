@@ -55,7 +55,7 @@
           <table class="demo-table">
             <thead>
               <tr>
-                <th>아이디</th>
+                <th>이메일</th>
                 <th>회원이름</th>
                 <th>성별</th>
                 <th>프로젝트명</th>
@@ -63,88 +63,7 @@
                 <th>선택</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>abc123</td>
-                <td>홍길동</td>
-                <td>남</td>
-                <td>3주 완성! 근력 강화 프로젝트</td>
-                <td>22%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>bbb123</td>
-                <td>김미진</td>
-                <td>여</td>
-                <td>비키니를 위한 다이어트 뽀개기</td>
-                <td>11%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>aoa777</td>
-                <td>권혁수</td>
-                <td>남</td>
-                <td>본격! 3개월 근육 키우기</td>
-                <td>50%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>ksy106</td>
-                <td>이지수</td>
-                <td>여</td>
-                <td>요가로 유연성 기르기</td>
-                <td>90%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>ksy106</td>
-                <td>권혁수</td>
-                <td>남</td>
-                <td>본격! 3개월 근육 키우기</td>
-                <td>50%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>melong</td>
-                <td>이지수</td>
-                <td>여</td>
-                <td>요가로 유연성 기르기</td>
-                <td>90%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>star1004</td>
-                <td>권혁수</td>
-                <td>남</td>
-                <td>본격! 3개월 근육 키우기</td>
-                <td>50%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>abdddc133</td>
-                <td>이지수</td>
-                <td>여</td>
-                <td>요가로 유연성 기르기</td>
-                <td>90%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>love999</td>
-                <td>권혁수</td>
-                <td>남</td>
-                <td>본격! 3개월 근육 키우기</td>
-                <td>50%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td>appleff</td>
-                <td>이지수</td>
-                <td>여</td>
-                <td>요가로 유연성 기르기</td>
-                <td>90%</td>
-                <td><input type="checkbox"></td>
-              </tr>
-            </tbody>
+            <tbody id="memberList"></tbody>
           </table>
         </div>
         <div class="memberButtons">
@@ -236,10 +155,24 @@
 </div><!--.container-->
 </div><!-- back -->
 <div id="footer"></div>
+<script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../../js/common.js"></script>
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../js/footer/footer.js"></script>
 <script src="../../js/trainer/trainerPage-memberManage.js"></script>
 <script src="../../js/trainer/trainer-template.js"></script>
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+    <td><a href='bd-view.html?email={{members.[0].email}}'>{{members.[0].email}}</a></td>
+    <td>{{members.[0].name}}</td>
+    <td>{{members.[0].sex}}</td>
+    <td>{{name}}</td>
+    <td>{{diary.dcheck}}</td>
+	<td><input type="checkbox"></td>
+</tr>
+{{/each}}
+</script>
+<script src="../../js/trainer/memberList.js"></script>
 </body>
 </html>

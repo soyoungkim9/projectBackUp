@@ -1,19 +1,38 @@
 package challenge.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-// 커뮤니티-게시물
 public class Community extends Post implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private String title;
     private int cnt; // 조회수
     private String type; // 말머리
     private int like; // 좋아요
-    private int user; // 사용자
-    
+    private User user;
+    private List<CommuMedia> commuMedias;
+
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
     public String getTitle() {
         return title;
+    }
+
+
+    public List<CommuMedia> getCommuMedias() {
+        return commuMedias;
+    }
+    public void setCommuMedias(List<CommuMedia> commuMedias) {
+        this.commuMedias = commuMedias;
     }
     public void setTitle(String title) {
         this.title = title;
@@ -36,12 +55,4 @@ public class Community extends Post implements Serializable {
     public void setLike(int like) {
         this.like = like;
     }
-    public int getUser() {
-        return user;
-    }
-    public void setUser(int user) {
-        this.user = user;
-    }
-    
-    
 }

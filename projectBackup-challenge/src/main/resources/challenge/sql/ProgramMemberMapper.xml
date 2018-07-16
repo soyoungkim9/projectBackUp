@@ -13,19 +13,19 @@
 
   <resultMap type="ProgramMember" id="ProgramMemberMap">
     <id column="pno" property="pno"/>
-    <result column="pname" property="pName"/>
+    <result column="pname" property="name"/>
     <result column="sdt" property="startDate"/>
     <result column="edt" property="endDate"/>
     <result column="uno" property="uno"/>
 	<collection property="members" ofType="Member">
-        <id column="uno" property="uno"/>
+        <id column="uno" property="userNo"/>
         <result column="mail" property="email"/>
-        <result column="uname" property="uName"/>
+        <result column="uname" property="name"/>
         <result column="sex" property="sex"/>
     </collection>
     <collection property="diary" ofType="Diary">
         <id column="dno" property="dno"/>
-        <result column="dcheck" property="check"/>
+        <result column="dcheck" property="dcheck"/>
     </collection>
 
   </resultMap>

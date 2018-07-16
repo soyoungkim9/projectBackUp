@@ -8,7 +8,7 @@ public class Diary implements Serializable{
     
     private int dno; //운동일지 번호
     private String content; // 운동일지 내용
-    private boolean check; // 출석여부
+    private char dcheck; // 출석여부
     
     public int getDno() {
         return dno;
@@ -22,11 +22,11 @@ public class Diary implements Serializable{
     public void setContent(String content) {
         this.content = content;
     }
-    public boolean isCheck() {
-        return check;
+    public char isCheck() {
+        return dcheck;
     }
-    public void setCheck(boolean check) {
-        this.check = check;
+    public void setCheck(char dcheck) {
+        this.dcheck = dcheck;
     }
     
     

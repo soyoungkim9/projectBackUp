@@ -1,31 +1,32 @@
 package challenge.domain;
 
-import java.io.Serializable;
-
-/* 사용자 */
-public class User implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class User {
+    protected int userNo;
+    protected String name;
+    protected char sex;
+    protected String email;
+    protected String password;
+    protected String userPath;
+    protected String userPhone;
+    protected int userType;
     
-    private int uno; // 사용자 번호
-    private String uName; // 사용자 이름
-    private char sex; // 성별
-    private String email; // 이메일
-    private String password; // 비밀번호
-    private String uPath; // 사용자 사진
-    private String phone; // 핸드폰번호
-    private int uType; // 사용자 유형
     
-    public int getUno() {
-        return uno;
+    @Override
+    public String toString() {
+        return "User [userNo=" + userNo + ", name=" + name + ", sex=" + sex + ", email=" + email + ", password="
+                + password + ", userPath=" + userPath + ", userPhone=" + userPhone + ", userType=" + userType + "]";
     }
-    public void setUno(int uno) {
-        this.uno = uno;
+    public int getUserNo() {
+        return userNo;
     }
-    public String getuName() {
-        return uName;
+    public void setUserNo(int userNo) {
+        this.userNo = userNo;
     }
-    public void setuName(String uName) {
-        this.uName = uName;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
     public char getSex() {
         return sex;
@@ -45,22 +46,23 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getuPath() {
-        return uPath;
+    public String getUserPath() {
+        return userPath;
     }
-    public void setuPath(String uPath) {
-        this.uPath = uPath;
+    public void setUserPath(String userPath) {
+        this.userPath = userPath;
     }
-    public String getPhone() {
-        return phone;
+    public String getUserPhone() {
+        return userPhone;
     }
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
-    public int getuType() {
-        return uType;
+    public int getUserType() {
+        return userType;
     }
-    public void setuType(int uType) {
-        this.uType = uType;
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
+    
 }
