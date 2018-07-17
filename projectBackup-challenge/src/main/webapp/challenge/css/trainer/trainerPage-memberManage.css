@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-.sm-mypage-body {
-  box-sizing: border-box;
-  margin-bottom: 100px;
-}
-
 /* 프로젝트 선택 서브메뉴*/
 .tabbed {
   max-width: 880px;
@@ -166,7 +161,7 @@
 }
 
 .demo-table th {
-  padding: 13px 53.1px;
+  padding: 13px 66.3px;
 }
 
 .demo-table td {
@@ -174,39 +169,9 @@
   padding-bottom: 13px;
 }
 
-/* 회원관리 버튼 들 */
-.memberButtons {
-  float: right;
-  margin-top: 12px;
-  margin-right: 3px;
-  margin-bottom: 30px;
-}
-
-.memberButtons ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.memberButtons li {
-  float:left;
-  padding: 6px 25px;
-  font-weight: bold;
-  border: 1px solid #DD1F26;
-  border-radius: 5px;
-  background-color: #DD1F26;
-  color: white;
-  font-size: 15px;
-}
-
-.MenuShare {
-  margin-left: 10px;
-}
-
 /* 회원관리 넘기는 탭 */
 #pagination {
 	padding-top: 30px;
-	padding-left: 140px;
 }
 
 .pagination a:hover:not(.pageActive) {background-color: #ddd;}

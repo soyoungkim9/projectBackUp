@@ -19,16 +19,16 @@
     <result column="uno" property="uno"/>
     <result column="pgoal" property="proGoal"/>
     <result column="pgoal_n" property="proGoalNum"/>
+    <collection property="diary" ofType="Diary">
+        <id column="dno" property="dno"/>
+        <result column="dchek" property="dcheck"/>
+    </collection>
     <collection property="members" ofType="Member">
         <id column="uno" property="userNo"/>
         <result column="mail" property="email"/>
         <result column="uname" property="name"/>
         <result column="sex" property="sex"/>
         <result column="uphon" property="userPhone"/>
-    </collection>
-	<collection property="diary" javaType="Diary">
-        <id column="dno" property="dno"/>
-        <result column="dcheck" property="dcheck"/>
     </collection>
   </resultMap>
   

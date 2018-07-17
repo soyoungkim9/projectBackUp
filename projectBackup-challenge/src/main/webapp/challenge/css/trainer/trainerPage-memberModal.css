@@ -166,7 +166,7 @@
 }
 
 .demo-table th {
-  padding: 13px 53.1px;
+  padding: 13px 66.3px;
 }
 
 .demo-table td {
@@ -177,9 +177,9 @@
 /* 회원관리 버튼 들 */
 .memberButtons {
   float: right;
-  margin-top: 12px;
-  margin-right: 3px;
+  margin-top: 5px;
   margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .memberButtons ul {
@@ -189,7 +189,6 @@
 }
 
 .memberButtons li {
-  float:left;
   padding: 6px 25px;
   font-weight: bold;
   border: 1px solid #DD1F26;
@@ -199,15 +198,10 @@
   font-size: 15px;
 }
 
-.MenuShare {
-  margin-left: 10px;
-}
-
 /* 회원관리 넘기는 탭 */
 #pagination {
 	padding-top: 30px;
-	padding-left: 140px;
-}
+ }
 
 .pagination a:hover:not(.pageActive) {background-color: #ddd;}
 
@@ -295,13 +289,6 @@
   margin: 0 auto;
 }
 
-.memberId {
-  text-align: center;
-  font-weight: bold;
-  font-size: 17px;
-  margin-top: 12px;
-}
-
 .memberInfoList {
   margin: 0;
   margin-top: 8px;
@@ -334,7 +321,7 @@
 }
 
 .skillBox{
-    width: 100%;
+    width: 97%;
     background-color: #ddd;
 }
 

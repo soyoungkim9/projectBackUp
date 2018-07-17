@@ -61,17 +61,10 @@
                 <th>성별</th>
                 <th>프로젝트명</th>
                 <th>출석률</th>
-                <th>선택</th>
               </tr>
             </thead>
             <tbody id="memberList"></tbody>
           </table>
-        </div>
-        <div class="memberButtons">
-          <ul>
-            <li><a>메시지</a></li>
-            <li class="MenuShare"><a id="showBtn">정보보기</a></li>
-          </ul>
         </div>
         <!-- pagenation -->
 	    <div class="sm-pagination" id="pagination">
@@ -97,12 +90,11 @@
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-    <td><a href='memberview.html?uno={{uno}}'>{{members.email}}</a></td>
-    <td><a href='memberview.html?uno={{uno}}'>{{members.name}}</a></td>
-    <td><a href='memberview.html?uno={{uno}}'>{{members.sex}}</a></td>
-    <td><a href='memberview.html?uno={{uno}}'>{{name}}</a></td>
-    <td><a href='memberview.html?uno={{uno}}'>{{diary.dcheck}}</a></td>
-	<td><input type="checkbox"></td>
+    <td><a href='memberView.html?uno={{uno}}'>{{members.email}}</a></td>
+    <td><a href='memberView.html?uno={{uno}}'>{{members.name}}</a></td>
+    <td><a href='memberView.html?uno={{uno}}'>{{members.sex}}</a></td>
+    <td><a href='memberView.html?uno={{uno}}'>{{name}}</a></td>
+    <td><a href='memberView.html?uno={{uno}}'>{{diary.dcheck}}</a></td>
 </tr>
 {{/each}}
 </script>
