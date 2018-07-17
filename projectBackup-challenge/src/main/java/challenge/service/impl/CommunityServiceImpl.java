@@ -1,3 +1,4 @@
+// 업무로직 구현체 - 고객사 마다 다른 구현을 할 수 있다.
 package challenge.service.impl;
 
 import java.util.List;
@@ -5,16 +6,20 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import challenge.dao.CommunityDao;
+import challenge.dao.PostDao;
 import challenge.domain.Community;
 import challenge.service.CommunityService;
 
+
 @Service
 public class CommunityServiceImpl implements CommunityService {
-    
+
     CommunityDao communityDao;
+    PostDao postDao;
     
-    public CommunityServiceImpl(CommunityDao communityDao) {
+    public CommunityServiceImpl(CommunityDao communityDao, PostDao postDao) {
         this.communityDao = communityDao;
+        this.postDao = postDao;
     }
     
     @Override
@@ -25,16 +30,6 @@ public class CommunityServiceImpl implements CommunityService {
         
         return communityDao.selectList();
     }
-    
-    
-    public List<Community> noticeList() {
-//      HashMap<String,Object> params = new HashMap<>();
-//      params.put("startRowNo", (pageNo - 1) * pageSize);
-//      params.put("pageSize", pageSize);
-      
-      return communityDao.selectListNotice();
-    }
-    
     
     @Override
     public int delete(int no) {
@@ -49,11 +44,11 @@ public class CommunityServiceImpl implements CommunityService {
     
     @Override
     public int add(Community community) {
+        postDao.insert(community);
         return communityDao.insert(community);
     }
     
     public int update(Community community) {
         return communityDao.update(community);
     }
-    
 }
