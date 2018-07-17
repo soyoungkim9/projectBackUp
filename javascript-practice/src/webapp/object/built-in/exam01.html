@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>기본 자료형과 객체</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var primitiveNumber = 273; // 기본 자료형
+    var objectNumber = new Number(273); // 객체
+
+    var output = '';
+    output += typeof (primitiveNumber) + ":" + primitiveNumber + '\n';
+    output += typeof (objectNumber) + ":" + objectNumber;
+    alert(output);
+
+    // 기본 자료형은 속성이나 메서드를 추가해서 사용할 수 없다.
+    // primitiveNumber.method = function() {
+    //   return 'Primitive Method'
+    // };
+
+    // 그러나 프로토타입에 메서드를 추가하면 기본 자료형에도 새로운 메서드를 생성할 수 있다.
+    Number.prototype.method = function () {
+      return 'Method Prototype'
+    }
+
+    var result = primitiveNumber.method() + '\n';
+
+    alert(result);
+    
+    </script>
+  </body>
+</html>

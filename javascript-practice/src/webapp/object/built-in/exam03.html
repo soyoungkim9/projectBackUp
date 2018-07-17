@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>모든 객체에 메서드 추가</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Object객체는 객체의 최상위 객체이다.
+      // 따라서 Object 객체의 프로토타입에 속성 또는 메서드를 추가하면
+      // 모든 객체에서 활용할 수 있다.
+      Object.prototype.test = function () {
+        alert(this);
+      }
+
+      var number = 273;
+      number.test();
+
+      // 소수 두 번째 자리까지 자른다.
+      var fixedNumber = (273.5210332).toFixed(2);
+      alert(fixedNumber);
+    </script>
+  </body>
+</html>
