@@ -11,22 +11,18 @@ $.getJSON(serverRoot + "/json/programMember/list", (data) => {
     $('#memberList').html(templateFn({list:data}));
 });
 
-
-// li-template
-//var liTemplateSrc = $("#li-template").html();
-//
-//var template2Fn = Handlebars.compile(liTemplateSrc);
-//
-//console.log();
-//$.getJSON(serverRoot + "/json/programMember/list", (data) => {
-//    $('#programList').html(template2Fn({list:data}));
-//});
-
+//li-template
+var liTemplateSrc = $("#li-template").html();
+var templateFn2 = Handlebars.compile(liTemplateSrc);
+console.log();
+$.getJSON(serverRoot + "/json/programMember/list", (data) => {
+ $('#programList').html(templateFn2({list:data}));
+});
 
 /* 탭 메뉴 이벤트 */
-$("li").click(function() {
-  if ($("li").find(".active")) {
-    $("li").removeClass("active");
-  }
-  $(this).addClass("active");
-  });
+$(document).on('click','.tabSelect', function(){
+	if ($(".tabSelect").find(".active")) {
+		$(".tabSelect").removeClass("active");
+	}
+	$(this).addClass("active");
+});
