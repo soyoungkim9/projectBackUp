@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>메서드 체이닝</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // String 객체의 메서드들은 자기 자신의 내용을 바꾸지 않고 리턴한다.
+      // 그러므로 메서드 체이닝을 이용할 수 있다.
+      var output = 'Hello wordl ..!';
+
+      output = output.toLowerCase().substring(0, 10).anchor('name');
+
+      alert(output);
+    </script>
+  </body>
+</html>
