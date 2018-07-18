@@ -31,11 +31,10 @@
       <!-- 통계 서브 메뉴 -->
       <div class="mangeSubMenu">
         <div class="tabbed">
-          <ul>
-            <li>본격! 식스팩 만들기</li>
-            <li>기초 근력 기르기</li>
-            <li>3주 하비탈출</li>
-            <li class="active">전체</li>
+          <ul id="programList">
+          <li class="tabSelect">1</li>
+          <li class="tabSelect">2</li>
+          <li class="tabSelect active">전체</li>
           </ul>
         </div>
         <div class="arrow">
@@ -52,7 +51,6 @@
         </div>
         </div>
         <div class="memberTable">
-          <div class="programDate">2018.07.10 ~ 2018.12.10</div>
           <table class="demo-table">
             <thead>
               <tr>
@@ -98,6 +96,14 @@
 </tr>
 {{/each}}
 </script>
+<!--  
+<script id="li-template" type="text/x-handlebars-template">
+{{#each list}}
+    <li class="tabSelect">{{name}}</li>
+{{/each}}
+<li class="tabSelect active">전체</li>
+</script>
+-->
 <script src="../../js/trainer/memberList.js"></script>
 </body>
 </html>
