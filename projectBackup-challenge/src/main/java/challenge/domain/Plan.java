@@ -14,7 +14,7 @@ public class Plan implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date planDate; // 운동 날짜
     private String planTitl; // 운동 제목
-    private String planContent; // 운동 내용
+    private String planContent; //oo,- 운동 내용
     
     private Program program; // 프로그램 객체
     

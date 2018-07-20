@@ -17,9 +17,9 @@ public class PlanController {
         this.planService = planService;
     }
         
-    @RequestMapping("list{no}")
-    public Object list (@PathVariable int no) throws Exception {
-        return planService.list(no);
+    @RequestMapping("list")
+    public Object list (){
+        return planService.list();
     }
     
     @RequestMapping("{no}")

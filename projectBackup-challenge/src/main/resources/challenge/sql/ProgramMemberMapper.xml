@@ -16,14 +16,13 @@
     <result column="pname" property="name"/>
     <result column="sdt" property="startDate"/>
     <result column="edt" property="endDate"/>
-    <result column="uno" property="uno"/>
     <result column="pgoal" property="proGoal"/>
     <result column="pgoal_n" property="proGoalNum"/>
-    <collection property="diary" ofType="Diary">
+    <collection property="diarys" ofType="Diary">
         <id column="dno" property="dno"/>
         <result column="dchek" property="dcheck"/>
     </collection>
-    <collection property="members" ofType="Member">
+    <collection property="users" ofType="User">
         <id column="uno" property="userNo"/>
         <result column="mail" property="email"/>
         <result column="uname" property="name"/>
@@ -40,12 +39,11 @@
   -->
   <select id="selectList"
           resultMap="ProgramMemberMap">
-	select u.mail, u.uname, u.sex, p.pname, d.dchek, u.uno
-	from PMEMB pm, PROG p, DIARY d, MEMB m, USER u
+	select distinct u.mail, u.uname, u.sex, p.pname, d.dchek, u.uno
+	from PMEMB pm, PROG p, DIARY d, USER u
 	where pm.pno = p.pno
-	AND u.uno = m.UNO
-	AND m.uno = pm.uno
 	AND pm.pno = d.pno
+	AND u.uno = pm.uno
 	AND pm.uno = d.uno
 <!--     order by pono desc -->
   </select>
@@ -54,13 +52,12 @@
        값을 꺼낼 때 프로퍼티 이름을 마음대로 해도 된다.
   -->
   <select id="selectOne" parameterType="int" resultMap="ProgramMemberMap">
-  select u.uname, u.sex, u.uphon, p.pname, p.sdt, p.edt, p.pgoal, d.dchek, p.pgoal_n
-	from PMEMB pm, PROG p, DIARY d, MEMB m, USER u
+  select distinct u.uname, u.sex, u.uphon, p.pname, p.sdt, p.edt, p.pgoal, d.dchek, p.pgoal_n
+	from PMEMB pm, PROG p, DIARY d, USER u
 	where pm.pno = p.pno
-	AND u.uno = m.UNO
-	AND m.uno = pm.uno
 	AND pm.pno = d.pno
-	AND pm.uno = d.UNO
-  AND m.uno=#{value}
+	AND u.uno = pm.uno
+	AND pm.uno = d.uno
+  AND u.uno=#{value}
   </select>
 </mapper>

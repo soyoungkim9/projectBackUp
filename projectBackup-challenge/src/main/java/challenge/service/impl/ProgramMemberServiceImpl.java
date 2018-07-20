@@ -27,7 +27,7 @@ public class ProgramMemberServiceImpl implements ProgramMemberService {
     }
 
     @Override
-    public Object get(int no) {
+    public List<ProgramMember> get(int no) {
         return programMemberDao.selectOne(no);
     }
 }

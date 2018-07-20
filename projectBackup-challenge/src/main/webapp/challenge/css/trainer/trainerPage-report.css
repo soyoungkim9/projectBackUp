@@ -85,6 +85,7 @@
 }
 .tabbed a {
   text-decoration: none;
+  color: #777;
 }
 
 .tabbed ul li:before,

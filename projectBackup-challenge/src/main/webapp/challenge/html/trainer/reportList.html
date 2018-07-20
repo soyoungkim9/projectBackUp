@@ -40,7 +40,7 @@
           <div class="arrowLeft"><i class="fas fa-chevron-circle-left"></i></div>
           <div class="arrowRight"><i class="fas fa-chevron-circle-right"></i></div>
         </div>
-        <div class="topBox">
+<!--         <div class="topBox">
         <div class="challengeBox1">
           <h3>3주 하비탈출</h3>
         </div>
@@ -176,16 +176,16 @@
             </li>
         </ul>
 
-        <!-- 운동일지 수정, 공유 운동후기 작성 -->
+        운동일지 수정, 공유 운동후기 작성
         <div class="bottomMenu">
           <ul>
             <li class="MenuShare"><a>공유</a></li>
             <li><a>이미지 파일</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
         <!-- pagenation -->
-	    <div class="sm-pagination" id="pagination">
+<!-- 	    <div class="sm-pagination" id="pagination">
 	      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-left"></i></a>
 	      <a class="sm-pagination-button pageActive">1</a>
 	      <a class="sm-pagination-button">2</a>
@@ -193,7 +193,7 @@
 	      <a class="sm-pagination-button">4</a>
 	      <a class="sm-pagination-button sm-pagination-button-end" href="#">5</a>
 	      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-right"></i></a>
-	    </div>
+	    </div> -->
       </div>
     </div><!-- mypage-body -->
 
@@ -208,7 +208,7 @@
 <script src="../../js/trainer/trainer-template.js"></script>  
 <script id="li-template" type="text/x-handlebars-template">
 {{#each list}}
-	<li class="tabSelect">{{name}}</li>
+	<li class="tabSelect"><a href='reportForm.html?no={{program.no}}'>{{program.name}}</a></li>
 {{/each}}
 </script>
 <script src="../../js/trainer/reportList.js"></script>
