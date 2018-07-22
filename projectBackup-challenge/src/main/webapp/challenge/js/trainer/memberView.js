@@ -1,16 +1,17 @@
 if (location.href.split("?").length > 1) {
-	var no = location.href.split("?")[1].split("=")[1];
+	var pno = location.href.split("?")[1].split("&")[0].split("=")[1];
+	var uno = location.href.split("&")[1].split("=")[1];
 
-	$.getJSON(serverRoot + "/json/programMember/" + no, function(data) {
-		$("#mName").append(data[no].users.name);
-        $("#mSex").append(data[no].users.sex);
-        $("#mTel").append(data[no].users.userPhone);
-        $("#mProgram").append(data[no].name);
-				$("#mDate1").append(data[no].startDate);
-				$("#mDate2").append(data[no].endDate);
-        $("#mTarget").append(data[no].proGoal);
-        $("#mAttend").append(data[no].diarys.dcheck);
-        $("#mTargetPer").append(data[no].proGoalNum);
+	$.getJSON(serverRoot + "/json/programMember/" + pno + "/" + uno, function(data) {
+		$("#mName").append(data[0].users.name);
+        $("#mSex").append(data[0].users.sex);
+        $("#mTel").append(data[0].users.userPhone);
+        $("#mProgram").append(data[0].name);
+				$("#mDate1").append(data[0].startDate);
+				$("#mDate2").append(data[0].endDate);
+        $("#mTarget").append(data[0].proGoal);
+        $("#mAttend").append(data[0].diarys.dcheck);
+        $("#mTargetPer").append(data[0].proGoalNum);
 	});
 
 	$(".close").click(function() {

@@ -24,9 +24,16 @@ public class ProgramMemberController {
         return programMemberService.list();
     }
     
-    @RequestMapping("{no}")
-    public List<ProgramMember> view(@PathVariable int no) throws Exception {
-        return programMemberService.get(no);
+    @RequestMapping("list/{no}")
+    public Object list(@PathVariable int no) {
+        return programMemberService.list(no);
+    }
+    
+    @RequestMapping("{no}/{userNo}")
+    public List<ProgramMember> view(
+            @PathVariable int no,
+            @PathVariable int userNo) throws Exception {
+        return programMemberService.get(no, userNo);
     }
     
 }

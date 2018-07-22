@@ -158,11 +158,11 @@
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-    <td><a href='memberView.html?no={{users.userNo}}'>{{users.email}}</a></td>
-    <td><a href='memberView.html?no={{users.userNo}}'>{{users.name}}</a></td>
-    <td><a href='memberView.html?no={{users.userNo}}'>{{users.sex}}</a></td>
-    <td><a href='memberView.html?no={{users.userNo}}'>{{name}}</a></td>
-    <td><a href='memberView.html?no={{users.userNo}}'>{{diarys.dcheck}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.email}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.name}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.sex}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{name}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{diarys.dcheck}}</a></td>
 </tr>
 {{/each}}
 </script>
@@ -171,7 +171,6 @@
 	<li class="tabSelect">{{name}}</li>
 {{/each}}
 <li class="tabSelect active">전체</li>
-{{toggle}}
 </script>
 <script src="../../js/trainer/memberList.js"></script>
 <script src="../../js/trainer/memberView.js"></script>
