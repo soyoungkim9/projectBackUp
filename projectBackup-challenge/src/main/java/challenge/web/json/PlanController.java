@@ -22,22 +22,28 @@ public class PlanController {
         return planService.list();
     }
     
-    @RequestMapping("{no}")
-    public Object view(@PathVariable int no) throws Exception {
-        return planService.get(no);
+    @RequestMapping("list/{pno}")
+    public Object planList (@PathVariable int pno){
+        return planService.getPlanList(pno);
     }
     
     @RequestMapping("add")
     public String add(Plan plan) throws Exception {
         planService.add(plan);
-        return "redirect:list";
+        return "등록성공!";
+
     }
-    
-    @RequestMapping("update")
-    public String update(Plan plan) throws Exception {
-        planService.update(plan);
-        return "redirect:list";
-    }
+//    @RequestMapping("{no}")
+//    public Object view(@PathVariable int no) throws Exception {
+//        return planService.get(no);
+//    }
+//    
+//    
+//    @RequestMapping("update")
+//    public String update(Plan plan) throws Exception {
+//        planService.update(plan);
+//        return "redirect:list";
+//    }
     
 }
 
