@@ -33,11 +33,10 @@ public class PlanController {
         return "등록성공!";
 
     }
-//    @RequestMapping("{no}")
-//    public Object view(@PathVariable int no) throws Exception {
-//        return planService.get(no);
-//    }
-//    
+    @RequestMapping("{plno}")
+    public Object view(@PathVariable int plno) throws Exception {
+        return planService.get(plno);
+    }    
 //    
 //    @RequestMapping("update")
 //    public String update(Plan plan) throws Exception {
