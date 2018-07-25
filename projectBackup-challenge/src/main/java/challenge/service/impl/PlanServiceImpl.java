@@ -38,10 +38,9 @@ public class PlanServiceImpl implements PlanService {
     public List<Object> get(int plno) {
         return planDao.selectOne(plno);
     }
-//    
-//    
-//    @Override
-//    public int update(Plan plan) {
-//        return planDao.update(plan);
-//    }
+    
+    @Override
+    public int update(Plan plan) {
+        return planDao.update(plan);
+    }
 }

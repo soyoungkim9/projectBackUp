@@ -4,7 +4,7 @@
 <meta charset='UTF-8'>
 <title>트레이너페이지</title>
 <link rel="stylesheet" href="../../css/trainer/template/sm-trainerPage.css">
-<link rel="stylesheet" href="../../css/trainer/trainerPage-memberManage.css">
+<link rel="stylesheet" href="../../css/trainer/trainerPage-memberModal.css">
 <link rel="stylesheet" href="../../css/common.css">
 <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 <link rel="stylesheet" href="../../css/pagination.css">
@@ -28,10 +28,15 @@
 
 
     <div class="sm-mypage-body">
-      <!-- 서브 메뉴 -->
+      <!-- 통계 서브 메뉴 -->
       <div class="mangeSubMenu">
         <div class="tabbed">
-          <ul id="programList"></ul>
+          <ul>
+            <li>본격! 식스팩 만들기</li>
+            <li>기초 근력 기르기</li>
+            <li>3주 하비탈출</li>
+            <li class="active">전체</li>
+          </ul>
         </div>
         <div class="arrow">
           <div class="arrowLeft"><i class="fas fa-chevron-circle-left"></i></div>
@@ -42,7 +47,7 @@
       <div class="manageContent">
         <div class="memberName">
           <div class="rightBox">
-          <input id="userName" type="text" placeholder="회원명을 입력해 주세요.">
+          <input type="text" placeholder="회원명을 입력해 주세요.">
           <button type="button" name="button">검색</button>
         </div>
         </div>
@@ -60,7 +65,7 @@
             <tbody id="memberList"></tbody>
           </table>
         </div>
-	                <!-- pagenation -->
+        <!-- pagenation -->
 	    <div class="sm-pagination" id="pagination">
 	      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-left"></i></a>
 	      <a class="sm-pagination-button pageActive">1</a>
@@ -70,9 +75,8 @@
 	      <a class="sm-pagination-button sm-pagination-button-end" href="#">5</a>
 	      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-right"></i></a>
 	    </div>
-      </div>
-      
-       <div id="myModal" class="modal">
+        <!-- 모달창 -->
+        <div id="myModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
             <div class="modal-header">
@@ -140,6 +144,7 @@
             </div>
         </div>
       </div>
+      </div>
     </div><!-- mypage-body -->
 </div><!-- mypage -->
 </div><!--.container-->
@@ -150,12 +155,24 @@
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../js/footer/footer.js"></script>
 <script src="../../js/trainer/trainer-template.js"></script>
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.email}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.name}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{users.sex}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{name}}</a></td>
+    <td><a href='memberView.html?pno={{no}}&uno={{users.userNo}}'>{{diarys.dcheck}}</a></td>
+</tr>
+{{/each}}
+</script>
 <script id="li-template" type="text/x-handlebars-template">
 {{#each list}}
-	<li class="tabSelect"><a href='memberList.html?pno={{no}}'>{{name}}</a></li>
+	<li class="tabSelect">{{name}}</li>
 {{/each}}
-<li class="tabSelect active"><a href='memberList.html'>전체</a></li>
+<li class="tabSelect active">전체</li>
 </script>
 <script src="../../js/trainer/memberList.js"></script>
+<script src="../../js/trainer/memberView.js"></script>
 </body>
 </html>

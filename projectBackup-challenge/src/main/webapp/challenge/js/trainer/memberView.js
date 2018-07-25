@@ -1,4 +1,4 @@
-if (location.href.split("?").length > 1) {
+if (location.href.split("?").length > 1 && location.href.split("&").length > 1) {
 	var pno = location.href.split("?")[1].split("&")[0].split("=")[1];
 	var uno = location.href.split("&")[1].split("=")[1];
 
@@ -13,9 +13,11 @@ if (location.href.split("?").length > 1) {
         $("#mAttend").append(data[0].diarys.dcheck);
         $("#mTargetPer").append(data[0].proGoalNum);
 	});
+	
+	$('.modal').css("display", "block");
 
 	$(".close").click(function() {
-		location.href= serverRoot + "/challenge/html/trainer/memberList.html";
+		location.href=  "memberList.html";
 		});
 
 }

@@ -61,5 +61,13 @@
 	from PLAN pl, PROG p 
 	where p.pno = pl.pno 
 	AND pl.plno = #{value}
-  </select> 
+  </select>
+  
+  <update id="update" parameterType="Plan">
+  	update PLAN set
+	pltitl=#{planTitl},
+	plcont=#{planContent}
+	where plno=#{no} 
+  </update>
+  
 </mapper>

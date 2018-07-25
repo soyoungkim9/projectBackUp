@@ -12,7 +12,7 @@ if (location.href.split("?").length > 1) {
 	        	var li = document.createElement("li");
 	        	li.innerHTML = "<div class='dayContent'>" + 
 	        		"<h4 class='time'>" + "Day"+ item.planTurn + "</h4>" +
-	        		"<p>" + item.planContent + "</p>" + "</div>" +
+	        		"<pre>" + item.planContent + "</pre>" + "</div>" +
 	        		"<div class='editIcon'>" + 
 	        		"<a onclick='modalView(" + item.no + ")' class='viewNum'><i class='fas fa-plus-circle'></i></a>" 
 	        		+ "</div>";
@@ -32,15 +32,29 @@ $.getJSON(serverRoot + "/json/plan/list/", (data) => {
  $('#programList').html(templateFn({list:data}));
 });
 
-/* 탭 메뉴 이벤트 */
-$(document).on('click','.tabSelect', function(){
-	if ($(".tabSelect").find(".active")) {
-		$(".tabSelect").removeClass("active");
-		$(".tabSelect a").css("color", "#777");
+/* 탭 메뉴 이벤트  나중에*/
+function tabEvent(pno) {
+	var programNo = location.href.split("?")[1].split("=")[1];
+
+	if(programNo == pno) {
+//			if ($(".tabSelect" + {{program.no}}).find(".active")) {
+//				$(".tabSelect" + {{program.no}}).removeClass("active");
+//				$(".tabSelect a" + {{program.no}}).css("color", "#777");
+//			}
+			console.log(pno);
+			console.log(programNo);
+			console.log($("tabSelect" + pno).selector);
+						
+			$("tabSelect" + pno).addClass("active");
+			//$(".active a").css("color", "#fff");
+			//$("tabSelect" + pno).css('background-color', 'red');
 	}
-	$(this).addClass("active");
-	$(".active a").css("color", "#fff");
-});
+}
+
+
+
+
+
 
 // 모달 관련 이벤트, 새글 관련 이벤트
 var modal = document.getElementById('myModal');
@@ -71,30 +85,8 @@ window.onclick = function(event) {
     }
 }
 
-// 운동일지 수정하기 이따가 수정!
-$(document).on("click",".updateNum",() => {
-    modal.style.display = "block";
-    $('#registerPlan').html("수정");
-    
-	var programNo = location.href.split("?")[1].split("=")[1];
-	$.ajax(serverRoot + "/json/plan/list/" + programNo, {
-		dataType: "json",	
-	    success(data) {
-			
-			
-			
-	    },
-	    error() {
-	        window.alert("report.js view 실행 오류!");
-	    }	
-	}); 
-    
-});
-
-
 //원하는 운동일지 확대해서 크게 보기 + 수정!
 function modalView(plno) {
-	
 	$('.modal').css("display", "block");
 	$('#addForm').css("display", "none");
 	$('#viewForm').css("display", "block");
@@ -111,7 +103,19 @@ function modalView(plno) {
 	    error() {
 	        window.alert("report.js view 실행 오류!");
 	    }	
-	}); 
+	});
+	
+	// 수정 버튼 눌렀을 경우 쿼리
+	$("#updatePlanButton").click(() => {
+		var programNo = location.href.split("?")[1].split("=")[1];
+		$.post(serverRoot + "/json/plan/update", {
+			planTitl: $("#modalViewTitle input").val(),
+			planContent: $("#modalViewContent textarea").val(),
+			"no": plno
+		}, () => {
+			location.href = "reportList.html?no=" +programNo;
+		});
+	});
 }
 
 // 등록 버튼 눌렀을 시
@@ -128,4 +132,3 @@ $("#registerPlan").click(() => {
 	});
 });
 
-// 수정 버튼 눌렀을 경우 쿼리 짜기

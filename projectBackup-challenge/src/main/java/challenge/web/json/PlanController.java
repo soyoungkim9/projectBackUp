@@ -30,19 +30,19 @@ public class PlanController {
     @RequestMapping("add")
     public String add(Plan plan) throws Exception {
         planService.add(plan);
-        return "등록성공!";
+        return "plan add success!";
 
     }
     @RequestMapping("{plno}")
     public Object view(@PathVariable int plno) throws Exception {
         return planService.get(plno);
     }    
-//    
-//    @RequestMapping("update")
-//    public String update(Plan plan) throws Exception {
-//        planService.update(plan);
-//        return "redirect:list";
-//    }
+    
+    @RequestMapping("update")
+    public String update(Plan plan) throws Exception {
+        planService.update(plan);
+        return "plan update success!";
+    }
     
 }
 
