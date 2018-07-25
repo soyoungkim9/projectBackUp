@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>array 객체의 remove</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      Array.prototype.remove = function (index) { this.splice(index, 1); }
+
+      var arr = [52, 273, 103, 32, 274, 129];
+
+      for (var i = arr.length -1; i >=0; i--) {
+        if (arr[i] > 100) {
+          arr.remove(i);
+        }
+      }
+
+      alert(arr);
+    </script>
+  </body>
+</html>

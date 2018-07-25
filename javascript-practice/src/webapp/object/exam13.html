@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ECMAScript 5 JSON 객체</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환한다.
+      // JSON.parse() : JSON 문자열을 자바스크립트 객체로 변환한다.
+      // toJSON() 메서드가 있다면 toJSON()메서드에서 리턴한 객체를 JSON으로
+      // 변환하고 그렇지 않다면 전체 객체를 JSON으로 변환한다.
+
+      var object = {
+        name : '윤인성',
+        region: '서울특별시',
+        // toJSON: function () {
+        //   return {
+        //     custom: 'custom'
+        //   };
+        // }
+      };
+
+      alert(JSON.stringify(object));
+
+      var copy = JSON.parse(JSON.stringify(object));
+      alert(copy.name + ':' + copy.region);
+    </script>
+  </body>
+</html>
