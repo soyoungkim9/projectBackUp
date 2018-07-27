@@ -5,13 +5,102 @@
   margin-bottom: 100px;
 }
 
-/* 수입 통계 서브 메뉴 */
-.uploadSubMenu h3 {
+/* 프로젝트 선택 서브메뉴*/
+.tabbed {
+  max-width: 880px;
+  margin: 0 auto;
+  margin-left: 0;
+  border-bottom: 4px solid #1B3453;
+  overflow: hidden;
+  transition: border 250ms ease;
+}
+.tabbed ul {
+  overflow: hidden;
+  float: left;
+  list-style-type: none;
+  padding-left: 35px;
   margin: 0;
-  border-bottom: 1px solid #666666;
-  height: 35px;
-  font-size: 21px;
-  font-weight: 400;
+}
+.tabbed ul * {
+  margin: 0px;
+  padding: 0px;
+}
+.tabbed ul li {
+  display: block;
+  float: right;
+  padding: 10px 24px 8px;
+  background-color: #FFF;
+  margin-right: 46px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  color: #777;
+  text-transform: uppercase;
+  font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
+
+  transition: all 250ms ease;
+}
+.tabbed a {
+  text-decoration: none;
+  color: #777;
+}
+
+.tabbed ul li:before,
+.tabbed ul li:after {
+  display: block;
+  content: " ";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 44px;
+  background-color: #FFF;
+  transition: all 250ms ease;
+}
+.tabbed ul li:before {
+  right: -24px;
+  transform: skew(30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0;
+}
+.tabbed ul li:after {
+  left: -24px;
+  transform: skew(-30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0;
+}
+.tabbed ul li:hover,
+.tabbed ul li:hover:before,
+.tabbed ul li:hover:after {
+  background-color: #F4F7F9;
+  color: #444;
+}
+.tabbed ul li.active {
+  z-index: 3;
+}
+
+.tabbed ul li.active,
+.tabbed ul li.active:before,
+.tabbed ul li.active:after {
+  background-color: #1B3453;
+}
+
+.active a {
+	color: #ffffff;
+}
+
+.arrow .fas {
+  color: #1B3453;
+  font-size: 22px;
+}
+
+.arrow {
+  margin-top: 5px;
+  height: 22px;
+}
+.arrowLeft {
+  float: left;
+}
+
+.arrowRight {
+  float: right;
 }
 
 /* 통계 본문 */
@@ -20,13 +109,24 @@
 }
 
 .dateSelect {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 .dateSelect input {
   border:1px solid #d7d7d7;
-  padding: 8px;
+  padding: 9px;
   border-radius:2px;
   width: 120px;
+}
+
+#searchStats {
+  height: 34px;
+  width: 55px;
+  background: #0e3665;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 /* 그래프 */
@@ -46,14 +146,24 @@
 }
 
 .statsTable table {
-  border: 1px solid #e0e0e0;
   border-collapse: collapse;
-  margin-left: 25px;
+  margin-bottom: 100px;
+  margin-top: 70px;
+}
+
+.statsTable thead th {
+	background-color: #0e3665;
+	color: white;
+	text-align: center;
+	
+}
+
+.statsTable td {
+	background-color: #f4fbff;
 }
 
 .statsTable th, .statsTable td {
-  border: 1px solid #e0e0e0;
-  padding: 13px 75px;
+  padding: 13px 85px;
 }
 
 
