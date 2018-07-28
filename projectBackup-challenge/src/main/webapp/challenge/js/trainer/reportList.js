@@ -15,7 +15,7 @@ $.ajax(serverRoot + "/json/plan/list/", {
 		defaultPage = $('.active').find('a').attr('data-last');
 		startDate = $('.active').find('a').attr('data-sdt');
 		endDate = $('.active').find('a').attr('data-edt');
-		
+		// 운동일지 default page 설정
 		$.ajax(serverRoot + "/json/plan/list/" + defaultPage, {
 			dataType: "json",	
 		    success(data) {
@@ -30,6 +30,7 @@ $.ajax(serverRoot + "/json/plan/list/", {
 						 startDate: data[0].program.startDate,
 						 endDate: data[0].program.endDate,
 						 list:data}));
+					 	 console.log(data);
 				 }
 		    },
 		    error() {
@@ -41,11 +42,6 @@ $.ajax(serverRoot + "/json/plan/list/", {
         window.alert("report.js li-template list 실행 오류!");
     }
 });
-
-// 운동일지 default page 설정
-
-
-
 
 // 운동일지 리스트 보기
 var programTemplateSrc = $("#program-template").html();
@@ -68,15 +64,17 @@ $(document.body).on('click', '.programTab', function(event) {
 	$.ajax(serverRoot + "/json/plan/list/" + pno, {
 		dataType: "json",	
 	    success(data) {
-			 if(data.length == 0) {
-				 $("#programBox h4").remove();
-				 $("#programBox div").remove();
+			if(data.length == 0) {
+				 // 클릭할 때마다 생기는 문제를 제거 하기 위해 만든 코드
+				 $('#programBox h4').remove();
+				 $('#programBox div').remove();
+				 $('#planList').remove();
+			
 				 $('#programBox').append('<h4>기간: <span id="sdt">' +
 						 startDate + '</span> ~ <span id="edt">' +
 						 endDate + '</span></h4>');
 				 $('#programBox').append('<div id="noPlan">작성된 운동일지가 없습니다.</div>');
 			 } else {
-				 // 오류 해결하기!
 				 $('#programBox').html(programTemplateFn({
 					 name: data[0].program.name,
 					 startDate: data[0].program.startDate,
@@ -105,13 +103,16 @@ window.onclick = function(event) {
 }
 
 // 새글 관련 이벤트
-$("#addPlan").click(() => {    
+$("#addPlan").click(() => {
     pno = $('.active').find('a').attr('data-no');
     // 프로그램 회차 관련
     $.ajax(serverRoot + "/json/plan/list/" + pno, {
     	dataType: "json",
 	    success(data) {
     	   $("option").remove();
+    	   $("#mDate").val('');
+    	   $("#mTitle").val('');
+    	   $("#mContent").val('');
     	   var count = data.length + 1;
     	   var turn;
     	   if(data.length == 0) { // 프로그램에 운동일지 하나도 없을 경우
@@ -186,7 +187,7 @@ $("#updatePlanButton").click(() => {
 });
 
 // 등록 버튼 눌렀을 시
-$("#registerPlan").click(() => {
+$("#registerPlan").click(() => {	
 	$.post(serverRoot + "/json/plan/add", {
 		planTurn: $("#mTurn").val(),
 		planDate: $("#mDate").val(),
@@ -195,7 +196,6 @@ $("#registerPlan").click(() => {
 		"program.no": pno
 	}, () => {
 		modal.style.display = "none";
-		
 		/* 업데이트한 상태에서 이전 화면으로 돌아가기 위한 코드임... 뭔가 이상 */
 		$.ajax(serverRoot + "/json/plan/list/" + pno, {
 			dataType: "json",	
@@ -211,5 +211,18 @@ $("#registerPlan").click(() => {
 		    }	
 		});
 	});
+});
+
+// DatePicker
+$(function() {
+    $("#mDate").datepicker({
+        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        minDate: startDate,
+        maxDate: endDate,
+        dateFormat: "yy-mm-dd"
+    });
 });
 

@@ -344,6 +344,10 @@
 	height: 25px;
 }
 
+#mDate {
+	height: 22.2px !important; 
+}
+
 [name="addContent"] {
 	border: 1px solid #d7d7d7;
 	height: 250px;
