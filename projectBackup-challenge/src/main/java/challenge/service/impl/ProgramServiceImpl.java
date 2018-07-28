@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import challenge.dao.ProgramDao;
+import challenge.dao.ProgramMediaDao;
 import challenge.domain.Program;
 import challenge.service.ProgramService;
 
@@ -15,9 +16,11 @@ import challenge.service.ProgramService;
 public class ProgramServiceImpl implements ProgramService {
 
     ProgramDao programDao;
+    ProgramMediaDao programMediaDao; 
     
-    public ProgramServiceImpl(ProgramDao programDao) {
+    public ProgramServiceImpl(ProgramDao programDao, ProgramMediaDao programMediaDao) {
         this.programDao = programDao;
+        this.programMediaDao = programMediaDao;
     }
     
     @Override
@@ -31,6 +34,10 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     public List<Program> listCard() {
         return programDao.selectListCard();
+    }
+    @Override
+    public List<Program> mainList() {
+        return programDao.mainList();
     }
     
     @Override
@@ -50,11 +57,11 @@ public class ProgramServiceImpl implements ProgramService {
         return programDao.delete(no);
     }
 
-    /*@Override
-    public Program getWithMembers(String name) {
-        Program program = programDao.selectOneWithMembers(name);
+    @Override
+    public Program getWithMedia(int no) {
+        Program program = programDao.selectOneWithMedia(no);
         return program;
-    }*/
+    }
     
     @Override
     public int add(Program program) {

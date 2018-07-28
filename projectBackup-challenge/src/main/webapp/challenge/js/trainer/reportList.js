@@ -7,40 +7,41 @@ var endDate;
 // li-template 트레이너가 관리하는 프로그램 이름 목록
 var liTemplateSrc = $("#li-template").html();
 var templateFn = Handlebars.compile(liTemplateSrc);
-$.ajax(serverRoot + "/json/plan/list/", {
-	dataType: "json",
-    success(data) {
-		$('#programList').html(templateFn({list:data}));
-		
-		defaultPage = $('.active').find('a').attr('data-last');
-		startDate = $('.active').find('a').attr('data-sdt');
-		endDate = $('.active').find('a').attr('data-edt');
-		// 운동일지 default page 설정
-		$.ajax(serverRoot + "/json/plan/list/" + defaultPage, {
-			dataType: "json",	
-		    success(data) {
-				 if(data.length == 0) {
-					 $('#programBox').append('<h4>기간: <span id="sdt">' +
-							 startDate + '</span> ~ <span id="edt">' +
-							 endDate + '</span></h4>');
-					 $('#programBox').append('<div id="noPlan">작성된 운동일지가 없습니다.</div>');
-				 } else {
-					 $('#programBox').html(programTemplateFn({
-						 name: data[0].program.name,
-						 startDate: data[0].program.startDate,
-						 endDate: data[0].program.endDate,
-						 list:data}));
-					 	 console.log(data);
-				 }
-		    },
-		    error() {
-		        window.alert("report.js default page 실행 오류!");
-		    }	
-		});
-	},
-    error() {
-        window.alert("report.js li-template list 실행 오류!");
-    }
+$(document).ready(function() {
+	$.ajax(serverRoot + "/json/plan/pList/" + obj.userNo, {
+		dataType: "json",
+	    success(data) {
+			$('#programList').html(templateFn({list:data}));
+			defaultPage = $('.active').find('a').attr('data-last');
+			startDate = $('.active').find('a').attr('data-sdt');
+			endDate = $('.active').find('a').attr('data-edt');
+			// 운동일지 default page 설정
+			$.ajax(serverRoot + "/json/plan/list/" + defaultPage, {
+				dataType: "json",	
+			    success(data) {
+					 console.log(obj.userNo);
+					 if(data.length == 0) {
+						 $('#programBox').append('<h4>기간: <span id="sdt">' +
+								 startDate + '</span> ~ <span id="edt">' +
+								 endDate + '</span></h4>');
+						 $('#programBox').append('<div id="noPlan">작성된 운동일지가 없습니다.</div>');
+					 } else {
+						 $('#programBox').html(programTemplateFn({
+							 name: data[0].program.name,
+							 startDate: data[0].program.startDate,
+							 endDate: data[0].program.endDate,
+							 list:data}));
+					 }
+			    },
+			    error() {
+			        window.alert("report.js default page 실행 오류!");
+			    }	
+			});
+		},
+	    error() {
+	        window.alert("report.js li-template list 실행 오류!");
+	    }
+	});
 });
 
 // 운동일지 리스트 보기

@@ -1,6 +1,9 @@
 package challenge.web.json;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import challenge.domain.Message;
+import challenge.domain.ProgramMember;
 import challenge.service.MessageService;
 
 @RestController
@@ -33,14 +37,17 @@ public class MessageController {
        messageService.delete(no);
     }
     
-    @RequestMapping("list")
+    @RequestMapping("list{page}")
     public Object list(
-            ) {
-        return messageService.list();
+        @PathVariable String page,
+        @MatrixVariable(defaultValue="1") int pageNo,
+        @MatrixVariable(defaultValue="5") int pageSize) {
+        return messageService.list(pageNo, pageSize);
     }
     
     @RequestMapping("{no}")
-    public Message view(@PathVariable int no) throws Exception {
+    public Message view(
+            @PathVariable int no) throws Exception {
         return messageService.get(no);
     }
     
