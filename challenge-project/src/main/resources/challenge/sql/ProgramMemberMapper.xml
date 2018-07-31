@@ -35,7 +35,7 @@
 	    <result column="edt" property="endDate"/>
 	    <result column="pgoal" property="proGoal"/>
 	    <result column="pgoal_n" property="proGoalNum"/>
-	    <result column="trnno" property="trainerNo"/>
+        <result column="trnno" property="trainerNo"/>
     </association>
     <association property="user" javaType="User">
         <id column="uno" property="userNo"/>
@@ -56,7 +56,12 @@
        스프링 프레임워크와 연동할 때 DAO객체를 자동생성하고
        그 메서드를 자동생성할 때 사용할 수 있다.
   -->
-  
+  <insert id="insert" parameterType="ProgramMember">
+    insert into PMEMB(pno,uno,payday) 
+    values(#{pno},#{uno},now())
+    
+   </insert>
+   
   <select id="pNameList" parameterType="int" resultMap="ProgramMemberMap">
   	SELECT p.pno, p.trnno, p.pname
 	FROM PROG p 
@@ -75,7 +80,7 @@
   </select>
   
   <select id="selectListWithProgram" parameterType="map" resultMap="ProgramMemberMap">
-	SELECT u.uno, u.mail, u.uname, u.sex, p.pname 
+	SELECT u.uno, p.pno, u.mail, u.uname, u.sex, p.pname 
 	FROM PMEMB pm 
 		INNER JOIN USER u 
 	    ON pm.uno = u.uno 
