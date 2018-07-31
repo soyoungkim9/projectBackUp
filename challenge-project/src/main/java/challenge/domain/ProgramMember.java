@@ -5,38 +5,35 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/* 프로그램 참여자 */
-public class ProgramMember extends Program implements Serializable {
+/* 프로그램 참여자 */ 
+public class ProgramMember implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    @JsonFormat(pattern="yyyy-MM-dd")
+    private int programNo;
+    private int userNo;
+    
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date paymentDay; // 결제일
     private double grade; // 평점
     private String review; // 리뷰
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date reviewDate; // 리뷰일자
     private int userType; // 회원유형
     
-    private User users;
+    private User user;
+    private Program program;
     private Diary diarys;
-    
-    
-    public int getUserType() {
-        return userType;
+    public int getProgramNo() {
+        return programNo;
     }
-    public void setUserType(int userType) {
-        this.userType = userType;
+    public void setProgramNo(int programNo) {
+        this.programNo = programNo;
     }
-    public User getUsers() {
-        return users;
+    public int getUserNo() {
+        return userNo;
     }
-    public void setUsers(User users) {
-        this.users = users;
-    }
-    public Diary getDiarys() {
-        return diarys;
-    }
-    public void setDiarys(Diary diarys) {
-        this.diarys = diarys;
+    public void setUserNo(int userNo) {
+        this.userNo = userNo;
     }
     public Date getPaymentDay() {
         return paymentDay;
@@ -62,4 +59,30 @@ public class ProgramMember extends Program implements Serializable {
     public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
+    public int getUserType() {
+        return userType;
+    }
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public Program getProgram() {
+        return program;
+    }
+    public void setProgram(Program program) {
+        this.program = program;
+    }
+    public Diary getDiarys() {
+        return diarys;
+    }
+    public void setDiarys(Diary diarys) {
+        this.diarys = diarys;
+    }
+    
+    
 }

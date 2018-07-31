@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import challenge.domain.Member;
 import challenge.domain.ProgramMember;
 import challenge.service.ProgramMemberService;
 
@@ -35,18 +36,19 @@ public class ProgramMemberController {
         return programMemberService.list(pno, trnNo);
     }
     
-    @RequestMapping("{no}/{userNo}")
+    @RequestMapping("{pno}/{userNo}")
     public List<ProgramMember> view(
-            @PathVariable int no,
+            @PathVariable int pno,
             @PathVariable int userNo) throws Exception {
-        return programMemberService.get(no, userNo);
+        return programMemberService.get(pno, userNo);
     }
     
     @RequestMapping("{userNo}")
-    public List<ProgramMember> listWithUserNo(
+    public Member listWithUserNo(
             @PathVariable int userNo) throws Exception {
         return programMemberService.getWithUserNo(userNo);
     }
+   
 }
 
 //ver 55 - JSON 데이터를 출력하는 페이지 컨트롤러 생성
