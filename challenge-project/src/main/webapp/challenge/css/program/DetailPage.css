@@ -124,7 +124,7 @@ ul {
 }
 
 .alineCenter {
-	width: 350px;
+	width: 219px;
 	height: 42px;
 	margin: 0 auto;
 }
@@ -151,7 +151,6 @@ ul {
 	border-top: 1px solid #e6e6e6;
 	border-right: 1px solid #e6e6e6;
 	box-sizing: border-box;
-	width: 649.5px;
 	background: #fafafa;
 	margin-bottom: 50px;
 	z-index: 100;
@@ -163,7 +162,7 @@ ul {
 	color: #999;
 	font-weight: bold;
 	text-align: center;
-	padding: 14px 46.3px;
+	padding: 14px 47.6px;
 	text-decoration: none;
 	font-size: 15px;
 	border-left: 1px solid #e6e6e6;
@@ -215,7 +214,6 @@ ul {
 }
 
 #examContent [class^=p]:not(a) {
-	width: 647px;
 	margin-bottom: 25px;
 }
 
@@ -228,7 +226,6 @@ ul {
 
 .ExamImage {
 	margin-bottom: 0px;
-	width: 649px;
 }
 
 .mySlides {
@@ -324,7 +321,7 @@ to {
 
 /* 가격 정보 */
 .four {
-	width: 649px;
+	margin-top: 30px;
 }
 
 .checkbox {
@@ -444,6 +441,7 @@ thead {
 
 .five table, tr, td, th {
 	border-collapse: collapse;
+	width: inherit;
 }
 
 th, td {
@@ -456,8 +454,48 @@ th, td {
 	display: inline-block;
 	border: 1px solid #e0dbdb;
 	box-sizing: border-box;
-	width: 649px;
+	width: -webkit-fill-available;
 }
+
+
+/* 숫자를 별로 변환 */
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+
+
+span.star-prototype2, span.star-prototype2 > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype2 > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+
+span.star-prototype3, span.star-prototype3 > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype3 > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+
 
 /* 프로그램 평가 댓글 입력창 star */
 .star-input>.input, .star-input>.input>label:hover, .star-input>.input>input:focus+label,
@@ -562,12 +600,18 @@ star-input>.input.focus {
 	height: 30px;
 	border-radius: 30px;
 	float: left;
+	overflow: hidden;
+}
+
+.userNameCircle img {
+	width: 100%;
 }
 
 .userNameContent {
 	float: left;
 	font-size: 14px;
 	padding: 6px 10px;
+	font-weight: bold;
 }
 
 .userContent {
@@ -599,10 +643,27 @@ star-input>.input.focus {
 	cursor: pointer;
 }
 
+/* 댓글 더보기 관련 */
+.cm-load {
+    display: none;
+}
+.cm-load.active {
+    display: block;
+}
+.is_comp.cm-load:after {
+    display: none;
+}
+.btn-wrap {
+    display: block;
+}
+.btn-wrap {
+    text-align: center;
+}
+
+
 /* 프로그램 평가*/
 .six {
 	margin-top: 25px;
-	width: 649px;
 }
 
 .navEvalSub {
@@ -611,8 +672,7 @@ star-input>.input.focus {
 
 .EvalContent1 {
 	background-color: #f5f5f5;
-	padding: 2% 30%;
-	padding-top: 3%;
+	padding: 4% 43%;
 }
 
 .EvalContent1-star {
@@ -624,12 +684,9 @@ star-input>.input.focus {
 	font-size: 25px;
 }
 
-.EvalContent1-score {
-	padding: 0 28%;
-}
-
 .EvalContent1-score .evalEnp {
 	font-size: 14px;
+	margin-left: 10px;
 }
 
 .EvalContent2 {
@@ -653,7 +710,12 @@ star-input>.input.focus {
 	width: 75px;
 	height: 75px;
 	margin: 0;
-	margin-top: 4px;
+	margin-left: 12px;
+	overflow: hidden;
+}
+
+.commentImg img {
+	width: 100%;
 }
 
 .commentDate {
@@ -670,13 +732,14 @@ star-input>.input.focus {
 }
 
 .commentContent {
-	width: 550px;
+	width: 530px;
 	margin: 10px 0 13px 0;
-	padding-left: 20px;
+	padding: 0 20px;
 }
 
 .commentName {
 	padding-left: 20px;
+	
 }
 
 .EvalContent2 ul {
@@ -696,17 +759,35 @@ star-input>.input.focus {
 }
 
 .commentPlus a {
-	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
 	padding-top: 8px;
 	font-size: 15px;
 	color: #5e5e5e;
 	font-weight: bold;
 }
-
-/* 프로그램 평가 댓글 입력창 */
-#more {
-	display: none;
+.cmt-edit {
+    display: none;
+    font-size: 12px;
+    font-weight: 100;
+    color: #666666;
+    margin: 3px 8px 0 8px;
+    cursor: pointer;
+    width: 38px;
+    height: 20px;
+    float: left;
 }
+.cmt-delete {
+    display: none;
+    font-size: 12px;
+    font-weight: 100;
+    color: #666666;
+    margin: 3px 0px 0 0px;
+    cursor: pointer;
+    width: 38px;
+    height: 20px;
+    float: left;
+}
+
 
 /* aside 부분 */
 .aside {
@@ -841,7 +922,10 @@ star-input>.input.focus {
 }
 
 .lectBox {
-	padding: 0 6%;
+    padding: 0 6%;
+    height: 360px;
+    overflow-y: scroll;
+    width: 380px;
 }
 
 .lectList {
@@ -929,7 +1013,15 @@ star-input>.input.focus {
 	padding: 10px 0px;
 	text-align: center;
 	cursor: pointer;
+	font-weight:normal;
 }
+.asideCost h2 span:first-child {
+    font-size:22px;
+}
+.asideCost h2 span {
+    font-size:20px;
+}
+
 
 /* 장소 */
 .asidePosition, .asideDate {

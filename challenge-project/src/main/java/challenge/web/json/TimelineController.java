@@ -1,9 +1,6 @@
 package challenge.web.json;
 
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,8 +44,11 @@ public class TimelineController {
 
     @RequestMapping("update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(Timeline timeline) throws Exception {
-        timelineService.update(timeline);
+    public void update(
+            @RequestParam("content") String content,
+            @RequestParam("picture") String picture,
+            @RequestParam("no") int no) throws Exception {
+        timelineService.update(content, picture, no);
     }
 
     @RequestMapping("{no}")

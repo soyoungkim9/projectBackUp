@@ -10,23 +10,14 @@
      스프링 프레임워크와 연동할 때 DAO 객체를 자동 생성할 수 있다.
 -->
 <mapper namespace="challenge.dao.ProgramMemberDao">
-  <resultMap type="Member" id="MemberMap">
-    <id column="uno" property="userNo"/>
-    <result column="mail" property="email"/>
-    <result column="uname" property="name"/>
-    <result column="upath" property="userPath"/>
-    <collection property="programs" ofType="Program">
-        <id column="pno" property="no"/>
-        <result column="pname" property="name"/>
-        <result column="pth" property="proTh"/>
-        <result column="ptover" property="proTurn"/>
-    </collection>
-  </resultMap>
-
   <resultMap type="ProgramMember" id="ProgramMemberMap">
     <id column="pno" property="programNo"/>
     <id column="uno" property="userNo"/>
+    <result column="pgrade" property="grade"/>
+    <result column="prv" property="review"/>
+    <result column="prvdt" property="reviewDate"/>
     <result column="payday" property="paymentDay"/>
+    <result column="ptype" property="userType"/>
     
     <association property="program" javaType="Program">
         <id column="pno" property="no"/>
@@ -43,6 +34,7 @@
         <result column="uname" property="name"/>
         <result column="sex" property="sex"/>
         <result column="uphon" property="userPhone"/>
+        <result column="upath" property="userPath"/>
     </association>
     <collection property="diarys" ofType="Diary">
         <id column="dno" property="dno"/>
@@ -50,17 +42,13 @@
     </collection>
   </resultMap>
 
-  <!-- SQL 문 id를 설정할 때 SQL문을 사용하는 메서드 이름과 같게하면
-       유지보수할 때 알아보기 쉽다.
-       알아보기 쉬울 뿐만 아니라
-       스프링 프레임워크와 연동할 때 DAO객체를 자동생성하고
-       그 메서드를 자동생성할 때 사용할 수 있다.
-  -->
-  <insert id="insert" parameterType="ProgramMember">
-    insert into PMEMB(pno,uno,payday) 
-    values(#{pno},#{uno},now())
-    
-   </insert>
+  
+   <insert id="insert" parameterType="ProgramMember">
+    INSERT INTO PMEMB (pno,uno,payday,ptype) 
+    VALUES (#{programNo},#{userNo},now(),#{userType})
+  </insert>
+  
+   
    
   <select id="pNameList" parameterType="int" resultMap="ProgramMemberMap">
   	SELECT p.pno, p.trnno, p.pname
@@ -68,6 +56,15 @@
     WHERE p.trnno = #{value}
   </select>
   
+  <!-- 회원이 수강중인 프로그램 목록 -->
+  <select id="lectList" parameterType="int" resultMap="ProgramMemberMap">
+  	SELECT pm.pno, pm.uno, p.pname, p.trnno, p.sdt, p.edt 
+	FROM PMEMB pm 
+		INNER JOIN PROG p 
+		ON pm.pno = p.pno 
+	WHERE pm.uno = #{value}
+  </select>
+    
   <select id="selectList" parameterType="int" resultMap="ProgramMemberMap">
 	SELECT u.uno, p.pno, pm.uno, u.mail, u.uname, u.sex, p.pname, p.trnno
 	FROM PMEMB pm 
@@ -131,13 +128,33 @@
 	    AND p.pno = #{arg1}
   </select>
   -->
-  <select id="selectListWithUno" parameterType="int" resultMap="MemberMap">  
-    select u.uno, u.uname, u.mail, u.upath, pm.uno, pm.pno, pm.ptype, p.pname, p.pth, p.ptover
-	from USER u
-	left outer join PMEMB pm on u.uno = pm.uno
-	left outer join PROG p on pm.pno = p.pno
-    where u.uno = #{value};
-  </select>
 
-  
+	<update id="updateReview" parameterType="ProgramMember">
+		update PMEMB set
+		pgrade=#{grade},
+		prv=#{review},
+		prvdt=now()
+		where pno=#{programNo} and uno=#{userNo}
+	</update>
+
+	<select id="reviewList" parameterType="map" resultMap="ProgramMemberMap">
+		SELECT pm.pno, pm.pgrade, pm.prv, pm.prvdt, pm.uno,
+		       u.uname, u.upath
+		FROM PMEMB pm
+            INNER JOIN USER u ON pm.uno = u.uno
+		WHERE pm.pno = #{programNo} and length(pm.prvdt) > 0
+		ORDER BY pm.prvdt desc;
+	</select>
+	
+	<select id="reviewCount" parameterType="int" resultType="int">
+         select count(*)
+         from PMEMB
+         where pno=#{programNo} and length(prvdt) > 0
+    </select>
+    
+    <select id="reviewScore" parameterType="int" resultType="int">
+         select sum(pgrade)
+         from PMEMB
+         where pno=#{programNo} and length(prvdt) > 0
+    </select>
 </mapper>

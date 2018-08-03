@@ -104,13 +104,11 @@
 }
 
 .sm-timeline ul li:nth-child(odd) div {
-	transform: all;
-  transform: translateX(200px);
+  transform: translate3d(200px, 0, 0);
 }
 
 .sm-timeline ul li:nth-child(even) div {
-	transform: all;
-  transform: translateX(-200px);
+  transform: translate3d(-200px, 0, 0);
 }
 
 .sm-timeline ul li.in-view div {

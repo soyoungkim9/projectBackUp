@@ -16,7 +16,7 @@
 <h2 id="fName" class="challengeName"></h2>
 <div class="challengeSub">
   <p><span id="Dday">Start D</span></p>
-  <p><span id="fStartDate">( </span> )</p>
+  <p><span id="fDate">( </span> )</p>
   <p><span id="fminQty">참여인원 </span><span id="fmaxQty"> / </span></p>
 </div>
 </div>
@@ -28,28 +28,24 @@
    <span id="fName"></span>
    <span id="fproType">운동종목: </span>
    </h3>
-    <p><span><a class="far fa-heart"></a></span>
+    <p><span id="fchalName"></span>
     <span id="fprice">￦ </span></p>
   </div>
   </div>
   <div class="middle two">
   <div class="alineCenter">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <p class="evalNum"><b><span>5</span>점</b></p>
-    <p class="evalEnp">(<span>11</span>개의 평가)</p>
+    <span id="reviewScore" class="star-prototype3"></span>
+    <p class="evalNum"><b><span id="reviewScore"></span>점</b></p>
+    <p class="evalEnp">(<span id="reviewCount"></span>개의 평가)</p>
   </div>
   </div>
 
   <!-- 본문 따라다니는 navbar -> name id(#) 잘 활용하기 -->
   <div id="navbar" class="middle">
-   <a href="#navExam" onclick="openNav(event)" class="navLink">프로그램설명</a>
-   <a href="#navPrice" onclick="openNav(event)" class="navLink">가격정보</a>
-   <a href="#navNum" onclick="openNav(event)" class="navLink">기수정보</a>
-   <a href="#navEval" onclick="openNav(event)" class="navLink">프로그램평가</a>
+   <a href="#navExam" class="navLink">프로그램설명</a>
+   <a href="#navPrice" class="navLink">가격정보</a>
+   <a href="#navNum" class="navLink">기수정보</a>
+   <a href="#navEval" class="navLink">프로그램평가</a>
   </div>
   <!-- 프로그램 설명-->
   <div class="middle three">
@@ -76,9 +72,7 @@
     <div class="PriceContent">
       <ul class="PriceContentSub1">
         <li>
-          <div><strong>[퍼스널트레이닝] 식스팩만들기 3개월권</strong></div>
-          <div class="priceLeft PriceContentSize">성인 남성을 위한 3개월 트레이닝 과정입니다.
-            <br>운동 초보자분들에게 추천 드립니다.</div>
+          <div><strong><span id="fproType">[</span>] <span id="fName"></span></strong></div>
           <div class="priceRight">
             <div>
               <div class="priceSubLeft">
@@ -86,11 +80,11 @@
                 <span><b>1</b></span>
                 <a class="numPlus"><b>↑</b></a>-->
               </div>
-              <div class="priceSubRight"><b>99,000</b>원</div>
+              <div class="priceSubRight"><b id="fprice"></b> 원</div>
             </div>
           </div>
         </li>
-        <li>
+        <!-- <li>
           <div class="priceLeft">
             <label><input type="checkbox"> 개인 락커룸 3개월권</label>
           </div>
@@ -119,7 +113,7 @@
               <div class="priceSubRight"><b>2,000</b>원</div>
             </div>
           </div>
-        </li>
+        </li> -->
       </ul>
       <div class="PriceContentSub2">
         <h4>
@@ -169,15 +163,9 @@
     </div>
     <div>
       <div class="EvalContent1">
-      <div class="EvalContent1-star">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
+      <span id="reviewScore" class="star-prototype"></span>
       <div class="EvalContent1-score">
-        <p class="evalEnp"><span>11</span>개의 평가</p>
+        <p class="evalEnp"><span id="reviewCount"></span>개의 평가</p>
       </div>
       </div>
       <!-- 댓글입력 창 -->
@@ -185,10 +173,10 @@
 
         <div class="userName">
           <div class="userNameCircle"></div>
-          <div class="userNameContent"><b>홍길동</b></div>
+          <div id="uName" class="userNameContent"></div>
         </div>
         <div class="userContent">
-          <textarea rows="5" cols="82" placeholder="정직한 프로그램 후기를 남겨주세요^^"></textarea>
+          <textarea id="fContent" rows="5" cols="82" placeholder="정직한 프로그램 후기를 남겨주세요^^"></textarea>
         </div>
         <div class="formInput">
           <div class="starInput">
@@ -208,183 +196,16 @@
             <output for="star-input"><b>0</b>점</output>
             </span>
           </div>
-            <button class="commentRegister" type="button">등록</button>
+            <button id="updBtn" class="commentRegister" type="button">등록</button>
         </div>
       </div>
       <!-- 댓글 리스트 -->
       <div class="EvalContent2">
-        <div>
-          <ul>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lsl******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lyk******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                정말 힘들었습니다. ㅠㅠ
-              </div>
-              <div class="commentName">
-                abc******
-              </div>
-            </li>
-            <!-- 숨겨진 더보기 -->
-            <span id="more">
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                강추하는 수업입니다!
-              </div>
-              <div class="commentName">
-                doc******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lyk******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lyk******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lyk******
-              </div>
-            </li>
-            <li>
-              <div class="commentImg"></div>
-              <div class="commentDate">
-                18.09.20 20:28
-                <span>｜</span>
-              </div>
-              <div class="commentEval">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="commentContent">
-                3개월동안 고생하셨어요 감사합니다~!
-              </div>
-              <div class="commentName">
-                lyk******
-              </div>
-            </li>
-            </span>
-            <!-- 숨겨진 더보기 끝 -->
-          </ul>
+        <div id="cm-load">
+          <ul id="comment1"></ul>
+          <div id="cm-btn-wrap" class="btn-wrap commentPlus">
+          <a id="moreBtn" class="button">더보기</a> </div>
         </div>
-        <div class="commentPlus">
-          <a onclick="moreFunction()" id="moreBtn">+ 더보기</a>
-        </div>
-
       </div>
     </div>
   </div>
@@ -433,10 +254,8 @@
   </div>
  <!-- 결제하기 -->
  <div class="asideCost">
- <h2 id="payment" style="font-weight:normal;">
- <span style="font-size:22px">결제하기 </span><span style="font-size:20px">(
- </span><span style="font-size: 20px;" id="fprice"></span><span style="font-size:20px">원</span><span style="font-size:20px">
- )</span>
+ <h2 id="payment">
+ <span>결제하기</span><span id="fprice"> ( </span><span>원 )</span>
  </h2>
  </div>
  <!-- 강의 장소 -->
@@ -454,13 +273,13 @@
  <div class="asideDate">
    <h4><i class="far fa-calendar-alt"></i> 일정</h4>
    <div id="date" class="tab">
-     <button class="tablinks2" onclick="openDay(event, 'day0')" id="defaultOpen2">월</button>
-     <button class="tablinks2" onclick="openDay(event, 'day1')">화</button>
-     <button class="tablinks2" onclick="openDay(event, 'day2')">수</button>
-     <button class="tablinks2" onclick="openDay(event, 'day3')">목</button>
-     <button class="tablinks2" onclick="openDay(event, 'day4')">금</button>
-     <button class="tablinks2" onclick="openDay(event, 'day5')">토</button>
-     <button class="tablinks2" onclick="openDay(event, 'day6')">일</button>
+     <button class="tablinks2 day0" id="defaultOpen2">월</button>
+     <button class="tablinks2 day1">화</button>
+     <button class="tablinks2 day2">수</button>
+     <button class="tablinks2 day3">목</button>
+     <button class="tablinks2 day4">금</button>
+     <button class="tablinks2 day5">토</button>
+     <button class="tablinks2 day6">일</button>
    </div>
    <div id="day"></div>
  </div>
@@ -471,7 +290,7 @@
 <script id="detail-image" type="text/x-handlebars-template">
 {{#each list}}
 <div class="mySlides fade">
-  <div class="numbertext">{{@key}} / 3</div>
+  <div class="numbertext"><span id="slideOr-{{@key}}"></span> / <span id="slideLen"></span></div>
   <img src="../../../files/{{path}}">
 </div>
 {{/each}}
@@ -505,10 +324,30 @@
 </script>
 <script id="dayday" type="text/x-handlebars-template">
 {{#each list}}
-<div id="day{{@key}}" class="tabcontent2">
-  <h6 class="tapMargin">가능 시간 {{proday}}</h6>
-  <h5 class="tapMargin">22:00 ~ 22:30</h5>
+<div id="day-{{@key}}" class="tabcontent2">
+  <h6 class="tapMargin">가능 시간</h6>
+  <h5 class="tapMargin">{{time}}</h5>
 </div>
+{{/each}}
+</script>
+<script id="commentList" type="text/x-handlebars-template">
+{{#each list}}
+ <li class="cm-load" data-userNo="{{user.userNo}}"
+    onmouseover=showCmtMenu(this) onmouseout=hideCmtMenu(this)>
+  <div class="commentImg">
+    <img id="cmImg-{{@key}}" src="../../../files/{{user.userPath}}_50x50.jpg"></div>
+  <div class="commentDate">
+   {{reviewDate}} <span>｜</span> </div>
+  <div class="commentEval">
+   <span class="star-prototype2">{{grade}}</span> ({{grade}})
+  </div>
+  <div class="commentContent">{{review}}</div>
+  <div class="commentName">{{user.name}}</div>
+  <div onclick=cmtEdit(this) name={{programNo}} class="cmt-edit">
+     <i class="fas fa-pen">수정</i></div>
+  <div onclick=cmtDelete(this) name={{programNo}} class="cmt-delete">
+     <i class="fas fa-trash-alt">삭제</i></div>
+ </li>
 {{/each}}
 </script>
 <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>

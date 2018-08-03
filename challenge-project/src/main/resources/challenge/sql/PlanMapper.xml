@@ -17,7 +17,7 @@
     <result column="pldt" property="planDate"/>
     <result column="pltitl" property="planTitl"/>
     <result column="plcont" property="planContent"/>
-    <association property="program" javaType="Program">
+    <association property="program" javaType="Program"> 
         <id column="pno" property="no"/>
         <result column="pname" property="name"/>
         <result column="sdt" property="startDate"/>
@@ -42,7 +42,7 @@
 
   <select id="selectPlanList" parameterType="int" resultMap="PlanMap">
 	select p.pname, p.sdt, p.edt, p.ptover, pl.pno, pl.plno, pl.pltover,
-		   pl.pltitl, pl.plcont, p.trnno
+		   pl.pltitl, pl.plcont, pl.pldt, p.trnno
 	from PROG p, PLAN pl
 	where p.pno = pl.pno
 	AND pl.pno = #{value}

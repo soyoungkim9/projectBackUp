@@ -4,9 +4,11 @@ package challenge.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import challenge.dao.CommentDao;
 import challenge.dao.PostDao;
 import challenge.dao.TimelineDao;
 import challenge.domain.Comment;
@@ -18,12 +20,14 @@ import challenge.service.TimelineService;
 public class TimelineServiceImpl implements TimelineService {
 
     PostDao postDao;
+    CommentDao commentDao;
     TimelineDao timelineDao;
 
 
-    public TimelineServiceImpl(PostDao postDao, TimelineDao timelineDao) {
+    public TimelineServiceImpl(PostDao postDao, TimelineDao timelineDao, CommentDao commentDao) {
         this.postDao = postDao;
         this.timelineDao = timelineDao;
+        this.commentDao = commentDao;
     }
 
 
@@ -36,8 +40,8 @@ public class TimelineServiceImpl implements TimelineService {
 
         return timelineDao.selectList(params);
     }
-    
-    
+
+
     // 강사님이 알려주신 서버에서 요청하는 방법
     /*
     @Override
@@ -48,14 +52,14 @@ public class TimelineServiceImpl implements TimelineService {
             cardNos.add(tl.getNo());
         }
         ArrayList<Comment> comments = commentDao.list(cardNos);
-        
+
         for (Timeline tl : timelines) {
             tl.setComment(extractComment(comments, tl.getNo()));
         }
-        
+
         return timelines;
     }
-    
+
     private ArrayList<Comment> extractComment(List<Comment> comments, int cardNo) {
         ArrayList<Comment> cardComment = new ArrayList<>();
         for (Comment c : comments) {
@@ -64,11 +68,27 @@ public class TimelineServiceImpl implements TimelineService {
         }
         return cardComment;
     }
-    */
+     */
 
     @Override
     public int delete(int no) {
-        return timelineDao.delete(no);
+        List<Comment> comments = commentDao.listWithNo(no);
+        List<Integer> commentsNo = new ArrayList<Integer>();
+        
+        Map<String, Object> param = new HashMap<String, Object>();
+        
+        if (!comments.isEmpty()) {
+            for (int i = 0; i < comments.size(); i++) {
+                System.out.println(comments.get(i).getNo());
+                commentsNo.add(comments.get(i).getNo());
+            }
+            param.put("comments_list", commentsNo);
+            commentDao.deleteAllWithTMLNo(no);
+            postDao.deleteAllComments(param);
+        }
+        timelineDao.timelineLikeDeleteWithtmlNo(no);
+        timelineDao.delete(no);
+        return postDao.delete(no);
     }
 
     @Override
@@ -83,8 +103,18 @@ public class TimelineServiceImpl implements TimelineService {
         return timelineDao.insert(timeline);
     }
 
-    public int update(Timeline timeline) {
-        return timelineDao.update(timeline);
+    public int update(String content, String picture, int no) {
+        HashMap<String, Object> paramsPost = new HashMap<>();
+        HashMap<String, Object> paramsTimeline = new HashMap<>();
+
+        paramsPost.put("content", content);
+        paramsPost.put("no", no);
+
+        paramsTimeline.put("picture", picture);
+        paramsTimeline.put("no", no);
+
+        postDao.update(paramsPost);
+        return timelineDao.update(paramsTimeline);
     }
 
     @Override

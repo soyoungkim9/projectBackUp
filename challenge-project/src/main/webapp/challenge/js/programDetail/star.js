@@ -1,19 +1,3 @@
-/* 일정 div 이벤트 */
-function openDay(evt, dayName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent2");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks2");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    //document.getElementById(dayName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-document.getElementById("defaultOpen2").click();
-
 /* 본문 따라다니는 navbar 이벤트*/
 window.onscroll = function() {myFunction()};
 
@@ -28,68 +12,84 @@ function myFunction() {
   }
 }
 
+$('.navLink').click(function() {
+  openNav(event)
+})
+
 function openNav(evt) {
-    var navLinks;
-    navLinks = document.getElementsByClassName("navLink");
-    for (i = 0; i < navLinks.length; i++) {
-        navLinks[i].className = navLinks[i].className.replace(" active", "");
-    }
-    evt.currentTarget.className += " active";
+  var navLinks;
+  navLinks = document.getElementsByClassName("navLink");
+  for (i = 0; i < navLinks.length; i++) {
+    navLinks[i].className = navLinks[i].className.replace(" active", "");
+  }
+  evt.currentTarget.className += " active";
 }
 
 
 
-
-/* 더보기 임시 */
-function moreFunction() {
-  var moreText = document.getElementById("more");
-  var btnText = document.getElementById("moreBtn");
-
-  if (moreText.style.display === "none") {
-    moreText.style.display = "none";
-  } else {
-    moreText.style.display = "inline";
+function showCmtMenu(e) {
+  var userNoOfComment = $(e).attr("data-userNo");
+  if (userNoOfComment == userInfo.userNo) {
+    $(e).children('.cmt-edit').css("display", "block");
+    $(e).children('.cmt-delete').css("display", "block");
   }
 }
 
+function hideCmtMenu(e) {
+  var userNoOfComment = $(e).attr("data-userNo");
+
+  if (userNoOfComment == userInfo.userNo) {
+    $(e).children('.cmt-edit').css("display", "none");
+    $(e).children('.cmt-delete').css("display", "none");
+  }
+}
+
+function cmtEdit(e) {
+  $(e).parent().attr("onmouseover", "");
+  $(e).parent().attr("onmouseout", "");
+
+  $(e).one().siblings('.cmt-delete').css("display", "none");
+  $(e).one().css("display", "none");
+
+  $(e).parent().append('<textarea class="sh-tl-cmt' 
+      + $(e).attr("name") 
+      + ' sh-tl-review-title  sh_tl_reply_textarea">' 
+      + $(e).siblings('.commentContent').last().html() 
+      + '</textarea><button onclick=cmtEditClick(' 
+      + $(e).attr("name") 
+      + ') class="sh-tl-cmt-edit-btn" type="submit">수정</button>');
+  $(e).siblings('.commentContent').remove();
+
+}
+
+var cmtEditNo;
+
+function cmtEditClick(no) {
+  cmtEditNo = no;
+  $.post({
+    url: "../../../json/programMember/updateReview",
+    data: {
+      no: no,
+      content: $('.sh-tl-cmt' + no).val()
+    }
+  }).done(function() {
+    $.getJSON(serverRoot + "/json/comment/" + cmtEditNo).done(function(data) {
+      $('.sh-tl-cmt' + cmtEditNo)
+      .parent().first()
+      .prepend(' <div readonly class="sh-tl-review-content  sh-tl-reply-content"><span class="sh-cmt-name" >' 
+          + data.progMemb.user.name 
+          + '</span><span>' + data.content + '</span></div>');
+      $('.sh-tl-cmt' + cmtEditNo).parent().attr("onmouseover", "showCmtMenu(this)");
+      $('.sh-tl-cmt' + cmtEditNo).parent().attr("onmouseout", "hideCmtMenu(this)");
 
 
-
-
-// 평점 점수 올라는 쿼리문
-var starRating = function(){
-var $star = $(".star-input"),
-    $result = $star.find("output>b");
-
-  	$(document)
-	.on("focusin", ".star-input>.input",
-		function(){
-   		 $(this).addClass("focus");
- 	})
-
-   	.on("focusout", ".star-input>.input", function(){
-    	var $this = $(this);
-    	setTimeout(function(){
-      		if($this.find(":focus").length === 0){
-       			$this.removeClass("focus");
-     	 	}
-   		}, 100);
- 	 })
-
-    .on("change", ".star-input :radio", function(){
-    	$result.text($(this).next().text());
-  	})
-    .on("mouseover", ".star-input label", function(){
-    	$result.text($(this).text());
+      $('.sh-tl-cmt-edit-btn').remove();
+      $('.sh-tl-cmt' + cmtEditNo).remove();
     })
-    .on("mouseleave", ".star-input>.input", function(){
-    	var $checked = $star.find(":checked");
-    		if($checked.length === 0){
-     	 		$result.text("0");
-   		 	} else {
-     	 		$result.text($checked.next().text());
-    		}
-  	});
-};
+  });
+}
 
-starRating();
+
+
+
+

@@ -43,6 +43,7 @@ h3 {
   margin-bottom: 38px;
 }
 </style>
+
 </head>
 <body>
 
@@ -112,7 +113,7 @@ h3 {
                         <p>체지방량</p> 
                         <input type="text"id="setfat" style="display: block;">
                         <div class="nextBox" style="float:left;">
-                            <button id="updBtn">수정 완료</button>
+                            <button id="updBtn">갱신</button>
                         </div>
                     </div>
 
@@ -148,7 +149,11 @@ h3 {
 
 
 
-
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/header/header_white.js"></script>
+<script src="../../js/footer/footer.js"></script>
+<script src="../../js/member/mb-menu.js"></script>
 
   <script> // 탭 메뉴
 function openCity(evt, cityName) {
@@ -167,58 +172,36 @@ function openCity(evt, cityName) {
 </script>
 
 
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../js/common.js"></script>
-    <script src="../../js/header/header_white.js"></script>
-    <script src="../../js/footer/footer.js"></script>
-    <script src="../../js/member/mb-menu.js"></script>
+    
 <script>
-       /* $.getJSON(serverRoot + "/json/bodyInfo/list", (data) => {
-            console.log(data);
-            $(setmdate).val(data[0].bdate);
-            $(setweight).val(data[0].weight);
-            $(setmuscle).val(data[0].muscle);
-            $(setfat).val(data[0].fat);
-           }); */
-     var no = 1;
-   
-    
-    
-        $.getJSON(serverRoot + "/json/bodyInfo/" + no, (data) => {
-            console.log(data);
-            $(setmdate).val(data.bdate);
-            $(setweight).val(data.weight);
-            $(setmuscle).val(data.muscle);
-            $(setfat).val(data.fat);
-        }); 
-        
-        $("#updBtn").click(() => {
-            $.post(serverRoot + "/json/bodyInfo/update", {
-                mdate: $(setmdate).val(),
-                weight: $(setweight).val(),
-                muscle: $(setmuscle).val(),
-                fat: $(setfat).val()
-            }, () => {
-                location.href = "member-set2.html";
-            });
-        });
-        
-        
-        
-     /* else { // 새 글 등록
-        var tags = $(".detail-view");
-        tags.css("display", "none");
-        
-        $("#addBtn").click(() => {
-            $.post(serverRoot + "/json/board/add", {
-                title: $(fTitle).val(),
-                content: $(fContent).val()
-            }, () => {
-                location.href = "list.html";
-            });
-        });
-    } */
-    
+console.log(userInfo.userNo);
+$.getJSON(serverRoot + "/json/bodyInfo/" + userInfo.userNo, (data) => {
+	console.log(data[data.length-1]);
+    var lastData = data[data.length-1];
+    $(setmdate).val(lastData.bdate);
+    $(setweight).val(lastData.weight);
+    $(setmuscle).val(lastData.muscle);
+    $(setfat).val(lastData.fat);
+}); 
+
+$("#updBtn").click(() => {
+	$.ajax({
+        type: 'POST',
+        url: serverRoot + '/json/bodyInfo/add',
+        data: {
+            userNo: userInfo.userNo,
+        	bdate: $(setmdate).val(),
+            weight: $(setweight).val(),
+            muscle: $(setmuscle).val(),
+            fat: $(setfat).val()
+
+        }, 
+    }).done(function() {
+    	location.href = "member-set2.html";
+    });
+  
+});
+
 </script>
 
 

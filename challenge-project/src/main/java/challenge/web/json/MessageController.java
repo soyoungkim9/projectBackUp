@@ -1,5 +1,6 @@
 package challenge.web.json;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import challenge.domain.Message;
-import challenge.domain.ProgramMember;
 import challenge.service.MessageService;
 
 @RestController
@@ -33,16 +33,19 @@ public class MessageController {
     @RequestMapping("delete")
     //@ResponseStatus(HttpStatus.OK) // 응답 상태 코드 값의 기본은 "200(OK)" 이다.
     public void delete(
-            @RequestParam("no") int no) throws Exception {
-       messageService.delete(no);
+            @RequestParam int no
+            ) throws Exception {
+        
+            messageService.delete(no);
     }
     
-    @RequestMapping("list{page}")
+    @RequestMapping("list/{userNo}/{utype}")
     public Object list(
-        @PathVariable String page,
+        @PathVariable int userNo,
+        @PathVariable int utype,
         @MatrixVariable(defaultValue="1") int pageNo,
         @MatrixVariable(defaultValue="5") int pageSize) {
-        return messageService.list(pageNo, pageSize);
+        return messageService.list(userNo,utype, pageNo, pageSize);
     }
     
     @RequestMapping("{no}")

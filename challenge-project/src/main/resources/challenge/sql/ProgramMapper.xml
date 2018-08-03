@@ -30,15 +30,7 @@
     <result column="presult" property="proResult"/>
 
     <result column="cno" property="challengeNo"/>
-
-    <association property="trainerNo" javaType="Trainer">
-      <id column="uno" property="userNo"/>
-      <result column="uname" property="name"/>
-      <result column="upath" property="userPath"/>
-      <result column="trnint" property="introduce"/>
-      <result column="trncar" property="career"/>
-      <result column="trntime" property="time"/>
-    </association>
+    <result column="trnno" property="trainerNo"/>
 
     <collection property="medias" ofType="ProgramMedia">
         <id column="pno" property="no" />
@@ -51,24 +43,20 @@
   <select id="selectListCard"
           resultMap="ProgramMap" parameterType="map">
     select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt,
-           m.pmedno, m.ppath, m.pmtype,
-           u.upath, u.uname
+           m.pmedno, m.ppath, m.pmtype
     from PMED m
          right outer join PROG p on m.pno=p.pno
          left outer join TRN t on p.trnno=t.trnno
-         left outer join USER u on t.trnno=u.uno
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
 
   <select id="selectTrainerProgram"
           resultMap="ProgramMap" parameterType="map">
     select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt,
-           m.pmedno, m.ppath,
-           u.upath, u.uname
+           m.pmedno, m.ppath
     from PMED m
          right outer join PROG p on m.pno=p.pno
          left outer join TRN t on p.trnno=t.trnno
-         left outer join USER u on t.trnno=u.uno
     where t.trnno=#{value}
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
@@ -82,8 +70,10 @@
   
   <select id="mainList"
           resultMap="ProgramMap" parameterType="map">
-    SELECT * FROM PROG limit 0, 2
-    <!-- limit #{startRowNo}, #{pageSize} -->
+    select p.pname,p.ptype,pm.pmedno,Max(pm.ppath),p.pno,pm.pno,pm.ppath FROM PROG p 
+    inner join PMED pm on p.pno = pm.pno 
+    Group By p.pname,p.pno,pm.pno
+    order by pm.pmedno desc limit 6
   </select>
 
   <insert id="insert" parameterType="Object"
@@ -109,7 +99,7 @@
         #{proTh}, #{proTurn}, 
         #{proDay}, #{proTime}, 
         #{proState}, #{proResult},
-        #{challengeNo}, #{trainerNo.userNo})
+        #{challengeNo}, #{trainerNo})
   </insert>
 
 
@@ -134,6 +124,12 @@
          left outer join USER u on t.TRNNO = u.UNO
     where p.pno=#{value}
   </select>
+  
+  <select id="selectRecent" resultMap="ProgramMap">
+    select pno, trnno
+    from PROG 
+    order by pno desc limit 1 
+  </select>
 
   <update id="update" parameterType="Program">
     update pms2_program set
@@ -154,4 +150,6 @@
       stat=#{state}
     where tano=#{no}
   </update>
+  
+  
 </mapper>

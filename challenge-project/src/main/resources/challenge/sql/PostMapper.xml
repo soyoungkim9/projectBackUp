@@ -48,14 +48,23 @@
     where pono=#{value}
   </select>
   
-  <update id="update" parameterType="Post">
+  <update id="update" parameterType="map">
     update POST set 
-        pocont=#{content}, 
-        podate=now()
+    pocont=#{content}
     where pono=#{no}
   </update>
   
   <delete id="delete" parameterType="int">
     delete from POST where pono=#{value}
   </delete>
+  
+      <!-- deleteAllinTML -->
+      <delete id="deleteAllComments" parameterType="java.util.HashMap">
+        delete from POST
+        where pono in 
+        <foreach collection="comments_list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+     
 </mapper>
