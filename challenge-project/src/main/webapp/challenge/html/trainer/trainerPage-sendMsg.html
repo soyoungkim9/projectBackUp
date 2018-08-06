@@ -10,27 +10,17 @@
 <link rel="stylesheet" href="../../css/member/ksy-settings.css">
 <link rel="stylesheet" href="../../css/member/msg.css">
 <link rel="stylesheet" href="../../css/member/msg-modal.css">
+<link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
 <link rel="stylesheet"
   href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
-<link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
 <link href="https://fonts.googleapis.com/css?family=Titillium+Web:900"
   rel="stylesheet">
-
-
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
 <body>
-
-
-  <div class="sm-top-bar-white">
-    <div class="sm-container">
-      <div id="header"></div>
-      <!-- 헤더-->
-      <div id="mb-menu"></div>
-      <!-- 상단 메뉴바 -->
-    </div>
-    <!-- container -->
-  </div>
-  <!-- top-bar-white -->
+<div id="subMenu"></div>
 
 
 
@@ -41,10 +31,10 @@
       <br>
       <div class="sm-mypage">
         <div class="sm-profile" id="cssRemove">
-          <h3><a href="member-msg.html">받은메시지</a></h3>
+          <h3><a href="trainerPage-receiveMsg.html">받은메시지</a></h3>
           <hr class="hr_menu">
           <br>
-          <h3><a href="member-msgSend.html">보낸메시지</a></h3>
+          <h3><a href="trainerPage-sendMsg.html">보낸메시지</a></h3>
           <hr class="hr_menu">
         </div>
         <!-- .profile -->
@@ -111,23 +101,20 @@
     <div id="footer"></div><!-- 푸터 -->
   </div><!-- back -->
 
-  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
 <!-- 받은 메시지 리스트 가져오기 -->
-  <script id="sendMsg-template" type="text/x-handlebars-template">
+  <script id="receiveMsg-template" type="text/x-handlebars-template">
 {{#each list}}
             <tr>
               <td>
-                <input type="checkbox" name="checkOne" id="{{no}}">
+                <input type="checkbox" name="checkOne" id="{{no}}" value="{{no}}">
               </td>
-              <td>{{member.name}}</td>
+              <td>{{trainer.name}}</td>
               <td><a href="#" class="viewSelect" data-msgno="{{no}}">{{title}}</a></td>
               <td>{{msgDate}}</td>
             </tr>
 {{/each}}
 </script>
-
 <!-- view -->
   <script id="view-template" type="text/x-handlebars-template">
                 <div>
@@ -153,15 +140,11 @@
                 </div>
                 </div>
 </script>
-
-
-
-
   <script src="../../js/common.js"></script>
   <script src="../../js/header/header_white.js"></script>
   <script src="../../js/footer/footer.js"></script>
-  <script src="../../js/member/mb-menu.js"></script>
-  <script src="../../js/member/msgSend.js"></script>
+<script src="../../js/trainer/trainer-template.js"></script>
+  <script src="../../js/trainer/trainerMsgList-send.js"></script>
   <script src="../../js/member/msgButton.js"></script>
 
 </body>

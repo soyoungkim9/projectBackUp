@@ -4,10 +4,28 @@
   margin-bottom: 100px;
 }
 
-
+.sm-btn-1 { /* 남색 버튼 */
+  width:100px;
+    background-color: #1B3453;
+    border:1px solid #1B3453;
+    color:#fff;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 3px;
+    cursor: pointer;
+    border-radius:10px;
+}
+.sm-btn-1:hover {
+    background-color: white;
+    color:#1B3453;
+    border:1px solid #1B3453;
+}
 /* 모달창 퍼옴 */
 /* The Modal (background) */
-.modal {
+.sm-modal {
   display:none;
     position: fixed; /* Stay in place */
     z-index: 99999; /* Sit on top */
@@ -61,6 +79,7 @@
 }
 
 .modal-header {
+      text-align: right;
     padding: 10px;
     height: 15px;
 }
@@ -118,7 +137,7 @@
   margin: 0 auto;
 }
 
-.memberInfoList {
+.msgInfoList {
   display:inline-block;
   margin: 0;
   margin-top: 5px;
@@ -126,13 +145,13 @@
      height:0px;
 }
 
-.memberInfoList li {
+.msgInfoList li {
   clear: both;
   margin-bottom: 20px;
 }
 
 .modal-ok {
-      margin-left: 255px;
+      margin-left: 195px;
 }
 
 .contentName {

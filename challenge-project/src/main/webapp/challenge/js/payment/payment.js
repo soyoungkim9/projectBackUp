@@ -13,6 +13,7 @@ if (location.href.split("?").length > 1) {
 		
 	var no = location.href.split("?")[1].split("=")[1];
 	$.getJSON(serverRoot + "/json/program/" + no, (data) => {
+		$("<img>").attr('src','../../../files/'+ data.medias[0].path+'_600x600.jpg').appendTo('#program-img');
 		$('.project-title').append("<b>"+data.name+"</b>");
 		function addComma(num) {
 			var regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -104,7 +105,7 @@ if (location.href.split("?").length > 1) {
 						dataType:"json",
 						data:{
 							programNo: data.no,
-							userNo: userInfo.userNo,
+							/*userNo: userInfo.userNo,*/
 							userType: 1
 						},
 						complete: function(data){
@@ -122,7 +123,7 @@ if (location.href.split("?").length > 1) {
 					}).done(function(data) {
 							
 					});
-				} else {
+			} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 
