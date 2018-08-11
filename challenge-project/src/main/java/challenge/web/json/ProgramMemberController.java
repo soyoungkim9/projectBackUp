@@ -27,17 +27,31 @@ public class ProgramMemberController {
     }
     @RequestMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(
-            @ModelAttribute("loginUser") User loginUser,
+    public Object add(@ModelAttribute("loginUser") User loginUser,
             ProgramMember programMember) throws Exception {
         programMember.setUserNo(loginUser.getUserNo());
-        
         programMemberService.add(programMember);
+        return programMember;
     }
     
     @RequestMapping("pList/{trnNo}")
     public List<ProgramMember> listWithPname(@PathVariable int trnNo) throws Exception {
         return programMemberService.listWithPname(trnNo);
+    }
+    
+    @RequestMapping("sList/{pno}/{trnNo}/{uname}")
+    public List<ProgramMember> listWithSearch(
+            @PathVariable int pno,
+            @PathVariable int trnNo,
+            @PathVariable String uname) throws Exception {
+        return programMemberService.listWithSearch(pno, trnNo, uname);
+    }
+    
+    @RequestMapping("sList/{trnNo}/{uname}")
+    public List<ProgramMember> listWithSearchAll(
+            @PathVariable int trnNo,
+            @PathVariable String uname) throws Exception {
+        return programMemberService.listWithSearchAll(trnNo, uname);
     }
 
     @RequestMapping("lList/{uno}")
@@ -75,6 +89,12 @@ public class ProgramMemberController {
         programMemberService.updateReview(programMember);
     }
     
+    @RequestMapping("deleteReview")
+    @ResponseStatus(HttpStatus.OK) // 기본 값이 OK이다.
+    public void deleteReview(ProgramMember programMember) throws Exception {
+        programMemberService.deleteReview(programMember);
+    }
+    
     
     @RequestMapping("reviewList/{pno}")
     @ResponseStatus(HttpStatus.OK) // 기본 값이 OK이다.
@@ -91,6 +111,27 @@ public class ProgramMemberController {
     public int reviewScore(@PathVariable int pno) throws Exception {
         return programMemberService.reviewScore(pno);
     }
+    
+    @RequestMapping("pmemberCount/{pno}")
+    public int pmemberCount(@PathVariable int pno) throws Exception {
+        return programMemberService.pmemberCount(pno);
+    }
+    
+    @RequestMapping("trainerReviewCount/{uno}")
+    public int trainerReviewCount(@PathVariable int uno) throws Exception {
+        return programMemberService.trainerReviewCount(uno);
+    }
+    @RequestMapping("trainerReviewScore/{uno}")
+    public int trainerReviewScore(@PathVariable int uno) throws Exception {
+        return programMemberService.trainerReviewScore(uno);
+    }
+    
+    @RequestMapping("trainerReviewList/{uno}")
+    @ResponseStatus(HttpStatus.OK) // 기본 값이 OK이다.
+    public List<ProgramMember> trainerReviewList(@PathVariable int uno) throws Exception {
+        return programMemberService.trainerReviewList(uno);
+    }
+    
 }
 
 //ver 55 - JSON 데이터를 출력하는 페이지 컨트롤러 생성

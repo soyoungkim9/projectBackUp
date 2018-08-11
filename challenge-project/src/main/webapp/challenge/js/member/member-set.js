@@ -1,13 +1,25 @@
-//회원정보 읽어오기
-$(document).ready(function () {
+//업데이트된 회원정보 읽어오기
+$("#upload-btn").click(function (data) { 
+	updateUserInfo(data);
 	
-	$('#email').val(userInfo.email);
-	$('#phone').val(userInfo.userPhone);
-	$("<img>").attr('src', '../../../files/'+ userInfo.userPath).css('border-radius', '50%').appendTo('#images-div');
-
-
+	}); 
+//회원정보 읽어오기
+$.ajax({
+	type: 'GET',
+	async: false,
+	traditional : true,
+	url: serverRoot + '/json/auth/loginUser' ,
+	data:userInfo,
+}).done(function(data) {
+	console.log(data);
+	$('#email').val(data.email);
+	$('#phone').val(data.userPhone);
+	$("<img>").attr('src', '../../../files/'+ userInfo.userPath+'_200x200.jpg').css('border-radius', '50%').appendTo('#images-div');
 
 });
+
+
+
 
 "use strict"
 
@@ -79,7 +91,7 @@ $("#upload-btn").click(() => {
 		}).done(function() {
 
 			alert('회원님 정보가 수정되었습니다');
-			location.href = "http://localhost:8888/challenge-project/challenge/html/member/member-set.html";
+			location.href = "member-set.html";
 		});
 	}else{ //이미지 수정을 안하고 다른것만 수정했을때
 		$.ajax({
@@ -97,7 +109,7 @@ $("#upload-btn").click(() => {
 		}).done(function() {
 
 			alert('회원님 정보가 수정되었습니다');
-			location.href = "http://localhost:8888/challenge-project/challenge/html/member/member-set.html";
+			location.href = "member-set.html";
 		});
 	}
 });
@@ -117,16 +129,40 @@ $(document).ready(function () {
 					email: $('#email').val(),
 					userPhone: $('#phone').val(),
 					password: $('.pwd').val(),
-
 					userNo: userInfo.userNo
 
 				}, 
 			}).done(function() {
 
 				alert('비밀번호 변경 완료');
-				location.href = "http://localhost:8888/challenge-project/challenge/html/member/member-set.html";
+				location.href = "member-set.html";
 			});
 
 		}
 	});
+});
+
+
+// 회원 삭제
+$("#exitButton").click(function() {
+	$.ajax({
+		type:'POST',
+		url: serverRoot + '/json/user/delete',
+		data:{
+			userNo : userInfo.userNo
+		},
+	}).done(function() {
+		$.get(serverRoot + "/json/auth/logout", () => {
+			swal({
+				  title: "계정 탈퇴 하였습니다",
+				  text: "확인을 누르시면 메인화면으로 이동합니다",
+				  type: "success",
+					 
+				  preConfirm: () => {
+					  location.href=serverRoot + "/challenge/html/login/login.html";
+						  }
+				})
+           
+         }); 
+	})
 });

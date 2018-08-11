@@ -1,8 +1,10 @@
 // 업무로직 구현체 - 고객사 마다 다른 구현을 할 수 있다.
 package challenge.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -30,15 +32,51 @@ public class ProgramServiceImpl implements ProgramService {
         params.put("pageSize", pageSize);
         return programDao.selectList();
     }
-    
+    @Override
+    public List<Program> priceList(int min, int max,int pageNo, int pageSize) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("minPrice",min);
+        params.put("maxPrice",max);
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+        return programDao.selectPrice(params);
+    }
     @Override
     public List<Program> listCard() {
         return programDao.selectListCard();
     }
     
     @Override
+    public List<Program> selectListChallenge(int cno) {
+        return programDao.selectListChallenge(cno);
+    }
+    
+    @Override
+    public List<Program> listCardWithKeyword(String keyword) {
+        return programDao.selectListWithKeyword(keyword);
+    }
+    
+    @Override
     public List<Program> listProgram(int trainerNo) {
         return programDao.selectTrainerProgram(trainerNo);
+    }
+    
+    @Override
+    public List<Program> listWithProgramType(String[] pType) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("programTypeList", pType);
+        return programDao.selectListWithProgramType(param);
+    }
+    
+    
+    @Override
+    public List<Program> listWithPrice() {
+        return programDao.selectListWithPrice();
+    }
+    
+    @Override
+    public List<Program> listWithStartDate() {
+        return programDao.selectListWithStartDate();
     }
     
     @Override
@@ -82,6 +120,21 @@ public class ProgramServiceImpl implements ProgramService {
     public Program get(int no) {
         return programDao.selectOne(no);
     }
+
+    @Override
+    public List<Integer> countCardsWithProgramGoal(String[] programGoals) {
+        // TODO Auto-generated method stub
+        List<String> proGoals = new ArrayList<String>();
+        for (int i = 0; i < programGoals.length; i++) {
+            proGoals.add(programGoals[i]);
+        }
+        
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("programGoals_list", proGoals);
+        return programDao.countCardsWithProgramGoal(param);
+    }
+
+    
 
 
     /*@Override

@@ -1,27 +1,25 @@
 
 
-
+function addComma(num) {
+				var regexp = /\B(?=(\d{3})+(?!\d))/g;
+				return num.toString().replace(regexp, ',');
+			}
 /*swal("결제가 완료되었습니다.", "화이또", "success");
 
 location.href="../main/main.html"*/
 if (location.href.split("?").length > 1) {
-	
-	
-		
-	
-		
-		
+
 	var no = location.href.split("?")[1].split("=")[1];
 	$.getJSON(serverRoot + "/json/program/" + no, (data) => {
-		$("<img>").attr('src','../../../files/'+ data.medias[0].path+'_600x600.jpg').appendTo('#program-img');
+		console.log(data);
+		$("<img>").attr('src','../../../files/'+ data.medias[0].path).appendTo('#program-img');
 		$('.project-title').append("<b>"+data.name+"</b>");
-		function addComma(num) {
-			var regexp = /\B(?=(\d{3})+(?!\d))/g;
-			return num.toString().replace(regexp, ',');
-		}
+		
 		var num = data.price;
 		$('.p-price').append(addComma(num)+" 원");
-		$('.p-trainer').append(data.trainerNo.name);
+		$('.p-trainer').append(data.user.name);
+		$("<img>").attr('src','../../../files/'+ data.user.userPath+'_50x50.jpg').appendTo('#trainer-img');
+		
 	}); 
 
 //	------------------------- 수량 증가 ---------------------------//
@@ -35,12 +33,7 @@ if (location.href.split("?").length > 1) {
 			Clicks = Clicks + 1;
 			document.getElementById('p-value').innerHTML = Clicks ;
 
-			function addComma(num) {
-				var regexp = /\B(?=(\d{3})+(?!\d))/g;
-				return num.toString().replace(regexp, ',');
-			}
 			var num = data.price * document.getElementById('p-value').innerHTML;
-//			$('.p-price').html(data.price * document.getElementById('p-value').innerHTML  +' 원');
 			$('.p-price').html(addComma(num)  +' 원');
 
 		}); 
@@ -52,10 +45,7 @@ if (location.href.split("?").length > 1) {
 
 			Clicks = Clicks - 1;
 			document.getElementById('p-value').innerHTML = Clicks ;
-			function addComma(num) {
-				var regexp = /\B(?=(\d{3})+(?!\d))/g;
-				return num.toString().replace(regexp, ',');
-			}
+			
 			var num = data.price * document.getElementById('p-value').innerHTML;
 			$('.p-price').html(addComma(num)  +' 원');
 
@@ -124,16 +114,75 @@ if (location.href.split("?").length > 1) {
 							
 					});
 			} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg;
-
-					alert(msg);
+	        	console.log(rsp.error_msg)
+	        	swal({
+	      		  type: 'error',
+	      		  title: '결제가 취소되었습니다',
+	      		  confirmButtonColor: '#1B3453',
+	      		  confirmButtonText: '확인'
+	      		})
 				}
 			});
 		}); 
 	}
-
-
-
-
 }
+
+
+
+
+//-------------------------------------핸드폰 소액결제---------------------------
+
+function danalPay() {
+	$.getJSON(serverRoot + "/json/program/" + no, (data) => {
+	      
+	  var IMP = window.IMP;
+	  IMP.init("imp16964915");
+	  
+
+	    IMP.request_pay({
+	        pg : 'danal',
+	        pay_method : 'phone',
+	        merchant_uid : 'merchant_' + new Date().getTime(),
+	        name : data.name,
+	        amount : data.price * document.getElementById('p-value').innerHTML ,
+	        buyer_email : userInfo.email,
+	        buyer_name : userInfo.name,
+	        buyer_tel : userInfo.userPhone,
+	        buyer_addr : '서울특별시 강남구 삼성동',
+	        buyer_postcode : '123-456'
+	    }, function(rsp) {
+	        if ( rsp.success ) {
+	            $.ajax({
+	                url: serverRoot + '/json/programMember/add',
+	                type: 'POST',
+	                dataType: 'json',
+	                data: {
+	                    programNo: data.no,
+	                    userType: 1
+	                },
+	                complete: function(data){
+
+	                    swal({
+	                          title: "결제가 완료되었습니다.",
+	                          text: "확인을 누르시면 메인화면으로 이동합니다",
+	                          type: "success",
+	                             
+	                          preConfirm: () => {
+	                              location.href='../main/main.html'
+	                                  }
+	                        })
+	                    }
+	                });
+	        } else {
+	        	console.log(rsp.error_msg)
+	        	swal({
+	      		  type: 'error',
+	      		  title: '결제가 취소되었습니다',
+	      		  confirmButtonColor: '#1B3453',
+	      		  confirmButtonText: '확인'
+	      		})
+	            
+	        }
+	    });
+	  });
+	}

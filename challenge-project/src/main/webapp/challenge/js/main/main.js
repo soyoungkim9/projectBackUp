@@ -32,31 +32,45 @@
 
 })();
 
-//템플릿 엔진이 사용할 템플릿 데이터 가져오기
+// 챌린지 카드
 var trTemplateSrc = $("#tr-template").html();
-
-//위에서 준비한 템플릿 데이터를 가지고 HTML을 생성할 템플릿 엔진 준비
 var templateFn = Handlebars.compile(trTemplateSrc);
-
-
-$.getJSON(serverRoot + "/json/challenge/mainList", (data) => {
-	//$tableBody.innerHTML = templateFn({list:data});
+$.getJSON(serverRoot + "/json/challenge/list", (data) => {
     $("#new-challenge").html(templateFn({list:data}));
 });
 
 
-//템플릿 엔진이 사용할 템플릿 데이터 가져오기
+
 var prTemplateSrc = $("#pr-template").html();
-
-//위에서 준비한 템플릿 데이터를 가지고 HTML을 생성할 템플릿 엔진 준비
 var prtemplateFn = Handlebars.compile(prTemplateSrc);
-
 $.getJSON(serverRoot + "/json/program/mainList", (data) => {
-	
-	//$tableBody.innerHTML = templateFn({list:data});
     $("#program-list").html(prtemplateFn({list:data}));
 });
 
+$(document).ready(function() {
+    $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+        if (this.hash !== "") {
+            event.preventDefault();
 
+            var hash = this.hash;
 
+            $('html, body').animate({
+                scrollTop : $(hash).offset().top
+            }, 900, function() {
 
+                window.location.hash = hash;
+            });
+        } // End if
+    });
+
+    $(window).scroll(function() {
+        $(".slideanim").each(function() {
+            var pos = $(this).offset().top;
+
+            var winTop = $(window).scrollTop();
+            if (pos < winTop + 600) {
+                $(this).addClass("slide");
+            }
+        });
+    });
+})

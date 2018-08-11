@@ -98,7 +98,7 @@
 							</h3>
 						</div>
 
-						<table id="notice-table">
+						<table id="notice-table" >
 							<tbody>
 								<tr>
 									<td><span> <strong style="color: red;">1</strong><i
@@ -132,13 +132,19 @@
 			    <div id="common-table"></div>
 			   
 
-				<div class="pagination">
-					
-				</div>
-				<!-- pagination -->
+            <!-- pagination 시작 -->
+    <div class="sm-pagination">
+      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-left"></i></a>
+      <a class="sm-pagination-button pageActive" id="page-1" href="#">1</a>
+      <a class="sm-pagination-button" id="page-2" href="#">2</a>
+      <a class="sm-pagination-button" id="page-3" href="#">3</a>
+      <a class="sm-pagination-button sm-pagination-button-end" id="page-4" href="#">4</a>
+      <a class="sm-pagination-button sm-pagination-side" href="#"><i class="fas fa-angle-right"></i></a>
+    </div>
+<!-- pagination 끝-->
 
 				<div class="btnWrap">
-					<button id="writeBtn" type="button" name="write">글쓰기</button>
+					<button id="writeBtn" type="button" name="write" class="writeBtn">글쓰기</button>
 				</div>
 				<div id="jh-search-freeboard">
 
@@ -148,7 +154,7 @@
 							<option value="">내용</option>
 							<option value="">작성자</option>
 						</select> <input type="text">
-						<button type="button" id="selBtn">검색</button>
+						<button type="button" id="selBtn" class="selBtn">검색</button>
 
 					</div>
 				</div>
@@ -177,9 +183,19 @@
 {{/each}}
 </script>
 	<script>
-    $("#writeBtn").click(() => { location.href="community-write.html"});
+    $("#writeBtn").click(() => {
+            if (userInfo == null) {
+            	alert("로그인후 등록해 주세요");
+                location.href = "../login/login.html";
+            } else { location.href="community-write.html";}
+    });
+    /* if (data == null) {
+        location.href = "../login/login.html";
+    } else
+    { location.href="community-write.html";}
+    ); */
     </script>
-	<script src="../../js/header/header_white.js"></script>
+	<script src="../../js/header/header.js"></script>
 	<script src="../../js/footer/footer.js"></script>
 	<script src="../../js/community/community-list.js"></script>
 	<script src="../../js/pagination.js"></script>

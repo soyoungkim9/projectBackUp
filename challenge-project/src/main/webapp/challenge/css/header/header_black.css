@@ -152,8 +152,19 @@ a.sh_after:hover:after {
   position: relative;
 }
 
+#sh-msg-dropdown-content {
+	display: none;
+}
+
+#member-mypage {
+	  display: none;
+}
+
+#trainer-mypage {
+      display: none;
+}
+
 .sh_dropdown-content {
-  display: none;
   position: absolute;
   background-color: #FFFFFF;
   border: 1px solid rgb(102, 102, 102, 0.2);
@@ -167,9 +178,7 @@ a.sh_after:hover:after {
   margin-top: 10px;
 }
 
-.sh_dropdown:hover .sh_dropdown-content {
-  display: block;
-}
+
 
 .sh_dropdown-content a {
   color: #666666;
@@ -180,6 +189,8 @@ a.sh_after:hover:after {
 .sh_dropdown-content a:hover {
   background-color: #FFFFFF;
 }
+
+
 
 #sh_sub-menu-ul {
   padding-left: 0px;
@@ -218,7 +229,6 @@ a.sh_after:hover:after {
 }
 
 #sh_top_layout {
-  border-bottom: solid 1px rgb(102, 102, 102, 0.2);
   height: 76px;
 }
 
@@ -243,7 +253,7 @@ a.sh_after:hover:after {
 
 #sh_logo_h1 {
   margin-bottom: 0px;
-  margin-top: 12px;
+  margin-top: 20px;
   color: #fff;
 }
 

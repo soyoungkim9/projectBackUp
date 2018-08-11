@@ -3,20 +3,24 @@ window.onscroll = function() {
 	myFunction()
 };
 
-var sh_Class_Daily = document.getElementById("sh-Class-Daily");
-var diff = document.getElementById("sh-mainContainer");
-var sticky = (diff.offsetTop + 27 + 76);
 /*
 1. offsetTop => sh-mainContainer부터 top까지 거리
 2.sh-contentCol의 padding값(27)만큼 더함
  */
+
+var sh_Class_Daily = document.getElementById("sh-Class-Daily");
+var diff = document.getElementById("sh-mainContainer");
+var sticky = (diff.offsetTop + 104);
 function myFunction() {
 	if (window.pageYOffset >= sticky) {
 		sh_Class_Daily.classList.add("sh_class_daily_sticky")
 	} else {
 		sh_Class_Daily.classList.remove("sh_class_daily_sticky");
 	}
+
 }
+
+
 
 /* 강의계획서 더보기 */
 function shClassFunction() {
@@ -33,21 +37,8 @@ function shClassFunction() {
 		divText.html("▲");
 		moreText.css("display","inline");
 	}
-	
-	/*
-	if (dots.style.display === "none") {
-		dots.style.display = "inline";
-		divText.innerHTML = "운동일정 보기";
-		moreText.style.display = "none";
-	} else {
-		dots.style.display = "none";
-		divText.innerHTML = "닫기";
-		
-		moreText.style.display = "inline";
-	}
-	*/
 }
-
+	
 /* 타임라인 글 작성 textarea auto-growing / self-resizing */
 function resizeFunction() {
 	$('.sh-tl-reply-content').css('height', 'auto');
@@ -433,11 +424,8 @@ function postEditClicked() {
 		// modal close
 		$("#sh-tl-editModal").attr("style", "display:none;");
 		$("#sh-tl-editModal").html("")
-
 	});
-
 };
-
 
 var postEditNo;
 
@@ -450,9 +438,6 @@ function postEditClick(no) {
 			content: $('.sh-tl-cmt' + no).val()
 		}
 	}).done(function() {
-
-
-
 		$.getJSON(serverRoot + "/json/comment/" + cmtEditNo).done(function(data) {
 			$('.sh-tl-cmt' + cmtEditNo).parent().first().prepend(' <div readonly class="sh-tl-review-content  sh-tl-reply-content"><span class="sh-cmt-name" >' + data.progMemb.user.name + '</span><span>' + data.content + '</span></div>');
 			$('.sh-tl-cmt' + cmtEditNo).parent().attr("onmouseover", "showCmtMenu(this)");
@@ -476,8 +461,6 @@ function postDelete(e) {
 	.done(function () {
 		$('.sh-tl-card-modal' + $(e).attr("name")).remove();
 	})
-
-
 }
 
 var postNo;
@@ -501,7 +484,6 @@ $('#MOVE_TOP_BTN').click(function () {
             scrollTop: 0
     }, 100);
 });
-
 
 
 //---------------------리뷰 작성자-------------------

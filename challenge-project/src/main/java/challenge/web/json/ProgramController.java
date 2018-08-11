@@ -2,7 +2,6 @@ package challenge.web.json;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.MatrixVariable;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import challenge.domain.Program;
-import challenge.domain.User;
 import challenge.service.ProgramService;
 
 @RestController
@@ -47,10 +45,23 @@ public class ProgramController {
     }
 
     @RequestMapping("listCard")
-    public Object list(@ModelAttribute User loginUser
-            ) {
-        System.out.println("gkgkgk" + loginUser.getUserNo());
+    public Object list() {
         return programService.listCard();
+    }
+    
+    @RequestMapping("listCard/{cno}")
+    public Object listCh(@PathVariable int cno) {
+        return programService.selectListChallenge(cno);
+    }
+    
+    @RequestMapping("listCardWithKeyword/{keyword}")
+    public Object list(@PathVariable String keyword) {
+        return programService.listCardWithKeyword(keyword);
+    }
+    
+    @RequestMapping("countCardsWithProgramGoal")
+    public Object list(@RequestParam(value="programGoals[]") String[] programGoals) {
+        return programService.countCardsWithProgramGoal(programGoals);
     }
     
     @RequestMapping("listProgram/{trainerNo}")
@@ -58,11 +69,35 @@ public class ProgramController {
         return programService.listProgram(trainerNo);
     }
     
+    @RequestMapping("typeList")
+    public Object typeList(@RequestParam(value="pType[]") String[] pType) {
+        return programService.listWithProgramType(pType);
+    }
+    
+    @RequestMapping("priceList")
+    public Object priceList() {
+        return programService.listWithPrice();
+    }
+    
+    @RequestMapping("dateList")
+    public Object dateList() {
+        return programService.listWithStartDate();
+    }
+    
     @RequestMapping("mainList")
     public Object mainList(
             ) {
-        System.out.println("mainList 실행");
         return programService.mainList();
+    }
+    
+    @RequestMapping("/pList/{pageNo}/{pageSize}")  // 프로그램 가격 검색 
+    public Object priceList(
+                            @RequestParam("minPrice") int min,
+                            @RequestParam("maxPrice") int max,
+                            @PathVariable int pageNo,
+                            @PathVariable int pageSize
+                            ) {
+        return programService.priceList(min,max,pageNo,pageSize);
     }
 
     @RequestMapping("update")

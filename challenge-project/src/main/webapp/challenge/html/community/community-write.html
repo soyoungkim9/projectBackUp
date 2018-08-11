@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -127,11 +126,11 @@
 
                 <tr>
                   <th>머리말</th>
-                  <td><select name="category" id="CMU_TYPE">
+                  <td><form method="action" name="insertForm"><select name="category" id="CMU_TYPE">
                         <option value="">게시판 선택</option>
-                        <option value="1">비포&애프터</option>
-                        <option value="2">자유게시판</option>
-                      </select></td>
+                        <option value="비포&애프터">비포&애프터</option>
+                        <option value="자유게시판">자유게시판</option>
+                      </select></form></td>
 
                 </tr>
                 <tr>
@@ -152,6 +151,8 @@
             </div>
             <div class="btnArea">
               <button id="addBtn" type="button" class="input-view">등록</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="community-list.html"><button id="addBtn" type="button" class="input-view">취소</button></a>
             </div>
           </div>
 
@@ -166,26 +167,43 @@
   <div id="footer"></div>
   <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../../js/common.js"></script>
-<script src="../../js/header/header_white.js"></script>
+<script src="../../js/header/header.js"></script>
 <script src="../../js/footer/footer.js"></script>
 <script>
 
 $("#addBtn").click(() => {
-	$.ajax({
-	    type: 'POST',
+    $.ajax({
+        type: 'POST',
         url: '../../../json/community/add',
         data:{
             title: $(fTitle).val(),
             type: $(CMU_TYPE).val(),
-            content:$(fContent).val()
+            content:$(fContent).val(),
+            "user.userNo":userInfo.userNo
         }
-	}).done(function(){
-		location.href="community-list.html"
-	});
+    }).done(function(){
+        location.href="community-list.html"
+    });
 });
 console.log("Hey")
 
+/*         success : function(data) {
+        	  if(data.type == null || data.type == '' ){
+        		  ajaxStop(data);
+        		  location.href = "community-list.html";
+        	  }
+        	  else {
+        		  alert("머리말을 선택해 주세요.");
+        		  
+        	  }
+        	
+        } */
+console.log("hey");
+
+
+
 </script>
+<script></script>
 </body>
 
 </html>

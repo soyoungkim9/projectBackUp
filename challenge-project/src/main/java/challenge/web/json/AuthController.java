@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import challenge.domain.User;
 import challenge.service.UserService;
@@ -28,7 +29,16 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
-
+  
+    
+    
+    @RequestMapping("/form")
+    public String form() {
+        System.out.println("form으로 들어옴.");
+        return "loginNeed";
+    }
+    
+    
     @GetMapping("/loginUser")
     public User loginUser(HttpSession session) {
         return (User) session.getAttribute("loginUser");
@@ -74,7 +84,10 @@ public class AuthController {
     }
 
     @RequestMapping("/logout")
-    public void logout(HttpSession session) throws Exception {  
+    public void logout(HttpSession session, SessionStatus status) throws Exception {
+        
+        status.setComplete();
+        
         // 세션을 꺼내 무효화시킨다.
         session.invalidate();
     }

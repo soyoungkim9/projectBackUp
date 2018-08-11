@@ -23,6 +23,18 @@ $.ajax(serverRoot + "/json/programMember/pList/" + userInfo.userNo, {
 		        window.alert("프로그램 등록 후 이용해 주세요!");
 		    }	
 		});
+		
+		// 프로필 관련 이미지와 사용자 이름 불러오기
+		$.ajax(serverRoot + "/json/trainer/" + userInfo.userNo, {
+			dataType: "json",	
+		    success(data) {
+				 $('#fPath').attr('src', '../../../files/' + data.userPath);
+				 $('#tName').html(data.name);
+		    },
+		    error() {
+		        window.alert("트레이너 정보 불러오기 실패!");
+		    }	
+		});
 	},
     error() {
         window.alert("memberList.js li-template default list 실행 오류!");
@@ -69,7 +81,7 @@ $(document.body).on('click','.tabSelect', function(event){
 	});
 });
 
-// 회원정보 보기 
+//회원정보 보기 
 var viewTemplateSrc = $("#view-template").html();
 var viewtemplateFn = Handlebars.compile(viewTemplateSrc);
 var addTemplateSrc = $("#add-template").html();
@@ -77,26 +89,145 @@ var addtemplateFn = Handlebars.compile(addTemplateSrc);
 
 $(document.body).on('click','.trSelect', function(event){
 	event.preventDefault();
-
+	
+	var proTurn;
+	var proGoal;
+	var proGoalNum;
 	var userNo = $(this).attr("data-uno");
 	programNum = $(this).attr("data-pno");
+		
 	/* 전체는 못보고 탭에 있는 애들만 선택해서 볼 수 있다.*/
 	$.ajax(serverRoot + "/json/programMember/" + userNo + "/" + programNum, {
 		dataType: "json",	
 	    success(data) {
+			 console.log(data);
 			 $('.modal-body').html(viewtemplateFn({
+				 usersPath: data[0].user.userPath,
 				 usersName: data[0].user.name,
 				 usersSex: data[0].user.sex,
 				 usersphon: data[0].user.userPhone,
 				 name: data[0].program.name, 
 				 startDate: data[0].program.startDate,
-				 endDate: data[0].program.endDate}));
-			 $('#myModal').css("display", "block");
+				 endDate: data[0].program.endDate,
+				 proGoal: data[0].program.proGoal}));
+			 	 userNo = data[0].userNo;
+			 	 proTurn = data[0].program.proTurn;
+			 	 proGoal = data[0].program.proGoal;
+			 	 proGoalNum = data[0].program.proGoalNum;
+			 	
 	    },
 	    error() {
-	        window.alert("report.js programTab AllList 실행 오류!");
+	        window.alert("meberList.js 회원정보 보기 관련 실행 오류!");
 	    }	
 	});
+	
+	// 회원 출석률 관련               
+	var dSum = 0;
+	var dAver = 0;
+	$.ajax(serverRoot + "/json/diary/dList/" + userNo + "/" + programNum, {
+		dataType: "json",	
+	    success(data) {
+			console.log(data);
+			for(var i = 0; i < data.length; i++) {
+				if(data[i].dcheck == 1) {
+					dSum += parseInt(data[i].dcheck);
+				}
+			}
+			dAver = (dSum/proTurn)*100;
+			console.log(dAver);
+			
+			$('#mAttend').append(Math.floor(dAver) + '%');
+			if(Math.floor(dAver) == 100) {
+				$('.attend').css("width", "80%"); // 패딩값으로 인해 100%가 120%되는 것을 방지
+			} else {
+				$('.attend').css("width", Math.floor(dAver) + "%");
+			}
+	    },
+	    error() {
+	        window.alert("meberList.js 출석률 관련 실행 오류!");
+	    }	
+	});
+	
+	// 회원 목표달성률 관련               
+	$.ajax(serverRoot + "/json/bodyInfo/list/" + userNo, {
+		dataType: "json",	
+	    success(data) {
+			console.log(data);
+			var first;
+			var last;
+			var diff;
+			var lastIndex = data.length - 1;
+			var targetNum;
+			var targetResult;
+			
+			if(proGoal == '출석') {
+				$('#mTargetPer').append(Math.floor(dAver) + '%');
+				$('.target').css("width", Math.floor(dAver) + "%");
+				if(Math.floor(targetResult) == 100) {
+					$('.target').css("width", "80%"); // 패딩값으로 인해 100%가 120%되는 것을 방지
+				}
+			} else {
+				if(proGoal == '체중') {
+					if(data.length == 0) {
+						first = 0;
+						last = 0;
+					} else {
+						first = data[0].weight;
+						last = data[lastIndex].weight;
+					}
+				} else if(proGoal == '근력') {
+					if(data.length == 0) {
+						first = 0;
+						last = 0;
+					} else {
+						first = data[0].muscle;
+						last = data[lastIndex].muscle;
+					}
+				} else if(proGoal == '체지방') {
+					if(data.length == 0) {
+						first = 0;
+						last = 0;
+					} else {
+						first = data[0].fat;
+						last = data[lastIndex].fat;
+					}
+				}
+				
+				// proGoalNum이 -냐 +냐를 구분해서
+				// -이면 diff는 first - last --> 근데 diff의 결과가 -이면 달성률을 0으로 만든다
+				// +이면 diff는 last - first --> 근데 diff의 결과가 -이면 달성률을 0으로 만든다
+				if(proGoalNum.split('-').length == 2) {
+					targetNum = parseInt(proGoalNum.split('-')[1]);
+					diff = first - last;
+					
+				} else {
+					targetNum = parseInt(proGoalNum);
+					diff = last - first;
+				}
+				
+				if(proGoalNum.split('-')[0] == '-') {
+					targetResult = 0;
+					$('#mTargetPer').append(targetResult + '%');
+					$('.target').css("width", targetResult + "%");
+				} else {
+					targetResult = (diff/targetNum)*100;
+					$('#mTargetPer').append(Math.floor(targetResult) + '%');
+					$('.target').css("width", Math.floor(targetResult) + "%");
+					if(Math.floor(targetResult) == 100) {
+						$('.target').css("width", "80%"); // 패딩값으로 인해 100%가 120%되는 것을 방지
+					}
+				}
+			}
+			
+			$('#myModal').css("display", "block");
+			
+	    },
+	    error() {
+	        window.alert("meberList.js 목표달성률 관련 실행 오류!");
+	    }	
+	});
+	
+	
 	$(document.body).on('click','.close', function(){
 		$('#myModal').css("display", "none");
 	})
@@ -154,89 +285,36 @@ $(document.body).on('click','.trSelect', function(event){
 			$('#myAddModal').css("display", "none");
 		});
 	});
-	
-
 });
 
-// 회원정보 보기
-//if (location.href.split("?").length > 1 && location.href.split("&").length > 1) {
-//	var pno = location.href.split("?")[1].split("&")[0].split("=")[1];
-//	var uno = location.href.split("&")[1].split("=")[1];
-//
-//	$.getJSON(serverRoot + "/json/programMember/" + pno + "/" + uno, function(data) {
-//		$("#mName").append(data[0].users.name);
-//        $("#mSex").append(data[0].users.sex);
-//        $("#mTel").append(data[0].users.userPhone);
-//        $("#mProgram").append(data[0].name);
-//				$("#mDate1").append(data[0].startDate);
-//				$("#mDate2").append(data[0].endDate);
-//        $("#mTarget").append(data[0].proGoal);
-//        $("#mAttend").append(data[0].diarys.dcheck);
-//        $("#mTargetPer").append(data[0].proGoalNum);
-//	});
-//	
-//	$('.modal').css("display", "block");
-//
-//	$(".close").click(function() {
-//		location.href=  "memberList.html";
-//		});
-//
-//} else if (location.href.split("?").length > 1) { // 프로그램별로 회원 리스트 보기
-//	var pno = location.href.split("?")[1].split("=")[1];
-//	$('#memberList tr').css('display','none');
-//	$.ajax(serverRoot + "/json/programMember/list/" + pno, {
-//		dataType: "json",	
-//	    success(data) {
-//	        for (var item of data) {
-//	        	var tr = document.createElement("tr");
-//	        	tr.innerHTML = "<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.email + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.name + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.sex + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.name +"</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.diarys.dcheck +"</a></td>";  
-//	        	memberList.appendChild(tr);
-//	        }
-//	    },
-//	    error() {
-//	        window.alert("member.js view list 실행 오류!");
-//	    }	
-//	});
-//} else if (serverRoot + "/challenge/html/trainer/memberList.html") { // 프로그램별로 회원 리스트 보기
-//	$.ajax(serverRoot + "/json/programMember/list", {
-//		dataType: "json",	
-//	    success(data) {
-//	        for (var item of data) {
-//	        	var tr = document.createElement("tr");
-//	        	tr.innerHTML = "<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.email + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.name + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.users.sex + "</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.name +"</a></td>" +
-//	        	"<td><a href='memberList.html?pno=" + item.no + 
-//	        	"&uno=" + item.users.userNo +"'>"
-//	        	+ item.diarys.dcheck +"</a></td>";  
-//	        	memberList.appendChild(tr);
-//	        }
-//	    },
-//	    error() {
-//	        window.alert("member.js view list 실행 오류!");
-//	    }	
-//	});
-//}
+// 회원명으로 검색
+var uName;
+$(document.body).on('click','#searchButton', function(event){
+	uName = $('#userName').val();
+	if(typeof programNum == "undefined") {
+		$.ajax(serverRoot + "/json/programMember/sList/" + userInfo.userNo + "/" 
+				+ uName, {
+			dataType: "json",	
+		    success(data) {
+				 $('#memberList').html(membTemplateFn({
+					 list:data}));
+		    },
+		    error() {
+		        window.alert("전체 : 회원목록 검색 오류!");
+		    }	
+		});
+	} else {
+		$.ajax(serverRoot + "/json/programMember/sList/" + programNum + "/" 
+				+ userInfo.userNo + "/" + uName, {
+			dataType: "json",	
+		    success(data) {
+				 $('#memberList').html(membTemplateFn({
+					 list:data}));
+		    },
+		    error() {
+		        window.alert("회원목록 검색 오류!");
+		    }	
+		});
+	}
+});
+

@@ -8,18 +8,23 @@ if (location.href.split("?").length > 1) {
     $(faddress).append(data.address + ' ' + data.addDetail);
     $(fName).append(data.name);
     $(fDate).append(data.startDate + ' ~ ' + data.endDate);
-    $(fminQty).append(data.minQty);
+    //$(fminQty).append(data.minQty);
     $(fmaxQty).append(data.maxQty);
     $(fprice).append(data.price);
     $(fdescription).append(data.description);
     $(fproType).append(data.proType);
-    /*$(fproGoal).val(data.proGoal);
-    $(fproGoalNum).val(data.proGoalNum);*/
+    $(fproGoal).append(data.proGoal);
+    $(fproGoalNum).append(data.proGoalNum);
     $(fproTh).append(data.proTh);
-    /*$(fproTurn).val(data.proTurn);*/
+    $(fproTurn).append(data.proTurn);
     $('<img/>')
     .attr('src', '../../../files/'+data.medias[0].path+'_600x600.jpg')
     .appendTo($(fprogramImg));
+
+    // 참여인원 정보 가져오기
+    $.get(serverRoot + "/json/programMember/pmemberCount/" + data.no, function(data) {
+      $(fpmemCount).append(data - 1);
+    })
 
     // 챌린지 정보 가져오기
     $.getJSON(serverRoot + "/json/challenge/" + data.challengeNo, function(data) {
@@ -30,10 +35,57 @@ if (location.href.split("?").length > 1) {
     $.getJSON(serverRoot + "/json/trainer/" + data.trainerNo, function(data) {
       $(ftrainerName).append(data.name);
       $(ftrainerTime).append(data.time);
-      $('<img/>')
-      .attr('src', '../../../files/'+data.userPath+'_100x100.jpg')
-      .appendTo($(ftrainerImg));
-    })
+      
+      $(ftrainerImg).append('<a href="../trainer/trainer.html?no='
+          +data.userNo+'"><img src="../../../files/'
+          +data.userPath+'_100x100.jpg"></a>')
+      
+    }).done(function(data){ // 메시지 보내기---------------------------------------------------------
+      var addTemplateSrc = $("#add-template").html();
+      var addtemplateFn = Handlebars.compile(addTemplateSrc);
+      $(document.body).on('click','#msgBtn', function(event){
+        event.preventDefault();
+
+        $('#myAddModal').css("display", "block");
+        $('.add-body').html(addtemplateFn({
+          trainer: data.name,
+          member: userInfo.name,
+        }));
+        $("#addBtn").click(() => {
+          $.ajax({
+            type: 'POST',
+            url: '../../../json/message/add',
+            data:{
+              title: $(fTitle).val(),
+              content:$(fContent).val(),
+              direct: 1,
+              "member.userNo":userInfo.userNo,
+              "trainer.userNo":data.userNo
+            },
+            success:function(result){
+              $('#myAddModal').css("display", "none");
+              swal({
+                type: 'success',
+                title: '전송 완료!',
+                showConfirmButton: false,
+                timer: 1500,
+                preConfirm: () => {
+                  location.href="member-msg.html"
+                }
+              })
+
+            }
+          })
+        });
+
+        $(document.body).on('click','.close', function(){
+          $('#myAddModal').css("display", "none");
+        })
+        $(document.body).on('click','#msg-ok', function(){
+          $('#myModal').css("display", "none");
+        })
+      });
+    }); // 메시지 끝!
 
   }).done(function(data) {
 
@@ -51,6 +103,12 @@ if (location.href.split("?").length > 1) {
 
     no = data.no;
     loadComment(data.no); // 댓글
+    //금액 콤마
+    $(".numberic").each(function(){
+      $(this).number(true);
+    });
+
+    map(data.address); // 지도
   })
 
 
@@ -63,17 +121,82 @@ if (location.href.split("?").length > 1) {
     $.get(serverRoot + "/json/programMember/reviewScore/" + no, function(data) {
       var score = data;
       var cal = (score / count).toFixed(1);
-      $(reviewScore).append(cal);
+      if(!(isNaN(cal))) {
+        $(reviewScore).append(cal);
+      } else {
+        $(reviewScore).append(0)
+      }
+
       $('.star-prototype').generateStars();
       $('.star-prototype3').generateStars();
     })
   }).done(function() {
-    starRating();
+
   })
 
 
 }
 
+
+/*
+
+//add
+
+var addTemplateSrc = $("#add-template").html();
+var addtemplateFn = Handlebars.compile(addTemplateSrc);
+
+$(document.body).on('click','.addModal', function(event){
+	event.preventDefault();
+
+	var msgno = $(this).attr("data-msgno");
+	$.getJSON(serverRoot + "/json/message/" + msgno, function(data) {
+		$('.add-body').html(addtemplateFn({
+			 trainer: data.trainer.name,
+			 title: data.title,
+			 content: data.content,
+			 msgDate: data.msgDate,
+			 member: userInfo.name,
+			 }));
+		$('#myAddModal').css("display", "block");
+	}).done(function(data){
+		$("#addBtn").click(() => {
+			$.ajax({
+			    type: 'POST',
+		        url: '../../../json/message/add',
+		        data:{
+		            title: $(fTitle).val(),
+		            content:$(fContent).val(),
+		            direct: 1,
+		            "member.userNo":userInfo.userNo,
+		            "trainer.userNo":data.trainer.userNo
+		        },
+		        success:function(result){
+		        	$('#myAddModal').css("display", "none");
+		        	swal({
+		        		type: 'success',
+		        		  title: '전송 완료!',
+		        		  showConfirmButton: false,
+		        		  timer: 1500,
+                        preConfirm: () => {
+                        	location.href="member-msg.html"
+                              }
+                      })
+
+		        }
+			})
+		});
+	});
+
+	$(document.body).on('click','.close', function(){
+		$('#myAddModal').css("display", "none");
+	})
+	$(document.body).on('click','#msg-ok', function(){
+		$('#myModal').css("display", "none");
+	})
+});
+
+
+ */
 
 //댓글리스트
 function loadComment(no) {
@@ -82,13 +205,6 @@ function loadComment(no) {
   $.getJSON(serverRoot + "/json/programMember/reviewList/" + no, (data) => {
     $('#comment1').append(templateFn3({list: data}));
   }).done(function(data) {
-    // 유저 이미지 널값 보류!
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].user.userPath == "") {
-        $('#cmImg-' + i)
-        .attr('src', '../../../files/3a1987ec-885f-4ea3-8508-5872700e953c_50x50.jpg')
-      }
-    }
     //숫자 평점을 별로 변환하도록 호출하는 함수
     $('.star-prototype2').generateStars();
     load('#cm-load', '3');
@@ -120,10 +236,13 @@ function loadCommentAfter(no) {
 
 $(document).ready(function() {
   // 댓글에 필요한 사용자 정보 가져오기
-  $('<img/>')
-  .attr('src', '../../../files/'+userInfo.userPath+'_50x50.jpg')
-  .appendTo($('.userNameCircle'));
-  $(uName).append(userInfo.name);
+
+  if (userInfo != undefined) {
+    $('<img/>')
+    .attr('src', '../../../files/'+userInfo.userPath+'_50x50.jpg')
+    .appendTo($('.userNameCircle'));
+    $(uName).append(userInfo.name);
+  }
 
   starRating();
   //댓글달기
@@ -135,7 +254,8 @@ $(document).ready(function() {
       userNo: userInfo.userNo
     }, () => {
       loadCommentAfter(no);
-      $('.commentInput').css('display', 'none');
+      //$('.commentInput').css('display', 'none');
+      $(fContent).val('');
     })
   });
 
@@ -186,178 +306,35 @@ function showSlides(n) {
 
 //다른 프로그램 가져오기
 function programList(trainerNo) {
+
   var trTemplateSrc1 = $("#lectList").html();
   var templateF1 = Handlebars.compile(trTemplateSrc1);
   $.getJSON(serverRoot + "/json/program/listProgram/" + trainerNo, (data) => {
     $(lectBox).html(templateF1({list:data}));
+  }).done(function(data) {
+    $(".numberic").each(function(){
+      $(this).number(true);
+    });
+    for(var i = 0; i < data.length; i++) {
+      programListScore(data[i].no, i);
+    }
   })
 }
 
-
-//날짜 간격 구하기(D-day)
-function dayInterval(startDate) {
-  var interval = new Date().getTime() - new Date(startDate).getTime();
-  interval = Math.floor(interval / (1000 * 60 * 60 * 24));
-  if (interval == 0) {
-    interval = "-day"
-  } else {
-    var str = Number(interval)
-    if (str) {
-      if (0 < str) {
-        interval = "+" + interval;
-      } 
-    }
-  }
-  $(Dday).append(interval);
-}
-
-
-
-
-//일정 데이터 가져오기
-function plan(proDay, proTime) {
-  var inputTimeString='';
-  var mo, tu, we, th, fr, sa, su;
-  var pDay = proDay.split(" ");
-  var dayTime = proTime.split(" ");
-
-  for (var i = 0; i < pDay.length - 1; i++) {
-    switch (pDay[i]) {
-    case '0': 
-      timeCal(dayTime[i])
-      mo = inputTimeString
-      inputTimeString='';
-      break;
-    case '1': 
-      timeCal(dayTime[i])
-      tu = inputTimeString
-      inputTimeString='';
-      break;
-    case '2': 
-      timeCal(dayTime[i])
-      we = inputTimeString
-      inputTimeString='';
-      break;
-    case '3': 
-      timeCal(dayTime[i])
-      th = inputTimeString
-      inputTimeString='';
-      break;
-    case '4': 
-      timeCal(dayTime[i])
-      fr = inputTimeString
-      inputTimeString='';
-      break;
-    case '5': 
-      timeCal(dayTime[i])
-      sa = inputTimeString
-      inputTimeString='';
-      break;
-    case '6': 
-      timeCal(dayTime[i])
-      su = inputTimeString
-      inputTimeString='';
-      break;
-    default: 
-      console.log('에러')
-    }
-  }
-
-  function timeCal(dayTime) {
-    var dayTime= dayTime.split(",");
-    var calculated =  new Array();
-    for (var i = 0; i < dayTime.length - 1; i++) {
-      calculated[i] = ((parseInt(dayTime[i].split(":")[0]) * 60) + parseInt(dayTime[i].split(":")[1]));
-    }
-    var count = 0;
-    var temp = 0;
-    for (var i = 0; i < calculated.length; i++) {
-      if ((calculated[i + 1] - calculated[i]) > 30 && count == 0) {
-        inputTimeString = dayTime[0] + " ~ " + timePlus(dayTime[i]);
-        temp = i;
-        count++;
-      } else if ((calculated[i + 1] - calculated[i]) > 30 && count > 0 ) {
-        inputTimeString += (", " + dayTime[temp + 1] + " ~ " + timePlus(dayTime[i]));
-        temp = i;
-      } else if (i == calculated.length - 1 && count == 0) {
-        inputTimeString += (dayTime[0] + " ~ " + timePlus(dayTime[dayTime.length - 2]))
-      } else if (i == calculated.length - 1) {
-        inputTimeString += (", " + dayTime[temp + 1] + " ~ " + timePlus(dayTime[dayTime.length - 2]))
-      } 
-    }
-
-    function timePlus(time) {
-      var time1 = time.split(":")
-      if (Number(time1[1]) == 30) {
-        time1[1] = '00'
-          time1[0] = (parseInt(time1[0]) + 1)
-          if (time1[0] < 10) {
-            time1[0] = '0' + time1[0]
-          }
-        time = time1[0] + ":" + time1[1]
-        return time
-      } else {
-        time1[1] = '30'
-          time = time1[0] + ":" + time1[1]
-        return time
+function programListScore(no, i){
+//리뷰 개수 카운트
+  $.get(serverRoot + "/json/programMember/reviewCount/" + no, function(data) {
+    var count = data;
+//  리뷰  점수
+    $.get(serverRoot + "/json/programMember/reviewScore/" + no, function(data) {
+      var score = data;
+      var cal = (score / count).toFixed(1);
+      if(!(isNaN(cal))) {
+        $('.score-'+i+'').append(cal + '점')
       }
-    }
-    return inputTimeString;
-  }
-
-  var trTemplateSrc2 = $('#dayday').html();
-  var templateF2 = Handlebars.compile(trTemplateSrc2);
-  var data = {
-      list: [
-        {time: mo},
-        {time: tu},
-        {time: we},
-        {time: th},
-        {time: fr},
-        {time: sa},
-        {time: su}
-        ]
-  }
-  $(day).html(templateF2(data));
-
-  openDay(event, 'day-0')
-} 
-/* 일정 div 이벤트 */
-$('.day0').click(function() {
-  openDay(event, 'day-0')
-});
-$('.day1').click(function() {
-  openDay(event, 'day-1')
-});
-$('.day2').click(function() {
-  openDay(event, 'day-2')
-});
-$('.day3').click(function() {
-  openDay(event, 'day-3')
-});
-$('.day4').click(function() {
-  openDay(event, 'day-4')
-});
-$('.day5').click(function() {
-  openDay(event, 'day-5')
-});
-$('.day6').click(function() {
-  openDay(event, 'day-6')
-});
-function openDay(evt, dayName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent2");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks2");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(dayName).style.display = "block";
-  evt.currentTarget.className += " active";
+    })
+  })
 }
-
 
 
 

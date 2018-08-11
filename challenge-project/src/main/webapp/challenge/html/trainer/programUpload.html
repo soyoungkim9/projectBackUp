@@ -59,6 +59,15 @@
      <div id="sm-tab1" class="sm-tabcontent sm-current">
       <div class="uploadContent">
        <ul>
+       <li class="ucChallenge" id="reProgram">
+         <div class="contentName">프로그램 재등록</div>
+         <div class="ucContet">
+          <div class="challengeSelect">
+           <select name="programSelect" class="reProgram" id="proTab">
+           </select>
+          </div>
+         </div>
+        </li>
         <li class="ucChallenge" id="notPadding">
          <div class="contentName">챌린지 주제</div>
          <div class="ucContet">
@@ -83,12 +92,12 @@
           <div class="programTurnName">
            <h5>기수</h5>
            <div class="programTurnBox">
-            <input id="fth" type="number" min="1" max="999">
+            <input id="fth" type="number" min="1" max="999" value="1" readOnly>
            </div>
           </div>
           <div class="challengeProgram">
            <h5>이름</h5>
-           <input id="fname" type="text"
+           <input id="fname" type="text" 
             placeholder="프로그램 이름을 20자 이내로 입력해 주세요.">
           </div>
          </div>
@@ -100,11 +109,10 @@
            <select name="subjectSelect" class="selectTab1" id="ftype">
             <option value="헬스">헬스</option>
             <option value="수영">수영</option>
-            <option value="수영">에어로빅</option>
-            <option value="수영">댄스</option>
-            <option value="수영">필라테스</option>
-            <option value="수영">검도</option>
-            <option value="태권도">태권도</option>
+            <option value="필라테스">필라테스</option>
+            <option value="댄스">댄스</option>
+            <option value="복싱">복싱</option>
+            <option value="기타">기타</option>
            </select>
           </div>
          </div>
@@ -116,10 +124,10 @@
            <h5>목표주제</h5>
            <div class="targetBox">
             <select name="targetSelect" class="selectTab1" id="fprgoal">
-             <option value="체충">체충</option>
-             <option value="골격근량">골격근량</option>
-             <option value="체지방량">체지방량</option>
-             <option value="기타">기타</option>
+             <option value="체중">체중</option>
+             <option value="근력">근력</option>
+             <option value="체지방">체지방</option>
+             <option value="출석">출석</option>
             </select>
            </div>
           </div>
@@ -127,10 +135,10 @@
            <h5>수치설정</h5>
            <div class="targetNumBox">
             <div class="targetNumInput">
-             <input id="fprogoalnum" type="number" min="1" max="999">
+             <input id="fprogoalnum" type="number" min="-20" max="100">
             </div>
             <div class="targetNumSelect">
-             <select name="targeNumtSelect" class="selectTab1">
+             <select id="proNum" class="selectTab1">
               <option value="kg">kg</option>
               <option value="%">%</option>
              </select>
@@ -289,9 +297,14 @@
   </div>
   <!-- back -->
 
-  <script id="proInsert" type="text/x-handlebars-template">
+  <script id="chalInsert" type="text/x-handlebars-template">
 {{#each list}}
 <option id="fchno" value="{{no}}">{{title}}</option>
+{{/each}}
+</script>
+  <script id="proInsert" type="text/x-handlebars-template">
+{{#each list}}
+<option id="fReProName" value="{{no}}">{{name}} [{{proTh}}기]</option>
 {{/each}}
 </script>
 
@@ -317,10 +330,12 @@
   <script
    src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 
+  <script src="../../js/header/header.js"></script>
+  <script src="../../js/trainer/trainer-template.js"></script>
   <script src="../../js/trainer/dailySchedule.js"></script>
   <script src="../../js/trainer/jquery.number.js"></script>
-  <script src="../../js/trainer/trainer-template.js"></script>
   <script src="../../js/trainer/programUpload.js"></script>
+  <script src="../../js/trainer/programUpload2.js"></script>
   <script src="../../js/footer/footer.js"></script>
 </body>
 
