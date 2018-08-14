@@ -4,7 +4,7 @@ $.getJSON(serverRoot + "/json/program/listProgram/" + userInfo.userNo, (data) =>
   $(cardWide).html(cardBodyFn({list:data}));
 }).done(function(data) {
   
-  $('.trainer-img').attr('src', '../../../files/'+userInfo.userPath+'_50x50.jpg');
+  $('.trainer-img').attr('src', '../../../files/'+userInfo.userPath);
 
   var i;
   for (i = 0; i < data.length; i++) {
@@ -43,6 +43,13 @@ function reviewScore(no, i) {
       if(!(isNaN(cal))) {
         $('.score-'+i+'').html(cal)
       }
+      
+      if (cal >= 4) {
+        //display block
+        var displayNo = (cal / 5) * 100; // 백분율
+        $("#card-" + i).css("display", "block");
+        $("#card-" + i).append("<span>만족도 "+ displayNo+ "%</span>")
+      } 
     }).done(function(data) {
       $('.score-'+i+'').generateStars();
     })
@@ -80,3 +87,15 @@ function dday(startDate, i) {
   var dd = document.getElementById("dday-"+i);
   dd.append(interval)
 }
+
+//프로필 관련 이미지와 사용자 이름 불러오기
+$.ajax(serverRoot + "/json/trainer/" + userInfo.userNo, {
+  dataType: "json", 
+    success(data) {
+     $('#fPath').attr('src', '../../../files/' + data.userPath);
+     $('#tName').html(data.name);
+    },
+    error() {
+        window.alert("트레이너 정보 불러오기 실패!");
+    } 
+});

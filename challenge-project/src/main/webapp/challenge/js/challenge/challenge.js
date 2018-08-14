@@ -36,7 +36,7 @@ if (location.href.split("?").length > 1) {
 
 function trImg(no, i) {
   $.getJSON(serverRoot + "/json/trainer/" + no, (data) => {
-    $("<img/>").attr('src', '../../../files/'+data.userPath+'_50x50.jpg')
+    $("<img/>").attr('src', '../../../files/'+data.userPath)
     .appendTo('.tr-'+i+'').addClass('trainer-img');
   })
 }
@@ -58,6 +58,13 @@ function reviewScore(no, i) {
       var cal = (score / count).toFixed(1);
       if(!(isNaN(cal))) {
         $('.score-'+i+'').html(cal)
+      }
+      
+      if (cal >= 4) {
+        //display block
+        var displayNo = (cal / 5) * 100; // 백분율
+        $("#card-" + i).css("display", "block");
+        $("#card-" + i).append("<span>만족도 "+ displayNo+ "%</span>")
       }
     }).done(function(data) {
       $('.score-'+i+'').generateStars();

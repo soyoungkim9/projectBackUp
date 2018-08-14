@@ -57,6 +57,45 @@
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
   
+    <select id="pagingListCard"
+          resultMap="ProgramMap" parameterType="map">
+    select Max(m.ppath) as ppath, p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno,
+           m.pmedno, m.pmtype
+    from PMED m
+         right outer join PROG p on m.pno=p.pno
+         left outer join TRN t on p.trnno=t.trnno
+         Group By p.pno, p.pname
+         order by p.sdt desc
+         limit #{startRowNo}, #{pageSize} 
+  </select>
+  
+      <select id="pagingListProgoal"
+          resultMap="ProgramMap" parameterType="map">
+    select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal,
+           m.pmedno, m.ppath, m.pmtype
+    from PMED m
+         right outer join PROG p on m.pno=p.pno
+         left outer join TRN t on p.trnno=t.trnno
+    where pgoal = #{programGoal}
+    limit #{startRowNo}, #{pageSize} 
+  </select>
+  
+        <select id="pagingListKeyword"
+          resultMap="ProgramMap" parameterType="map">
+         select Max(m.ppath) as ppath, p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal, m.pmedno, m.pmtype
+    from PMED m
+         right outer join PROG p on m.pno=p.pno
+         left outer join TRN t on p.trnno=t.trnno
+    where pname like CONCAT('%', #{keyword}, '%')
+    or ptype like CONCAT('%', #{keyword}, '%')
+    or bas_addr like CONCAT('%', #{keyword}, '%')
+    or det_addr like CONCAT('%', #{keyword}, '%')
+    or pgoal like CONCAT('%', #{keyword}, '%')
+    Group By p.pno, p.pname
+    order by p.sdt desc
+    limit #{startRowNo}, #{pageSize}
+  </select>
+  
   <select id="selectListChallenge"
           resultMap="ProgramMap" parameterType="map">
     select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno,
@@ -82,18 +121,43 @@
     or pgoal like CONCAT('%', #{keyword}, '%')
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
-  <select id="selectPrice"
-          resultMap="ProgramMap" parameterType="map">
-     select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal,
+  
+   <select id="listCardWithProgoal"
+          resultMap="ProgramMap" parameterType="string">
+    select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal,
            m.pmedno, m.ppath, m.pmtype
     from PMED m
          right outer join PROG p on m.pno=p.pno
          left outer join TRN t on p.trnno=t.trnno
-    where p.pprice BETWEEN #{minPrice} AND #{maxPrice} 
-    order by p.pprice asc
-    limit #{startRowNo}, #{pageSize}
+    where pgoal = #{value}
+    <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
   
+  
+  <select id="selectPrice"
+          resultMap="ProgramMap" parameterType="map">
+	select Max(m.ppath),p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal,m.pmedno,m.pmtype  from PMED m
+    right outer join PROG p on m.pno=p.pno
+    left outer join TRN t on p.trnno=t.trnno
+	where p.pprice BETWEEN #{minPrice} AND #{maxPrice}
+	Group By p.pno,p.pprice
+	order by p.pprice asc
+	limit #{startRowNo}, #{pageSize}
+  </select>
+  <select id="pList"
+          resultMap="ProgramMap" parameterType="map">
+	
+	select Max(m.ppath),p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno, p.ptype, p.det_addr, p.pgoal,m.pmedno,m.pmtype  from PMED m
+    right outer join PROG p on m.pno=p.pno
+    left outer join TRN t on p.trnno=t.trnno
+    where p.pprice BETWEEN #{minPrice} AND #{maxPrice} 
+    Group By p.pno,p.pprice
+    order by p.pprice asc
+
+
+   
+  </select>
+
    <select id="countCardsWithProgramGoal" resultType="java.util.HashMap" parameterType="java.util.HashMap">
        select pgoal, count(*) as count
        from PROG
@@ -118,6 +182,7 @@
     <foreach collection="programTypeList" item="item" index="index" separator="," open="(" close=")">
             #{item}
     </foreach>
+    Group By p.pno
   </select>
   
     <!-- 가격순 search -->
@@ -151,6 +216,19 @@
     order by pno desc
     <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
+  
+  <select id="selectTrainerProgramTurn"
+          resultMap="ProgramMap" parameterType="map">
+  select p.pno, p.pname, p.pth, p.sdt, p.edt
+  from PROG p
+          inner join TRN t on p.trnno=t.trnno
+  where t.trnno=#{value} and p.pname in (
+		                   select pname
+		                   from PROG
+		                   GROUP BY pname 
+		                   having count(*) > 1 )
+  </select>
+  
 
   <select id="selectList"
           resultMap="ProgramMap" parameterType="map">
@@ -241,5 +319,16 @@
       stat=#{state}
     where tano=#{no}
   </update>
+  
+  <!-- 검색 페이징 listPage -->
+  <select id="selectListPage"
+          resultMap="ProgramMap" parameterType="map">
+    select p.pno, p.pname, p.pth, p.pprice, p.bas_addr, p.maxqty, p.sdt, p.trnno,
+           m.pmedno, m.ppath, m.pmtype
+    from PMED m
+         right outer join PROG p on m.pno=p.pno
+         left outer join TRN t on p.trnno=t.trnno
+    limit #{startRowNo}, #{pageSize}
+  </select>
   
 </mapper>

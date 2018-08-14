@@ -19,10 +19,6 @@ public class PlanServiceImpl implements PlanService {
     
     @Override
     public List<Plan> list(int trnno) {
-//        HashMap<String,Object> params = new HashMap<>();
-//        params.put("startRowNo", (pageNo - 1) * pageSize);
-//        params.put("pageSize", pageSize);
-        
         return planDao.selectList(trnno);
     }
 
@@ -42,5 +38,10 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public int update(Plan plan) {
         return planDao.update(plan);
+    }
+    
+    @Override
+    public List<Integer> getCount(int pno) {
+        return planDao.selectCount(pno);
     }
 }

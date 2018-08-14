@@ -118,8 +118,8 @@
         </div><!-- mypage-body -->
       </div><!-- mypage -->
     </div><!--.container-->
-    <div id="footer"></div><!-- 푸터 -->
   </div><!-- back -->
+    <div id="footer"></div><!-- 푸터 -->
 
 
   <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
@@ -144,7 +144,7 @@
   <script id="view-template" type="text/x-handlebars-template">
                 <div>
                 <div class="modal-body">
-                  <div class="originalImg"></div>
+                  <img class="originalImg" src="../../../files/{{imgPath}}">
                   <ul class="memberInfoList">
                     <li class="modalName">
                       <div class="contentName">이름</div>
@@ -170,7 +170,7 @@
   <script id="add-template" type="text/x-handlebars-template">
                 <div>
                 <div class="modal-body">
-                  <div class="originalImg"></div>
+                  <img class="originalImg" src="../../../files/{{imgPath}}">
                   <ul class="memberInfoList">
                     <li class="modalName">
                       <div class="contentName">이름</div>

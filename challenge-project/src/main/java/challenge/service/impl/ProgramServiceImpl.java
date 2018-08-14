@@ -41,6 +41,16 @@ public class ProgramServiceImpl implements ProgramService {
         params.put("pageSize", pageSize);
         return programDao.selectPrice(params);
     }
+    
+    @Override
+    public List<Program> pList(int min, int max) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("minPrice",min);
+        params.put("maxPrice",max);
+        return programDao.pList(params);
+    }
+
+    
     @Override
     public List<Program> listCard() {
         return programDao.selectListCard();
@@ -59,6 +69,11 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     public List<Program> listProgram(int trainerNo) {
         return programDao.selectTrainerProgram(trainerNo);
+    }
+    
+    @Override
+    public List<Program> listTurnProgram(int trainerNo) {
+        return programDao.selectTrainerProgramTurn(trainerNo);
     }
     
     @Override
@@ -133,6 +148,54 @@ public class ProgramServiceImpl implements ProgramService {
         param.put("programGoals_list", proGoals);
         return programDao.countCardsWithProgramGoal(param);
     }
+
+    @Override
+    public List<Program> listCardWithProgoal(String progoal) {
+        return programDao.listCardWithProgoal(progoal);
+    }
+
+    @Override
+    public List<Program> pagingListCard(int pageNo, int pageSize) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+
+        return programDao.pagingListCard(params);
+    }
+    
+
+    @Override
+    public List<Program> pagingListProgoal(String programGoal, int pageNo,
+            int pageSize) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("programGoal", programGoal);
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+        return programDao.pagingListProgoal(params);
+    }
+
+    @Override
+    public List<Program> pagingListKeyword(String keyword, int pageNo,
+            int pageSize) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("keyword", keyword);
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+        return programDao.pagingListKeyword(params);
+    }
+
+    
+    @Override
+    public List<Program> getListPage(int pageNo, int pageSize) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+        return programDao.selectListPage(params);
+    }
+
+   
+
+    
 
     
 

@@ -22,11 +22,11 @@
 
     <div class="container">
         <h2>프로그램</h2>
-
+ 
         <div class="sidenav">
 
             <div class="search-program">
-                <div class="search-title">검색</div>
+                
                 <form class="form-wrapper cf">
                     <input id="keyword" type="text" name="search" placeholder="검색어를 입력하세요" autocomplete=off>
                     <button id="keyword-search-button" type="button">검색</button>
@@ -39,9 +39,7 @@
                 <ul id="programGoal-sideMenu" class="challenge-ul">
                   
                 </ul>
-                <div class="challenge-more">
-                    <button id="testBtn" class="ch-btn">챌린지 더보기 +</button>
-                </div>
+                
             </div>
 
             <div class="search-price2">
@@ -64,8 +62,9 @@
                     </div>
                 </div>
 
-
+                <div style="text-align:center;">
                 <button id="priceSearch" class="ch-btn">가격적용</button>
+                </div>
                 <!-- <input type="range" min="1" max="300,000" value="0" step="1"> -->
             </div>
 
@@ -135,15 +134,18 @@
           </div> -->
             </div>
             <div class="sm-pagination">
-                <a class="sm-pagination-button sm-pagination-side" href="#"><i
-                    class="fas fa-angle-left"></i></a> <a
-                    class="sm-pagination-button pageActive" href="#">1</a> <a
-                    class="sm-pagination-button" href="#">2</a> <a
-                    class="sm-pagination-button" href="#">3</a> <a
-                    class="sm-pagination-button" href="#">4</a> <a
-                    class="sm-pagination-button sm-pagination-button-end" href="#">5</a>
-                <a class="sm-pagination-button sm-pagination-side" href="#"><i
-                    class="fas fa-angle-right"></i></a>
+                <a  class="sm-pagination-button sm-pagination-side" href="#">
+                <i class="fas fa-angle-left"></i></a> 
+                <div id="paginationLeft"></div>
+                <!-- 
+                    <a class="sm-pagination-button pageActive" href="#">1</a> 
+                    <a class="sm-pagination-button" href="#">2</a> 
+                    <a class="sm-pagination-button" href="#">3</a> 
+                    <a class="sm-pagination-button" href="#">4</a>
+                    <a class="sm-pagination-button sm-pagination-button-end" href="#">5</a>
+                 -->
+                <a class="sm-pagination-button sm-pagination-side" href="#">
+                <i class="fas fa-angle-right"></i></a>
             </div>
 
         </div>
@@ -151,7 +153,6 @@
     <!--container-->
 
     <footer id="footer"></footer>
-
 
 <script id="proGoalList" type="text/x-handlebars-template">
 {{#each list}}
@@ -165,7 +166,7 @@
     <a href="../program/DetailPage.html?no={{no}}">
     <!-- 카드 헤더 -->
     <div class="card-header">
-      <!--<img class="card-img" src="../../../files/{{medias.[0].path}}_200x200.jpg"/>-->
+      <img class="card-img" src="../../../files/{{medias.[0].path}}"/>
       <div id="card-{{@key}}" class="ribbon"></div>
       <div class="card-trainer tr-{{@key}}">
       </div>
@@ -196,6 +197,7 @@
     <script src="../../js/common.js"></script>
     <script src="../../js/header/header.js"></script>
     <script src="../../js/search/search_sh.js"></script>
+    <script src="../../js/search/paging.js"></script>
     <script src="../../js/footer/footer.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script

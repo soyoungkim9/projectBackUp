@@ -64,6 +64,7 @@ body {
 
 #sm-back { /* 로고 뒷배경 */
   padding-top: 130px;
+  margin-bottom: 188px;
 }
 .sm-profile {
 border:1px solid gray;
@@ -83,6 +84,7 @@ border:1px solid gray;
     margin-top:13px;
     margin-left:5%;
     text-align: left;
+    margin-bottom: 0px;
 }
 
 .sm-tab-down {

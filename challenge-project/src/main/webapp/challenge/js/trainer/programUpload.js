@@ -148,6 +148,17 @@ function lessFunction() {
   }
 }
 
+//프로필 관련 이미지와 사용자 이름 불러오기
+$.ajax(serverRoot + "/json/trainer/" + userInfo.userNo, {
+  dataType: "json", 
+    success(data) {
+     $('#fPath').attr('src', '../../../files/' + data.userPath);
+     $('#tName').html(data.name);
+    },
+    error() {
+        window.alert("트레이너 정보 불러오기 실패!");
+    } 
+});
 
 // 프로그램 이미지
 var imgFiles;
@@ -213,6 +224,11 @@ $('#fileupload2').fileupload({
       $('#addBtn').unbind("click");
       $('#addBtn').click(function() {
 
+        if (Number($(fStartDate).val().replace(/-/g,"")) > Number($(fEndDate).val().replace(/-/g,""))){
+          alert("시작일이 종료일보다 클 수 없습니다.");
+          $(fEndDate).focus();
+          return false;
+        } 
         // 데이터 입력
         data.formData = {
             postNo: $(sample6_postcode).val(),
@@ -232,8 +248,7 @@ $('#fileupload2').fileupload({
             proTurn: $(fptover).val(),
             proDay: proDay,
             proTime: proTime,
-            challengeNo: $(chalTab).val(),
-            "trainerNo": userInfo.userNo
+            challengeNo: $(chalTab).val()
         }
         data.submit();
       });
@@ -252,3 +267,14 @@ function delImg(event){
   var fileIndex =wrapperDiv.attr('data-file-index');
   imgFiles.splice(fileIndex, 1);
 }
+//DatePicker
+$(function() {
+    $(".mDate").datepicker({
+        dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        minDate: +1,
+        dateFormat: "yy-mm-dd"
+    });
+});

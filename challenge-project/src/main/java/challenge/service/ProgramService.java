@@ -15,6 +15,7 @@ public interface ProgramService {
     List<Program> listWithPrice();
     List<Program> listWithStartDate();
     List<Program> listProgram(int trainerNo);
+    List<Program> listTurnProgram(int trainerNo);
     List<Program> listWithProgramType(String[] pType);
     Program get(int no);
     Program getWithMedia(int no);
@@ -26,7 +27,14 @@ public interface ProgramService {
     List<Program> priceList(int min, int max,int pageNo, int pageSize);
 
     Object countCardsWithProgramGoal(String[] programGoals);
-
+    List<Program> listCardWithProgoal(String progoal);
+    List<Program> pList(int min, int max);
+   
+    List<Program> pagingListCard(int pageNo, int pageSize);
+    List<Program> getListPage(int pageNo, int pageSize);
+    List<Program> pagingListProgoal(String programGoal, int pageNo, int pageSize);
+    List<Program> pagingListKeyword(String keyword, int pageNo, int pageSize);
+    
     
     //boolean isMember(String programName, String memberId);
     //int addMember(String programName, String memberId);

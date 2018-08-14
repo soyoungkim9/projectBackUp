@@ -35,9 +35,9 @@
        그 메서드를 자동생성할 때 사용할 수 있다.
   -->
   <select id="selectList" parameterType="int" resultMap="PlanMap">
-	select p.trnno, p.pno, p.pname, p.sdt, p.edt from PROG p
-	where p.trnno = #{value}
-<!--     order by pono desc -->
+	select p.trnno, p.pno, p.pname, p.sdt, p.edt, p.ptover
+	from PROG p
+	where p.trnno = #{trnno}
   </select>
 
   <select id="selectPlanList" parameterType="int" resultMap="PlanMap">
@@ -45,7 +45,8 @@
 		   pl.pltitl, pl.plcont, pl.pldt, p.trnno
 	from PROG p, PLAN pl
 	where p.pno = pl.pno
-	AND pl.pno = #{value}
+	AND pl.pno = #{pno}
+    <!-- limit #{startRowNo}, #{pageSize} -->
   </select>
   
   <insert id="insert" parameterType="Plan" 
@@ -69,5 +70,14 @@
 	plcont=#{planContent}
 	where plno=#{no} 
   </update>
+  
+  <select id="selectCount" parameterType="int" resultMap="PlanMap" resultType="int">
+<!-- 	select (pltover DIV 12)+1 as plt
+	from PLAN 
+	where pno = #{value} -->
+	select (pltover DIV 12)+1 as plt
+	from PLAN 
+	where pno = #{value}
+  </select>
   
 </mapper>

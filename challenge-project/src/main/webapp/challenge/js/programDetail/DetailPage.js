@@ -3,8 +3,6 @@ if (location.href.split("?").length > 1) {
   var no = location.href.split("?")[1].split("=")[1];
 
   $.getJSON(serverRoot + "/json/program/" + no, function(data) {
-    /*$(fNo).append(data.no);
-    $(fpostNo).val(data.postNo);*/
     $(faddress).append(data.address + ' ' + data.addDetail);
     $(fName).append(data.name);
     $(fDate).append(data.startDate + ' ~ ' + data.endDate);
@@ -92,6 +90,7 @@ if (location.href.split("?").length > 1) {
     programList(data.trainerNo) // 다른 프로그램
     plan(data.proDay, data.proTime) // 일정
     dayInterval(data.startDate) // D-day
+    proTurn(data.trainerNo) // 기수 프로그램
 
     // 결제 페이지 이동
     $("#payment").click(() => {
@@ -130,11 +129,29 @@ if (location.href.split("?").length > 1) {
       $('.star-prototype').generateStars();
       $('.star-prototype3').generateStars();
     })
-  }).done(function() {
-
   })
+}
 
-
+function rewviewStar(no) {
+//리뷰 개수 카운트
+	$.get(serverRoot + "/json/programMember/reviewCount/" + no, function(data) {
+		$(reviewCount).html(data);
+		var count = data;
+		
+		// 리뷰  점수
+		$.get(serverRoot + "/json/programMember/reviewScore/" + no, function(data) {
+			var score = data;
+			var cal = (score / count).toFixed(1);
+			if(!(isNaN(cal))) {
+				$(reviewScore).html(cal);
+			} else {
+				$(reviewScore).html(0)
+			}
+			
+			$('.star-prototype').generateStars();
+			$('.star-prototype3').generateStars();
+		})
+	})
 }
 
 
@@ -194,9 +211,41 @@ $(document.body).on('click','.addModal', function(event){
 		$('#myModal').css("display", "none");
 	})
 });
-
-
  */
+
+// 기수 프로그램
+function proTurn(trainerNo) {
+  var trTemplateSrc5 = $("#turn-template").html();
+  var templateFn5 = Handlebars.compile(trTemplateSrc5);
+  $.getJSON(serverRoot + "/json/program/listTurnProgram/" + trainerNo, (data) => {
+    $("#turn").append(templateFn5({list: data}));
+  }).done(function(data) {
+    for (var i = 0; i < data.length; i++) {
+      rewviewStar1(data[i].no)
+    }
+  })
+}
+
+// 기수 별점
+function rewviewStar1(no) {
+//리뷰 개수 카운트
+  $.get(serverRoot + "/json/programMember/reviewCount/" + no, function(data) {
+    var count = data;
+    
+    // 리뷰  점수
+    $.get(serverRoot + "/json/programMember/reviewScore/" + no, function(data) {
+      var score = data;
+      var cal = (score / count).toFixed(1);
+      if(!(isNaN(cal))) {
+        $('.score'+no).append(cal);
+      } else {
+        $('.score'+no).append(0)
+      }
+      
+    })
+  })
+}
+
 
 //댓글리스트
 function loadComment(no) {
@@ -218,13 +267,6 @@ function loadCommentAfter(no) {
   $.getJSON(serverRoot + "/json/programMember/reviewList/" + no, (data) => {
     $('#comment1').html(templateFn3({list: data}));
   }).done(function(data) {
-    // 유저 이미지 널값 보류!
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].user.userPath == "") {
-        $('#cmImg-' + i)
-        .attr('src', '../../../files/3a1987ec-885f-4ea3-8508-5872700e953c_50x50.jpg')
-      }
-    }
     //숫자 평점을 별로 변환하도록 호출하는 함수
     $('.star-prototype2').generateStars();
     load('#cm-load', '3');
@@ -254,7 +296,7 @@ $(document).ready(function() {
       userNo: userInfo.userNo
     }, () => {
       loadCommentAfter(no);
-      //$('.commentInput').css('display', 'none');
+      rewviewStar(no);
       $(fContent).val('');
     })
   });

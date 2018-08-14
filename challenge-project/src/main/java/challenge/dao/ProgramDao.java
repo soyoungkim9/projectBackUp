@@ -14,14 +14,22 @@ public interface ProgramDao {
     public List<Program> selectListWithPrice();
     public List<Program> selectListWithStartDate();
     public List<Program> selectTrainerProgram(int no);
+    public List<Program> selectTrainerProgramTurn(int no);
     public int insert(Program program);
     public int update(Program program);
     public Program selectOne(int no);
     public List<Program> mainList();
     public Program selectOneWithMedia(int no);
     Program selectRecent();
-    public List<Program> selectPrice(Map<String,Object> prams);
+    public List<Program> selectPrice(Map<String,Object> params);
 	public List<Program> selectListWithKeyword(String keyword);
     public List<Integer> countCardsWithProgramGoal(Map<String, Object> param);
     public List<Program> selectListWithProgramType(Map<String, Object> param);
+    public List<Program> listCardWithProgoal(String progoal);
+    public List<Program> pList(Map<String, Object> params);
+    public List<Program> selectListPage(Map<String,Object> params);
+    
+    public List<Program> pagingListCard(Map<String, Object> params);
+    public List<Program> pagingListProgoal(Map<String, Object> params);
+    public List<Program> pagingListKeyword(Map<String, Object> params);
 }

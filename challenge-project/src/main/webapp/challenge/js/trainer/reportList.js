@@ -3,11 +3,17 @@ var pno;
 var defaultPage;
 var startDate;
 var endDate;
+var ptover;
+var pageNum = 1;
+var pageSize = 12;
+
+//var pageTemplateSrc = $("#pagenationList").html();
+//var pagetemplateFn = Handlebars.compile(pageTemplateSrc);
 
 // li-template 트레이너가 관리하는 프로그램 이름 목록
 var liTemplateSrc = $("#li-template").html();
 var templateFn = Handlebars.compile(liTemplateSrc);
-$(document).ready(function() {
+$(document).ready(function() {	
 	$.ajax(serverRoot + "/json/plan/pList/" + userInfo.userNo, {
 		dataType: "json",
 	    success(data) {
@@ -15,6 +21,7 @@ $(document).ready(function() {
 			defaultPage = $('.active').find('a').attr('data-last');
 			startDate = $('.active').find('a').attr('data-sdt');
 			endDate = $('.active').find('a').attr('data-edt');
+			ptover = $('.active').find('a').attr('data-ptover');
 			// 운동일지 default page 설정
 			$.ajax(serverRoot + "/json/plan/list/" + defaultPage, {
 				dataType: "json",	
@@ -34,12 +41,24 @@ $(document).ready(function() {
 					 }
 			    },
 			    error() {
-			        window.alert("프로그램 등록 후 이용해 주세요!");
+					swal({
+						  position: 'center',
+						  type: 'error',
+						  title: '실행 오류!',
+						  showConfirmButton: false,
+						  timer: 1500
+						})
 			    }	
 			});
 		},
 	    error() {
-	        window.alert("report.js li-template list 실행 오류!");
+			swal({
+				  position: 'center',
+				  type: 'error',
+				  title: '실행 오류!',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 	    }
 	});
 	
@@ -51,7 +70,13 @@ $(document).ready(function() {
 			 $('#tName').html(data.name);
 	    },
 	    error() {
-	        window.alert("트레이너 정보 불러오기 실패!");
+			swal({
+				  position: 'center',
+				  type: 'error',
+				  title: '실행 오류!',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 	    }	
 	});
 });
@@ -96,9 +121,36 @@ $(document.body).on('click', '.programTab', function(event) {
 			 }
 	    },
 	    error() {
-	        window.alert("report.js programTab list 실행 오류!");
+			swal({
+				  position: 'center',
+				  type: 'error',
+				  title: '실행 오류!',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 	    }	
 	});
+	
+//	// 페이징 처리 pageActive
+//	$.ajax(serverRoot + "/json/plan/count/" + pno, {
+//		dataType: "json",	
+//	    success(data) {
+//			 //var lastPage = parseInt(data[data.length-1].planTurn/12) + 1;
+//			 //console.log(lastPage);
+//			 $('#pagination').html(pagetemplateFn({
+//				 list: data}));
+//			 
+//			 for(var i = 0; i < data.length; i++) {
+//				 if($('.selectedPage').attr('data-num') == i) {
+//					 console.log(i);
+//					 console.log(data.length);
+//				 }
+//			 }
+//	    },
+//	    error() {
+//	        window.alert("페이징 실패!");
+//	    }	
+//	});
 });
 
 // 모달 관련 이벤트
@@ -116,6 +168,8 @@ window.onclick = function(event) {
 }
 
 // 새글 관련 이벤트
+var count;
+var turn;
 $("#addPlan").click(() => {
     console.log(startDate, endDate);
 	pno = $('.active').find('a').attr('data-no');
@@ -127,19 +181,30 @@ $("#addPlan").click(() => {
     	   $("#mDate").val('');
     	   $("#mTitle").val('');
     	   $("#mContent").val('');
-    	   var count = data.length + 1;
-    	   var turn;
+
+    	   var index;
     	   if(data.length == 0) { // 프로그램에 운동일지 하나도 없을 경우
     		   turn = 1;
+    		   count = 1;
+    		   turn = ptover;
     	   } else { // 프로그램에 운동일지 한 개 이상 있을 경우
+    		   index = data.length - 1;
+    		   count = data[index].planTurn + 1;
     		   turn = data[0].program.proTurn;
     	   }
-	       for (count; count <= turn; count++) {
+	       
+    	   for (count; count <= turn; count++) {
 	     	  $('#mTurn').append("<option>" + count +"</option>");
 	       }
 	    },
 	    error() {
-	        window.alert("report.js addPlan 실행 오류!");
+			swal({
+				  position: 'center',
+				  type: 'error',
+				  title: '실행 오류!',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 	    }
     });
     
@@ -169,7 +234,13 @@ $(document.body).on('click', '.editIcon', function(event) {
 	        $("#modalViewContent textarea").val(data[0].planContent);
 	    },
 	    error() {
-	        window.alert("report.js editIcon 실행 오류!");
+			swal({
+				  position: 'center',
+				  type: 'error',
+				  title: '실행 오류!',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
 	    }	
 	});
 });
@@ -201,7 +272,13 @@ $("#updatePlanButton").click(() => {
 					 list:data}));
 		    },
 		    error() {
-		        window.alert("report.js view list 실행 오류!");
+				swal({
+					  position: 'center',
+					  type: 'error',
+					  title: '실행 오류!',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
 		    }	
 		});
 		
@@ -236,10 +313,67 @@ $("#registerPlan").click(() => {
 					 list:data}));
 		    },
 		    error() {
-		        window.alert("report.js view list 실행 오류!");
+				swal({
+					  position: 'center',
+					  type: 'error',
+					  title: '실행 오류!',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
 		    }	
 		});
 	});
+});
+
+// 페이징 처리
+$(document.body).on('click', '.selectedPage', function(event) {
+	event.preventDefault();
+	pageNum = $(this).attr('data-num');
+	if($(".selectedPage").hasClass("pageActive").toString()) {
+		$(".selectedPage").removeClass("pageActive")
+	}
+	$(this).addClass("pageActive");
+	if(typeof pno == "undefined") {
+		$.ajax(serverRoot + "/json/plan/list/" + defaultPage, {
+			dataType: "json",	
+		    success(data) {
+				 $('#programBox').html(programTemplateFn({
+					 name: data[0].program.name,
+					 startDate: data[0].program.startDate,
+					 endDate: data[0].program.endDate,
+					 list:data}));
+		    },
+		    error() {
+				swal({
+					  position: 'center',
+					  type: 'error',
+					  title: '실행 오류!',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+		    }	
+		});
+	} else {
+		$.ajax(serverRoot + "/json/plan/list/" + pno, {
+			dataType: "json",	
+		    success(data) {
+				 $('#programBox').html(programTemplateFn({
+					 name: data[0].program.name,
+					 startDate: data[0].program.startDate,
+					 endDate: data[0].program.endDate,
+					 list:data}));
+		    },
+		    error() {
+				swal({
+					  position: 'center',
+					  type: 'error',
+					  title: '실행 오류!',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+		    }	
+		});
+	}
 });
 
 // DatePicker

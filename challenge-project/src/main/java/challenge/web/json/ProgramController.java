@@ -59,6 +59,12 @@ public class ProgramController {
         return programService.listCardWithKeyword(keyword);
     }
     
+    
+    @RequestMapping("listCardWithProgoal/{progoal}")
+    public Object listCardWithProgoal(@PathVariable String progoal) {
+        return programService.listCardWithProgoal(progoal);
+    }
+    
     @RequestMapping("countCardsWithProgramGoal")
     public Object list(@RequestParam(value="programGoals[]") String[] programGoals) {
         return programService.countCardsWithProgramGoal(programGoals);
@@ -67,6 +73,11 @@ public class ProgramController {
     @RequestMapping("listProgram/{trainerNo}")
     public Object list(@PathVariable int trainerNo) {
         return programService.listProgram(trainerNo);
+    }
+    
+    @RequestMapping("listTurnProgram/{trainerNo}")
+    public Object listTurn(@PathVariable int trainerNo) {
+        return programService.listTurnProgram(trainerNo);
     }
     
     @RequestMapping("typeList")
@@ -84,7 +95,7 @@ public class ProgramController {
         return programService.listWithStartDate();
     }
     
-    @RequestMapping("mainList")
+    @RequestMapping("mainList") 
     public Object mainList(
             ) {
         return programService.mainList();
@@ -99,16 +110,53 @@ public class ProgramController {
                             ) {
         return programService.priceList(min,max,pageNo,pageSize);
     }
-
+    @RequestMapping("pList")  // 프로그램 가격 검색 
+    public Object priceList(
+                            @RequestParam("minPrice") int min,
+                            @RequestParam("maxPrice") int max
+                            ) {
+        return programService.pList(min,max);
+    }
     @RequestMapping("update")
     @ResponseStatus(HttpStatus.OK)
     public void update(Program program) throws Exception {
         programService.update(program);
     }
 
-    @RequestMapping("{no}")
+    @RequestMapping("{no}") 
     public Program view(@PathVariable int no) throws Exception {
         return programService.getWithMedia(no);
     }
+    
+    @RequestMapping("listPage/{pageNo}/{pageSize}")
+    public Object listPage(
+            @PathVariable int pageNo,
+            @PathVariable int pageSize) {
+        return programService.pagingListCard(pageNo, pageSize);
+    }
+    
+    @RequestMapping("pagingListCard/{pageNo}/{pageSize}")
+    public Object pagingListCard(
+            @PathVariable int pageNo,
+            @PathVariable int pageSize) {
+        return programService.pagingListCard(pageNo, pageSize);
+    }
+    
+    @RequestMapping("pagingListProgoal/{programGoal}/{pageNo}/{pageSize}")
+    public Object pagingListProgoal(
+            @PathVariable String programGoal,
+            @PathVariable int pageNo,
+            @PathVariable int pageSize) {
+        return programService.pagingListProgoal(programGoal, pageNo, pageSize);
+    }
+    
+    @RequestMapping("pagingListKeyword/{keyword}/{pageNo}/{pageSize}")
+    public Object pagingListKeyword(
+            @PathVariable String keyword,
+            @PathVariable int pageNo,
+            @PathVariable int pageSize) {
+        return programService.pagingListKeyword(keyword, pageNo, pageSize);
+    }
+    
 
 }
