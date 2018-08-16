@@ -48,7 +48,7 @@ if (location.href.split("?").length > 1) {
         $('#myAddModal').css("display", "block");
         $('.add-body').html(addtemplateFn({
           trainer: data.name,
-          member: userInfo.name,
+          member: userInfo.name
         }));
         $("#addBtn").click(() => {
           $.ajax({
@@ -124,7 +124,7 @@ if (location.href.split("?").length > 1) {
       if(!(isNaN(cal))) {
         $(reviewScore).append(cal);
         var scorePe = cal / 5 * 100
-        $(scorePer).append(scorePe)
+        $(scorePer).append(scorePe.toFixed(1));
       } else {
         $(reviewScore).append(0)
       }

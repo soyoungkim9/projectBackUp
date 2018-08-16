@@ -44,9 +44,12 @@ public class ProgramController {
         return programService.list(pageNo, pageSize);
     }
 
-    @RequestMapping("listCard")
-    public Object list() {
-        return programService.listCard();
+    @RequestMapping("listCard/{cno}/{pageNo}/{pageSize}")
+    public Object list(
+            @PathVariable int cno,
+            @PathVariable int pageNo,
+            @PathVariable int pageSize) {
+        return programService.listCard(cno, pageNo, pageSize);
     }
     
     @RequestMapping("listCard/{cno}")

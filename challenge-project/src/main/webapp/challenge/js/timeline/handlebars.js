@@ -17,15 +17,9 @@
     		confirmButtonText: '로그인 페이지로'
     	}).then(function (result) {
     		if (result.value) {
-    			location.href = "../login/login.html" 
+    			location.href = "../login/login3.html" 
     		}
     	})
-    	
-//    	, function() {
-//    		if(data.responseText == "loginNeed") {
-//    		}
-//    	})
-    	
     	
     });
 
